@@ -31,6 +31,38 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['ui-sans-serif', 'system-ui', 'Barlow'],
+        barlow: ['var(--font-barlow)'],
+        'eveleth-clean': ['var(--font-eveleth-clean)'],
+      },
+      fontSize: {
+        'card-title': ['26px', { lineHeight: '22px' }],
+        'card-content': [
+          '14px',
+          {
+            lineHeight: '1.1',
+          },
+        ],
+      },
+      objectPosition: {
+        'center-top': 'center top',
+      },
+      colors: {
+        dh: {
+          base: '#1E184D',
+          'dark-blue': '#0a0f21',
+          purple: '#1e184d',
+          'purple-light': '#38227b',
+          gold: '#f3c267',
+          'gold-light': '#fef790',
+          'gold-dark': '#e38c3e',
+          teal: '#81ccc3',
+          blue: '#2878be',
+          'off-white': '#F2F3F4',
+          gray: '#d8d8d6',
+        },
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
