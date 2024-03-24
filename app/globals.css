@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Eveleth Clean';
+  src: url("/Eveleth-Clean-Regular.otf") format("opentype");
+}
+
+:root {
+  --font-eveleth-clean: 'Eveleth Clean'
+}
+
+.clip-card-type {
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.clip-banner-bg {
+  clip-path: polygon(91% 100%, 91% 0, 6% 0, 9% 100%, 29% 98%, 39% 95%, 45% 91%, 47% 86%, 46% 83%, 46% 79%, 53% 79%, 53% 84%, 53% 87%, 56% 91%, 60% 95%, 71% 98%);
+}
+
+.clip-banner-fg {
+  clip-path: polygon(0 0, 11% 1%, 11% 51%, 17% 55%, 18% 0, 82% 0, 83% 56%, 88% 52%, 88% 0, 100% 1%, 100% 58%, 83% 69%, 82% 90%, 72% 90%, 63% 88%, 57% 85%, 49% 82%, 43% 85%, 34% 88%, 25% 90%, 18% 90%, 17% 68%, 0 59%);
+}

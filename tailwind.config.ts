@@ -37,20 +37,22 @@ const config = {
         'eveleth-clean': ['var(--font-eveleth-clean)'],
       },
       fontSize: {
-        'card-title': ['26px', { lineHeight: '22px' }],
+        'card-title-lg': ['26px', { lineHeight: '22px' }],
+        'card-title-sm': ['16px', { lineHeight: '22px' }],
+        'card-subtitle': ['13px', { lineHeight: '22px' }],
         'card-content': [
           '14px',
           {
             lineHeight: '1.1',
           },
         ],
+        'card-credits': ['11px', { lineHeight: '12px' }],
       },
       objectPosition: {
         'center-top': 'center top',
       },
       colors: {
         dh: {
-          base: '#1E184D',
           'dark-blue': '#0a0f21',
           purple: '#1e184d',
           'purple-light': '#38227b',
@@ -61,6 +63,17 @@ const config = {
           blue: '#2878be',
           'off-white': '#F2F3F4',
           gray: '#d8d8d6',
+        },
+        domain: {
+          arcana: '#664295',
+          blade: '#b93035',
+          bone: '#c1c7cc',
+          codex: '#3370ab',
+          grace: '#cb3b90',
+          midnight: '#2c2c2c',
+          sage: '#0e854d',
+          splendor: '#d1b447',
+          valor: '#dc7a27',
         },
       },
       keyframes: {
