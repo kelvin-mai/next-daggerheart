@@ -1,4 +1,4 @@
-import { Feature } from './features';
+import { Feature } from '@/lib/types';
 
 export type Community = {
   name: string;
