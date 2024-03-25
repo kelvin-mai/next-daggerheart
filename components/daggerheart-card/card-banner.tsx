@@ -49,30 +49,30 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   domainSecondary,
   level,
 }) => {
-  const position = 'absolute left-[26px] top-0';
+  const position = 'absolute left-[26px] -top-1';
   const size = 'h-[120px] w-[59px]';
   const PrimaryIcon = getDomainIcon(domainPrimary);
   const SecondaryIcon = getDomainIcon(domainSecondary);
   return (
     <>
-      <div className='absolute left-[24px] top-0 z-40'>
+      <div className='absolute -top-1 left-[24px] z-40'>
         <img className='h-[120px] w-[63px]' src='/banner.webp' />
       </div>
       <div
         className={cn(
           'absolute  z-50 -translate-x-1/2 transform',
-          domainSecondary ? 'left-[56px] top-[20px]' : 'left-[56px] top-[58px]',
+          domainSecondary ? 'left-[56px] top-[16px]' : 'left-[56px] top-[54px]',
         )}
       >
         <PrimaryIcon className='h-[32px] w-[32px]' />
       </div>
       {domainSecondary ? (
-        <div className='absolute left-[56px] top-[58px] z-50 -translate-x-1/2 transform'>
+        <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
           <SecondaryIcon className='h-[32px] w-[32px]' />
         </div>
       ) : null}
       {level ? (
-        <p className='text-eveleth-clean absolute left-[56px] top-[32px] z-50 -translate-x-1/2 transform text-card-title-lg font-bold text-white'>
+        <p className='text-eveleth-clean absolute left-[56px] top-[28px] z-50 -translate-x-1/2 transform text-card-title-lg font-bold text-white'>
           {level}
         </p>
       ) : null}

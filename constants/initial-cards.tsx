@@ -88,7 +88,7 @@ export const subclass: DaggerHeartCardProps = {
   domain: 'arcana',
   domainSecondary: 'midnight',
   subtitle: 'Foundation',
-  subtype: 'sorcerer',
+  subtype: 'Sorcerer',
   spellcast: 'instinct',
   sections: [
     {

@@ -31,18 +31,34 @@ export const CardCreationSubclassForm: React.FC<
   const [showSpellcast, setShowSpellcast] = useState<boolean>(!!card.spellcast);
   return (
     <>
-      <FormField label='Subclass Name' htmlFor='subtitle'>
-        <Input
-          id='subtitle'
-          defaultValue={card.subtitle}
-          onChange={(e) => onChange({ ...card, subtitle: e.target.value })}
-        />
-      </FormField>
+      <div className='flex gap-2'>
+        <FormField label='Class Name' htmlFor='subtype'>
+          <Input
+            id='subtype'
+            defaultValue={card.subtype}
+            onChange={(e) => onChange({ ...card, subtype: e.target.value })}
+          />
+        </FormField>
+        <FormField label='Subclass Feature' htmlFor='subtitle'>
+          <Input
+            id='subtitle'
+            defaultValue={card.subtitle}
+            onChange={(e) => onChange({ ...card, subtitle: e.target.value })}
+          />
+        </FormField>
+      </div>
       <div className='flex gap-2'>
         <FormField label='Primary Domain' htmlFor='primary-domain'>
           <Select
             defaultValue={card.domain}
-            onValueChange={(e) => onChange({ ...card, domain: e })}
+            onValueChange={(e) =>
+              onChange({
+                ...card,
+                domain: e,
+                domainSecondary:
+                  card.domainSecondary === e ? undefined : card.domainSecondary,
+              })
+            }
           >
             <SelectTrigger id='primary-domain'>
               <SelectValue placeholder='Domain' />
@@ -86,6 +102,7 @@ export const CardCreationSubclassForm: React.FC<
                 <SelectItem value='midnight'>Midnight</SelectItem>
                 <SelectItem value='sage'>Sage</SelectItem>
                 <SelectItem value='splendor'>Splendor</SelectItem>
+                <SelectItem value='valor'>Valor</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

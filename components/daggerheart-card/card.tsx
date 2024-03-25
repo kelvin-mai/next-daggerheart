@@ -36,7 +36,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
 }) => {
   const Divider = getDivider(type);
   return (
-    <div className='h-[476px] w-[340px]'>
+    <div className='h-[476px] w-[340px] overflow-hidden'>
       <div className='relative flex h-full flex-col bg-white'>
         {type === 'domain' || type === 'subclass' ? (
           <CardBanner
@@ -79,7 +79,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
               {spellcast}
             </p>
           ) : null}
-          <div className='my-2 space-y-2'>
+          <div className='my-2 w-full space-y-2 text-left'>
             {sections.map((s, i) => (
               <CardText key={i} {...s} />
             ))}

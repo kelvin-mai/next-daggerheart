@@ -41,6 +41,7 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
               <SelectItem value='midnight'>Midnight</SelectItem>
               <SelectItem value='sage'>Sage</SelectItem>
               <SelectItem value='splendor'>Splendor</SelectItem>
+              <SelectItem value='valor'>Valor</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
