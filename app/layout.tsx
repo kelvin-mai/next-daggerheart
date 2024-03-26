@@ -15,7 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={barlow.variable}>{children}</body>
+      <body className={barlow.variable}>
+        {children}
+        <footer className='bg-dh-dark-blue pb-4 pt-8 text-white'>
+          <p className='text-center'>
+            © {new Date().getFullYear()} Kelvin Mai
+          </p>
+        </footer>
+      </body>
     </html>
   );
 }

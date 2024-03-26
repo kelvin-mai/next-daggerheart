@@ -13,6 +13,7 @@ import {
 import type { CardProperties } from '@/lib/types';
 import { DaggerHeartCard } from '@/components/daggerheart-card';
 import Link from 'next/link';
+import { BuyMeCofffeeBanner } from '.';
 
 export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
   const firstRow = cards.slice(0, 5);
@@ -52,9 +53,12 @@ export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
   return (
     <div
       ref={ref}
-      className='relative flex h-[240vh]  flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
+      className='relative flex h-[250vh]  flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
     >
       <Header />
+      <div className='container z-10 flex w-full justify-center md:w-[800px]'>
+        <BuyMeCofffeeBanner />
+      </div>
       <motion.div
         style={{
           rotateX,
@@ -81,7 +85,7 @@ export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
 
 export const Header = () => {
   return (
-    <div className='relative left-0 top-0 z-10 mx-auto w-full max-w-7xl  px-4 py-20 md:py-40'>
+    <div className='relative left-0 top-0 z-10 mx-auto w-full max-w-7xl px-4 py-20 md:py-40'>
       <Image
         src='/assets/logo.svg'
         width={808}
