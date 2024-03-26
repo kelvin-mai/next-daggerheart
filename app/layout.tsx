@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 import { barlow } from '@/lib/fonts';
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={barlow.variable}>
         {children}
+        <Analytics />
         <footer className='bg-dh-dark-blue pb-4 pt-8 text-white'>
           <p className='text-center'>
             © {new Date().getFullYear()} Kelvin Mai
