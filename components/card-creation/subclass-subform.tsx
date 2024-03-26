@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { domains, traits } from '@/constants/rules-texts';
 import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
 import { FormField } from '@/components/common';
 import {
@@ -60,20 +61,17 @@ export const CardCreationSubclassForm: React.FC<
               })
             }
           >
-            <SelectTrigger id='primary-domain'>
+            <SelectTrigger id='primary-domain' className='capitalize'>
               <SelectValue placeholder='Domain' />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Domain</SelectLabel>
-                <SelectItem value='arcana'>Arcana</SelectItem>
-                <SelectItem value='blade'>Blade</SelectItem>
-                <SelectItem value='bone'>Bone</SelectItem>
-                <SelectItem value='codex'>Codex</SelectItem>
-                <SelectItem value='grace'>Grace</SelectItem>
-                <SelectItem value='midnight'>Midnight</SelectItem>
-                <SelectItem value='sage'>Sage</SelectItem>
-                <SelectItem value='splendor'>Splendor</SelectItem>
+                {domains.map((d) => (
+                  <SelectItem key={d} className='capitalize' value={d}>
+                    {d}
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -88,21 +86,17 @@ export const CardCreationSubclassForm: React.FC<
               })
             }
           >
-            <SelectTrigger id='secondary-domain'>
+            <SelectTrigger id='secondary-domain' className='capitalize'>
               <SelectValue placeholder='Domain' />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Domain</SelectLabel>
-                <SelectItem value='arcana'>Arcana</SelectItem>
-                <SelectItem value='blade'>Blade</SelectItem>
-                <SelectItem value='bone'>Bone</SelectItem>
-                <SelectItem value='codex'>Codex</SelectItem>
-                <SelectItem value='grace'>Grace</SelectItem>
-                <SelectItem value='midnight'>Midnight</SelectItem>
-                <SelectItem value='sage'>Sage</SelectItem>
-                <SelectItem value='splendor'>Splendor</SelectItem>
-                <SelectItem value='valor'>Valor</SelectItem>
+                {domains.map((d) => (
+                  <SelectItem key={d} className='capitalize' value={d}>
+                    {d}
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -118,18 +112,17 @@ export const CardCreationSubclassForm: React.FC<
             }
           }}
         >
-          <SelectTrigger id='spellcast-trait'>
+          <SelectTrigger id='spellcast-trait' className='capitalize'>
             <SelectValue placeholder='Spellcast Trait' />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Spellcast Trait</SelectLabel>
-              <SelectItem value='agility'>Agility</SelectItem>
-              <SelectItem value='strength'>Strength</SelectItem>
-              <SelectItem value='finesse'>Finesse</SelectItem>
-              <SelectItem value='instinct'>Instinct</SelectItem>
-              <SelectItem value='presence'>Presence</SelectItem>
-              <SelectItem value='knowledge'>Knowledge</SelectItem>
+              {traits.map((t) => (
+                <SelectItem key={t} className='capitalize' value={t}>
+                  {t}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>

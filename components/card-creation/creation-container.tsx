@@ -52,7 +52,7 @@ export const CardCreationContainer = () => {
   };
 
   return (
-    <div className='flex gap-4'>
+    <div className='flex flex-col-reverse gap-4 md:flex-row'>
       <CardCreationForm
         className='flex-grow'
         card={card}
@@ -60,14 +60,17 @@ export const CardCreationContainer = () => {
         onChangeType={handleChangeType}
       />
       <div>
-        <div
-          className={cn(
-            cardBorder &&
-              'overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg',
-          )}
-        >
-          <div ref={ref}>
-            <DaggerHeartCard {...card} />
+        <div className='flex justify-center'>
+          <div
+            className={cn(
+              'w-[340px]',
+              cardBorder &&
+                'overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg',
+            )}
+          >
+            <div ref={ref}>
+              <DaggerHeartCard {...card} />
+            </div>
           </div>
         </div>
         <div className='mt-4 flex gap-2'>

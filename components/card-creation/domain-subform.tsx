@@ -1,3 +1,4 @@
+import { domains } from '@/constants/rules-texts';
 import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
 import { FormField } from '@/components/common';
 import {
@@ -27,21 +28,17 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
           defaultValue={card.domain}
           onValueChange={(e) => onChange({ ...card, domain: e })}
         >
-          <SelectTrigger id='domain'>
+          <SelectTrigger id='domain' className='capitalize'>
             <SelectValue placeholder='Domain' />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Domain</SelectLabel>
-              <SelectItem value='arcana'>Arcana</SelectItem>
-              <SelectItem value='blade'>Blade</SelectItem>
-              <SelectItem value='bone'>Bone</SelectItem>
-              <SelectItem value='codex'>Codex</SelectItem>
-              <SelectItem value='grace'>Grace</SelectItem>
-              <SelectItem value='midnight'>Midnight</SelectItem>
-              <SelectItem value='sage'>Sage</SelectItem>
-              <SelectItem value='splendor'>Splendor</SelectItem>
-              <SelectItem value='valor'>Valor</SelectItem>
+              {domains.map((d) => (
+                <SelectItem key={d} className='capitalize' value={d}>
+                  {d}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>

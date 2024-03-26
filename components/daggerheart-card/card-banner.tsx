@@ -56,7 +56,7 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   return (
     <>
       <div className='absolute -top-1 left-[24px] z-40'>
-        <img className='h-[120px] w-[63px]' src='/banner.webp' />
+        <img className='h-[120px] w-[63px]' src='/assets/card/banner.webp' />
       </div>
       <div
         className={cn(

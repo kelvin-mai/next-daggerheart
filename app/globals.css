@@ -4,15 +4,19 @@
 
 @font-face {
   font-family: 'Eveleth Clean';
-  src: url("/Eveleth-Clean-Regular.otf") format("opentype");
+  src: url("/assets/fonts/Eveleth-Clean-Regular.otf") format("opentype");
 }
 
 :root {
   --font-eveleth-clean: 'Eveleth Clean'
 }
 
-.clip-card-type {
-  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+.clip-card-domain-subtype {
+  clip-path: polygon(67% 16%, 73% 49%, 66% 87%, 33% 81%, 27% 48%, 35% 16%);
+}
+
+.clip-card-class-subtype {
+  clip-path: polygon(65% 14%, 73% 47%, 66% 89%, 35% 87%, 28% 53%, 34% 16%);
 }
 
 .clip-banner-bg {

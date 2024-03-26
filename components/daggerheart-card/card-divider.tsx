@@ -14,7 +14,7 @@ export const CommunityDivider: React.FC<DividerProps> = () => {
     <>
       <img
         className='absolute top-[-76px] h-[80px] w-full'
-        src='/card-divider-communities.webp'
+        src='/assets/card/card-divider-communities.webp'
       />
       <div className='absolute right-[36px] top-[-32px] z-10'>
         <p className='text-xs uppercase tracking-[1px]'>community</p>
@@ -28,7 +28,7 @@ export const AncestryDivider: React.FC<DividerProps> = () => {
     <>
       <img
         className='absolute top-[-26px] z-10 h-[80px] w-[500px]'
-        src='/card-divider-ancestries.png'
+        src='/assets/card/card-divider-ancestries.png'
       />
       <div className='absolute right-[16px] top-[-8px] z-10'>
         <p className='text-xs uppercase tracking-[2px]'>ancestry</p>
@@ -46,13 +46,13 @@ export const DomainDivider: React.FC<DividerProps> = ({
     <>
       <div
         className={cn(
-          'clip-card-type absolute left-1/2 top-[-12px] z-10 h-[18px] w-[120px] -translate-x-1/2 transform',
+          'clip-card-domain-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[265px] -translate-x-1/2 transform',
           domainPrimary ? `bg-domain-${domainPrimary}` : 'bg-black',
         )}
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
-        src='/domain-divider.webp'
+        src='/assets/card/domain-divider.webp'
       />
       <div className='absolute left-1/2 top-[-12px] z-10 -translate-x-1/2 transform'>
         <p className='font-barlow text-xs font-bold uppercase text-white'>
@@ -74,7 +74,7 @@ export const SubclassDivider: React.FC<DividerProps> = ({
     <>
       <div
         className={cn(
-          'clip-card-type absolute left-1/2 top-[-12px] z-10 h-[18px] w-[120px] -translate-x-1/2 transform',
+          'clip-card-class-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[265px] -translate-x-1/2 transform',
           `bg-domain-${domainPrimary}`,
           domainSecondary
             ? `bg-gradient-to-r from-domain-${domainPrimary} to-domain-${domainSecondary}`
@@ -83,7 +83,7 @@ export const SubclassDivider: React.FC<DividerProps> = ({
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
-        src='/subclass-divider.webp'
+        src='/assets/card/subclass-divider.webp'
       />
       <div className='absolute left-1/2 top-[-12px] z-10 -translate-x-1/2 transform'>
         <p className='font-barlow text-xs font-bold uppercase text-dh-gold-light'>

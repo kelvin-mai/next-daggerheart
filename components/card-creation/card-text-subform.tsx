@@ -64,7 +64,7 @@ export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = ({
     <>
       <div className='flex items-center'>
         <div className='w-full border border-dh-gold' />
-        <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase'>
+        <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase text-dh-gold'>
           card text
         </span>
         <div className='w-full border border-dh-gold' />
