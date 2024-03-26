@@ -1,9 +1,8 @@
 'use client';
 
-import type { CardType } from '@/lib/types';
+import type { CardType, CardProperties } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { FormField } from '@/components/common';
-import { type DaggerHeartCardProps } from '@/components/daggerheart-card';
 import {
   Input,
   Select,
@@ -19,9 +18,9 @@ import { CardCreationTextForm } from './card-text-subform';
 import { CardCreationSubclassForm } from './subclass-subform';
 
 type CardCreationFormProps = {
-  card: DaggerHeartCardProps;
+  card: CardProperties;
   className?: string;
-  onChange: (card: DaggerHeartCardProps) => void;
+  onChange: (card: CardProperties) => void;
   onChangeType: (type: CardType) => void;
 };
 

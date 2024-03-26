@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
+import type { CardProperties } from '@/lib/types';
 import type {
   CardTextListType,
   CardTextSection,
@@ -22,8 +22,8 @@ import { FormField } from '@/components/common';
 import { CardCreationSectionFormField } from './card-text-formfield';
 
 type CardCreationTextFormProps = {
-  card: DaggerHeartCardProps;
-  onChange: (card: DaggerHeartCardProps) => void;
+  card: CardProperties;
+  onChange: (card: CardProperties) => void;
 };
 
 export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = ({

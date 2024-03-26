@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { domains, traits } from '@/constants/rules-texts';
-import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
+import type { CardProperties } from '@/lib/types';
 import { FormField } from '@/components/common';
 import {
   Checkbox,
@@ -19,8 +19,8 @@ import {
 } from '@/components/ui';
 
 type CardCreationSubclassFormProps = {
-  card: DaggerHeartCardProps;
-  onChange: (card: DaggerHeartCardProps) => void;
+  card: CardProperties;
+  onChange: (card: CardProperties) => void;
 };
 
 export const CardCreationSubclassForm: React.FC<

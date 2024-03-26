@@ -1,6 +1,6 @@
-import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
+import type { CardProperties } from '@/lib/types';
 
-export const playtestExamples: DaggerHeartCardProps[] = [
+export const playtestExamples: CardProperties[] = [
   {
     type: 'ancestry',
     title: 'Ribbit',
@@ -128,7 +128,7 @@ export const playtestExamples: DaggerHeartCardProps[] = [
   },
 ];
 
-export const homebrewExamples: DaggerHeartCardProps[] = [
+export const homebrewExamples: CardProperties[] = [
   {
     type: 'ancestry',
     title: 'Sylvaneth',

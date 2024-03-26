@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useToPng } from '@hugocxl/react-to-image';
 
-import { CardType } from '@/lib/types';
+import type { CardType, CardProperties } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import {
   ancestry,
@@ -11,16 +11,14 @@ import {
   domain,
   subclass,
 } from '@/constants/initial-cards';
-import {
-  DaggerHeartCard,
-  DaggerHeartCardProps,
-} from '@/components/daggerheart-card';
-import { Button } from '@/components/ui';
+import { DaggerHeartCard } from '@/components/daggerheart-card';
+import { Button, Checkbox, Label } from '@/components/ui';
 import { CardCreationForm } from './form';
 
 export const CardCreationContainer = () => {
-  const [card, setCard] = useState<DaggerHeartCardProps>(ancestry);
+  const [card, setCard] = useState<CardProperties>(ancestry);
   const [cardBorder, setCardBorder] = useState(true);
+  const [boldRulesText, setBoldRulesText] = useState(true);
 
   const [_, convert, ref] = useToPng({
     onSuccess: (data) => {
@@ -69,9 +67,21 @@ export const CardCreationContainer = () => {
             )}
           >
             <div ref={ref}>
-              <DaggerHeartCard {...card} />
+              <DaggerHeartCard {...card} boldRulesText={boldRulesText} />
             </div>
           </div>
+        </div>
+        <div className='mt-2 flex items-center justify-end space-x-2'>
+          <Checkbox
+            id='bold-rules-text'
+            checked={boldRulesText}
+            onCheckedChange={(e) => {
+              if (e !== 'indeterminate') {
+                setBoldRulesText(e);
+              }
+            }}
+          />
+          <Label htmlFor='spellcast'>Bold rules text?</Label>
         </div>
         <div className='mt-4 flex gap-2'>
           <Button className='w-full' onClick={convert}>

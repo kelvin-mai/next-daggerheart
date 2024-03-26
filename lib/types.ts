@@ -26,3 +26,18 @@ export type CardTextSection = {
       text: string[];
     }
 );
+
+export type CardProperties = {
+  type: CardType;
+  title: string;
+  image: string;
+  artist?: string;
+  domain?: string;
+  domainSecondary?: string;
+  subtype?: string;
+  level?: number;
+  cost?: number;
+  subtitle?: string;
+  spellcast?: string;
+  sections: CardTextSection[];
+};

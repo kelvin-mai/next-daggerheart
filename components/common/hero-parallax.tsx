@@ -10,13 +10,11 @@ import {
   MotionValue,
 } from 'framer-motion';
 
-import {
-  type DaggerHeartCardProps,
-  DaggerHeartCard,
-} from '@/components/daggerheart-card';
+import type { CardProperties } from '@/lib/types';
+import { DaggerHeartCard } from '@/components/daggerheart-card';
 import Link from 'next/link';
 
-export const HeroParallax = ({ cards }: { cards: DaggerHeartCardProps[] }) => {
+export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
   const firstRow = cards.slice(0, 5);
   const secondRow = cards.slice(5, 10);
   const ref = useRef(null);
@@ -113,7 +111,7 @@ export const HeroCard = ({
   card,
   translate,
 }: {
-  card: DaggerHeartCardProps;
+  card: CardProperties;
   translate: MotionValue<number>;
 }) => {
   return (

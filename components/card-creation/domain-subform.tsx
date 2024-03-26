@@ -1,5 +1,5 @@
+import type { CardProperties } from '@/lib/types';
 import { domains } from '@/constants/rules-texts';
-import type { DaggerHeartCardProps } from '@/components/daggerheart-card';
 import { FormField } from '@/components/common';
 import {
   Input,
@@ -13,8 +13,8 @@ import {
 } from '@/components/ui';
 
 type CardCreationDomainFormProps = {
-  card: DaggerHeartCardProps;
-  onChange: (card: DaggerHeartCardProps) => void;
+  card: CardProperties;
+  onChange: (card: CardProperties) => void;
 };
 
 export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({

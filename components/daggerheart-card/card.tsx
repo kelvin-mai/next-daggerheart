@@ -1,23 +1,12 @@
-import type { CardType, CardTextSection } from '@/lib/types';
+import type { CardProperties } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { getDivider } from './card-divider';
 import { CardStress } from './card-stress';
 import { CardBanner } from './card-banner';
 import { CardText } from './card-text';
 
-export type DaggerHeartCardProps = {
-  type: CardType;
-  title: string;
-  image: string;
-  artist?: string;
-  domain?: string;
-  domainSecondary?: string;
-  subtype?: string;
-  level?: number;
-  cost?: number;
-  subtitle?: string;
-  spellcast?: string;
-  sections: CardTextSection[];
+export type DaggerHeartCardProps = CardProperties & {
+  boldRulesText?: boolean;
 };
 
 export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
@@ -33,6 +22,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
   cost,
   level,
   sections,
+  boldRulesText,
 }) => {
   const Divider = getDivider(type);
   return (
@@ -81,16 +71,16 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           ) : null}
           <div className='my-2 w-full space-y-2 text-left'>
             {sections.map((s, i) => (
-              <CardText key={i} {...s} />
+              <CardText key={i} {...s} boldRulesText={boldRulesText} />
             ))}
           </div>
         </div>
         {artist ? (
-          <div className='text-card-credits absolute bottom-2 left-2 text-xs italic text-slate-400'>
+          <div className='absolute bottom-2 left-2 text-card-credits text-xs italic text-slate-400'>
             {artist}
           </div>
         ) : null}
-        <div className='text-card-credits absolute bottom-2 right-2 text-xs italic text-slate-400'>
+        <div className='absolute bottom-2 right-2 text-card-credits text-xs italic text-slate-400'>
           © 2024 Daggerheart v1.2 Open Beta
         </div>
       </div>
