@@ -13,6 +13,7 @@ import {
   SelectItem,
   SelectContent,
   SelectGroup,
+  RichTextEditor,
 } from '@/components/ui';
 import { FormField } from '@/components/common';
 
@@ -177,6 +178,29 @@ const ListFormField: React.FC<ListFormFieldProps> = ({
   );
 };
 
+const RichTextFormField: React.FC<TextFormFieldProps> = ({
+  label,
+  text,
+  index,
+  onChange,
+  onRemove,
+}) => {
+  return (
+    <>
+      <FormField label={label} htmlFor={`card-section-${index}`}>
+        <RichTextEditor
+          id={`card-section-${index}`}
+          defaultValue={text}
+          onChange={onChange}
+        />
+      </FormField>
+      <Button variant='ghost' className='w-full' onClick={onRemove}>
+        Remove
+      </Button>
+    </>
+  );
+};
+
 export const CardCreationSectionFormField: React.FC<
   CardCreationSectionFormFieldProps
 > = ({ type, text, listType, ...props }) => {
@@ -189,6 +213,10 @@ export const CardCreationSectionFormField: React.FC<
       return <TextFormField label='Rules Text' text={text} {...props} />;
     case 'list':
       return <ListFormField listType={listType} text={text} {...props} />;
+    case 'custom':
+      return (
+        <RichTextFormField label='Custom Rules Text' text={text} {...props} />
+      );
     default:
       return null;
   }

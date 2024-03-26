@@ -18,7 +18,19 @@ import { cn } from '@/lib/utils';
 import { Toggle } from './toggle';
 import { Separator } from './separator';
 
-export const RichTextEditor = ({ className }: { className?: string }) => {
+type RichTextEditorProps = {
+  id?: string;
+  className?: string;
+  defaultValue?: string;
+  onChange?: (e: string) => void;
+};
+
+export const RichTextEditor: React.FC<RichTextEditorProps> = ({
+  id,
+  className,
+  defaultValue,
+  onChange,
+}) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -30,12 +42,12 @@ export const RichTextEditor = ({ className }: { className?: string }) => {
       StarterKit.configure({
         orderedList: {
           HTMLAttributes: {
-            class: 'list-decimal pl-4',
+            class: 'list-outside list-decimal pl-4',
           },
         },
         bulletList: {
           HTMLAttributes: {
-            class: 'list-disc pl-4',
+            class: 'list-outside list-disc pl-4',
           },
         },
       }),
@@ -43,11 +55,17 @@ export const RichTextEditor = ({ className }: { className?: string }) => {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: '',
+    content: defaultValue,
+    onUpdate: ({ editor }) => {
+      if (onChange) {
+        onChange(editor.getHTML());
+      }
+    },
   });
 
   return (
     <div
+      id={id}
       className={cn('rounded-md border border-slate-200 bg-white', className)}
     >
       <EditorContent editor={editor} />

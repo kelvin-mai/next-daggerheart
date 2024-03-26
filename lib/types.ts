@@ -5,7 +5,7 @@ export type Feature = {
   description: string;
 };
 
-export type CardTextType = 'flavor' | 'feature' | 'rules' | 'list';
+export type CardTextType = 'flavor' | 'feature' | 'rules' | 'list' | 'custom';
 
 export type CardTextListType = 'bullet' | 'number';
 
@@ -13,7 +13,7 @@ export type CardTextSection = {
   type: CardTextType;
 } & (
   | {
-      type: 'flavor' | 'rules';
+      type: 'flavor' | 'rules' | 'custom';
       text: string;
     }
   | {

@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
+import { safeParseInt } from '@/lib/utils';
 
 type CardCreationDomainFormProps = {
   card: CardProperties;
@@ -71,7 +72,7 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
             min={0}
             max={9}
             onChange={(e) =>
-              onChange({ ...card, cost: parseInt(e.target.value) })
+              onChange({ ...card, cost: safeParseInt(e.target.value) })
             }
           />
         </FormField>
@@ -84,7 +85,7 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
             min={1}
             max={10}
             onChange={(e) =>
-              onChange({ ...card, level: parseInt(e.target.value) })
+              onChange({ ...card, level: safeParseInt(e.target.value) })
             }
           />
         </FormField>

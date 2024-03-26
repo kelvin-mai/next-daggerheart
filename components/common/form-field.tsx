@@ -5,8 +5,8 @@ import { useMotionTemplate, useMotionValue, motion } from 'framer-motion';
 import { Label } from '@/components/ui';
 
 type FormFieldProps = React.PropsWithChildren & {
-  label: string;
-  htmlFor: string;
+  label?: string;
+  htmlFor?: string;
 };
 
 export const FormField: React.FC<FormFieldProps> = ({
@@ -28,7 +28,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   }
   return (
     <div className='flex w-full flex-col space-y-2'>
-      <Label htmlFor={htmlFor}>{label}</Label>
+      {label ? <Label htmlFor={htmlFor}>{label}</Label> : null}
       <motion.div
         style={{
           background: useMotionTemplate`

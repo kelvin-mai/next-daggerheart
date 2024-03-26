@@ -30,42 +30,55 @@ export const CardText: React.FC<CardTextProps> = ({
   boldRulesText,
 }) => {
   const listClasses = 'list-outside text-pretty text-card-content pl-4';
-  return type === 'list' ? (
-    listType === 'bullet' ? (
-      <ul className={cn(listClasses, 'list-disc italic')}>
-        {text.map((t, i) => (
-          <li key={`card-text-list-${i}`}>
-            <CardTextWithRules text={t} boldRulesText={boldRulesText} />
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <ol className={cn(listClasses, 'list-decimal')}>
-        {text.map((t, i) => (
-          <li key={`card-text-list-${i}`}>
-            <CardTextWithRules text={t} boldRulesText={boldRulesText} />
-          </li>
-        ))}
-      </ol>
-    )
-  ) : (
-    <p
-      className={cn(
-        'text-pretty text-card-content',
-        type === 'flavor' && 'italic',
-      )}
-    >
-      {type === 'feature' ? (
-        <>
-          <span className='font-bold italic'>{text.name}: </span>
-          <CardTextWithRules
-            text={text.description}
-            boldRulesText={boldRulesText}
-          />
-        </>
+  switch (type) {
+    case 'list':
+      return listType === 'bullet' ? (
+        <ul className={cn(listClasses, 'list-disc italic')}>
+          {text.map((t, i) => (
+            <li key={`card-text-list-${i}`}>
+              <CardTextWithRules text={t} boldRulesText={boldRulesText} />
+            </li>
+          ))}
+        </ul>
       ) : (
+        <ol className={cn(listClasses, 'list-decimal')}>
+          {text.map((t, i) => (
+            <li key={`card-text-list-${i}`}>
+              <CardTextWithRules text={t} boldRulesText={boldRulesText} />
+            </li>
+          ))}
+        </ol>
+      );
+    case 'flavor':
+      return (
+        <p className={cn('text-pretty text-card-content italic')}>
+          <CardTextWithRules text={text} boldRulesText={boldRulesText} />
+        </p>
+      );
+    case 'feature':
+      return (
+        <p className={cn('text-pretty text-card-content')}>
+          <>
+            <span className='font-bold italic'>{text.name}: </span>
+            <CardTextWithRules
+              text={text.description}
+              boldRulesText={boldRulesText}
+            />
+          </>
+        </p>
+      );
+    case 'rules':
+      <p className={cn('text-pretty text-card-content')}>
         <CardTextWithRules text={text} boldRulesText={boldRulesText} />
-      )}
-    </p>
-  );
+      </p>;
+    case 'custom':
+      return (
+        <div
+          className={cn('text-pretty text-card-content')}
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
+      );
+    default:
+      return null;
+  }
 };

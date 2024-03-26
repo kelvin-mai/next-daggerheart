@@ -41,6 +41,8 @@ export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = ({
         return '';
       case 'list':
         return [''];
+      case 'custom':
+        return '';
       default:
         return '';
     }
@@ -108,6 +110,7 @@ export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = ({
                 <SelectItem value='feature'>Feature</SelectItem>
                 <SelectItem value='rules'>Rules Text</SelectItem>
                 <SelectItem value='list'>Rules Text List</SelectItem>
+                <SelectItem value='custom'>Custom Rules Text</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
