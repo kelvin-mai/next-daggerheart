@@ -68,9 +68,11 @@ export const CardText: React.FC<CardTextProps> = ({
         </p>
       );
     case 'rules':
-      <p className={cn('text-pretty text-card-content')}>
-        <CardTextWithRules text={text} boldRulesText={boldRulesText} />
-      </p>;
+      return (
+        <p className={cn('text-pretty text-card-content')}>
+          <CardTextWithRules text={text} boldRulesText={boldRulesText} />
+        </p>
+      );
     case 'custom':
       return (
         <div
