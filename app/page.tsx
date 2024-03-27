@@ -1,5 +1,5 @@
 import { homebrewExamples, playtestExamples } from '@/constants/example-cards';
-import { HeroParallax, BuyMeCofffeeBanner } from '@/components/common';
+import { HeroParallax } from '@/components/common';
 
 export default function HomePage() {
   const cards = [...playtestExamples, ...homebrewExamples];

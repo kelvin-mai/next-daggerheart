@@ -101,7 +101,7 @@ export const playtestExamples: CardProperties[] = [
   },
   {
     type: 'domain',
-    title: 'Force of Nature',
+    title: 'Book of Norai',
     image: '/assets/playtest/codex.webp',
     domain: 'codex',
     subtype: 'grimoire',
