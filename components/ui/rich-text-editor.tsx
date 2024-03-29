@@ -101,21 +101,21 @@ const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
       <Separator orientation='vertical' className='h-8 w-[1px]' />
       <Toggle
         size='sm'
-        pressed={editor.isActive({ textAlign: 'center' })}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign('center').run()
-        }
-      >
-        <AlignCenter className='h-4 w-4' />
-      </Toggle>
-      <Toggle
-        size='sm'
         pressed={editor.isActive({ textAlign: 'left' })}
         onPressedChange={() =>
           editor.chain().focus().setTextAlign('left').run()
         }
       >
         <AlignLeft className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'center' })}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('center').run()
+        }
+      >
+        <AlignCenter className='h-4 w-4' />
       </Toggle>
       <Toggle
         size='sm'

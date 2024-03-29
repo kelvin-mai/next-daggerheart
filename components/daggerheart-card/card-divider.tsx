@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
 
+import { getDomainColor } from '@/constants/domain-colors';
 import type { CardType } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, getBrightness } from '@/lib/utils';
 
 type DividerProps = {
   domainPrimary?: string;
@@ -18,6 +19,20 @@ export const CommunityDivider: React.FC<DividerProps> = () => {
       />
       <div className='absolute right-[36px] top-[-32px] z-10'>
         <p className='text-xs uppercase tracking-[1px]'>community</p>
+      </div>
+    </>
+  );
+};
+
+export const EquipmentDivider: React.FC<DividerProps> = () => {
+  return (
+    <>
+      <img
+        className='absolute top-[-76px] h-[80px] w-full'
+        src='/assets/card/card-divider-equipment.webp'
+      />
+      <div className='absolute left-[35px] top-[-32px] z-10'>
+        <p className='text-xs uppercase tracking-[2px]'>equipment</p>
       </div>
     </>
   );
@@ -41,21 +56,28 @@ export const DomainDivider: React.FC<DividerProps> = ({
   domainPrimary,
   text,
 }) => {
-  // bg-domain-arcana bg-domain-blade bg-domain-bone bg-domain-codex bg-domain-grace bg-domain-midnight bg-domain-sage bg-domain-splendor bg-domain-valor
+  const background = getDomainColor(domainPrimary);
   return (
     <>
       <div
         className={cn(
           'clip-card-domain-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[265px] -translate-x-1/2 transform',
-          domainPrimary ? `bg-domain-${domainPrimary}` : 'bg-black',
         )}
+        style={{
+          background,
+        }}
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
         src='/assets/card/domain-divider.webp'
       />
       <div className='absolute left-1/2 top-[-12px] z-10 -translate-x-1/2 transform'>
-        <p className='font-barlow text-xs font-bold uppercase text-white'>
+        <p
+          className={cn(
+            'font-barlow text-xs font-bold uppercase',
+            getBrightness(background) < 128 ? 'text-white' : 'text-black',
+          )}
+        >
           {text}
         </p>
       </div>
@@ -68,18 +90,18 @@ export const SubclassDivider: React.FC<DividerProps> = ({
   domainSecondary,
   text,
 }) => {
-  // from-domain-arcana from-domain-blade from-domain-bone from-domain-codex from-domain-grace from-domain-midnigt from-domain-sage from-domain-splendor from-domain-valor
-  // to-domain-arcana to-domain-blade to-domain-bone to-domain-codex to-domain grace to-domain-midnight to-domain-sage to-domain-splendor to-domain-valor
+  const domainPrimaryColor = getDomainColor(domainPrimary);
+  const domainSecondaryColor = getDomainColor(domainSecondary);
+  const background = domainSecondary
+    ? `linear-gradient(to right,${domainPrimaryColor},${domainSecondaryColor})`
+    : domainPrimaryColor;
   return (
     <>
       <div
         className={cn(
           'clip-card-class-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[265px] -translate-x-1/2 transform',
-          `bg-domain-${domainPrimary}`,
-          domainSecondary
-            ? `bg-gradient-to-r from-domain-${domainPrimary} to-domain-${domainSecondary}`
-            : `bg-domain-${domainPrimary}`,
         )}
+        style={{ background }}
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
@@ -100,6 +122,8 @@ export const getDivider = (type: CardType) => {
       return AncestryDivider;
     case 'community':
       return CommunityDivider;
+    case 'equipment':
+      return EquipmentDivider;
     case 'domain':
       return DomainDivider;
     case 'subclass':

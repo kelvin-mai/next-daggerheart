@@ -1,6 +1,5 @@
-import { Fragment } from 'react';
-
-import { cn } from '@/lib/utils';
+import { getDomainColor } from '@/constants/domain-colors';
+import { cn, getBrightness } from '@/lib/utils';
 import {
   ArcaneDomainIcon,
   BladeDomainIcon,
@@ -53,6 +52,10 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   const size = 'h-[120px] w-[59px]';
   const PrimaryIcon = getDomainIcon(domainPrimary);
   const SecondaryIcon = getDomainIcon(domainSecondary);
+  const domainPrimaryColor = getDomainColor(domainPrimary);
+  const domainSecondaryColor = getDomainColor(domainSecondary);
+  const iconFill =
+    getBrightness(domainPrimaryColor) < 128 ? 'fill-white' : 'fill-black';
   return (
     <>
       <div className='absolute -top-1 left-[24px] z-40'>
@@ -64,11 +67,11 @@ export const CardBanner: React.FC<CardBannerProps> = ({
           domainSecondary ? 'left-[56px] top-[16px]' : 'left-[56px] top-[54px]',
         )}
       >
-        <PrimaryIcon className='h-[32px] w-[32px]' />
+        <PrimaryIcon className={cn('h-[32px] w-[32px]', iconFill)} />
       </div>
       {domainSecondary ? (
         <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
-          <SecondaryIcon className='h-[32px] w-[32px]' />
+          <SecondaryIcon className={cn('h-[32px] w-[32px]', iconFill)} />
         </div>
       ) : null}
       {level ? (
@@ -77,22 +80,16 @@ export const CardBanner: React.FC<CardBannerProps> = ({
         </p>
       ) : null}
       <div
-        className={cn(
-          position,
-          size,
-          'clip-banner-fg z-30',
-          `bg-domain-${domainPrimary}`,
-        )}
+        className={cn(position, size, 'clip-banner-fg z-30')}
+        style={{ background: domainPrimaryColor }}
       />
       <div
-        className={cn(
-          position,
-          size,
-          'clip-banner-bg z-20',
-          domainSecondary
-            ? `bg-domain-${domainSecondary}`
-            : `bg-domain-${domainPrimary}`,
-        )}
+        className={cn(position, size, 'clip-banner-bg z-20')}
+        style={{
+          background: domainSecondary
+            ? domainSecondaryColor
+            : domainPrimaryColor,
+        }}
       />
     </>
   );

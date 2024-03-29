@@ -6,6 +6,7 @@ export * from './popover';
 export * from './rich-text-editor';
 export * from './select';
 export * from './separator';
+export * from './table';
 export * from './tabs';
 export * from './textarea';
 export * from './toggle';

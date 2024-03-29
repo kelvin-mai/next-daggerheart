@@ -1,9 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-
 import { domains, traits } from '@/constants/rules-texts';
-import type { CardProperties } from '@/lib/types';
 import { FormField } from '@/components/common';
 import {
   Checkbox,
@@ -17,48 +14,50 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
+import { useCard, useCardActions, useCardOptions } from '@/store';
 
-type CardCreationSubclassFormProps = {
-  card: CardProperties;
-  onChange: (card: CardProperties) => void;
-};
+type CardCreationSubclassFormProps = {};
 
 export const CardCreationSubclassForm: React.FC<
   CardCreationSubclassFormProps
-> = ({ card, onChange }) => {
-  const [spellcast, setSpellcast] = useState<string | undefined>(
-    card.spellcast,
-  );
-  const [showSpellcast, setShowSpellcast] = useState<boolean>(!!card.spellcast);
+> = () => {
+  const { subtype, subtitle, domain, domainSecondary, spellcast } = useCard();
+  const { includeSpellcast } = useCardOptions();
+  const { changeCardStringProperty, changeCardOption } = useCardActions();
   return (
     <>
       <div className='flex gap-2'>
         <FormField label='Class Name' htmlFor='subtype'>
           <Input
             id='subtype'
-            defaultValue={card.subtype}
-            onChange={(e) => onChange({ ...card, subtype: e.target.value })}
+            value={subtype}
+            onChange={(e) =>
+              changeCardStringProperty({
+                property: 'subtype',
+                value: e.target.value,
+              })
+            }
           />
         </FormField>
         <FormField label='Subclass Feature' htmlFor='subtitle'>
           <Input
             id='subtitle'
-            defaultValue={card.subtitle}
-            onChange={(e) => onChange({ ...card, subtitle: e.target.value })}
+            value={subtitle}
+            onChange={(e) =>
+              changeCardStringProperty({
+                property: 'subtype',
+                value: e.target.value,
+              })
+            }
           />
         </FormField>
       </div>
       <div className='flex gap-2'>
         <FormField label='Primary Domain' htmlFor='primary-domain'>
           <Select
-            defaultValue={card.domain}
+            value={domain}
             onValueChange={(e) =>
-              onChange({
-                ...card,
-                domain: e,
-                domainSecondary:
-                  card.domainSecondary === e ? undefined : card.domainSecondary,
-              })
+              changeCardStringProperty({ property: 'domain', value: e })
             }
           >
             <SelectTrigger id='primary-domain' className='capitalize'>
@@ -78,11 +77,11 @@ export const CardCreationSubclassForm: React.FC<
         </FormField>
         <FormField label='Secondary Domain' htmlFor='secondary-domain'>
           <Select
-            defaultValue={card.domainSecondary}
+            value={domainSecondary}
             onValueChange={(e) =>
-              onChange({
-                ...card,
-                domainSecondary: card.domain === e ? undefined : e,
+              changeCardStringProperty({
+                property: 'domainSecondary',
+                value: e,
               })
             }
           >
@@ -106,10 +105,7 @@ export const CardCreationSubclassForm: React.FC<
         <Select
           value={spellcast}
           onValueChange={(e) => {
-            setSpellcast(e);
-            if (showSpellcast) {
-              onChange({ ...card, spellcast: e });
-            }
+            changeCardStringProperty({ property: 'spellcast', value: e });
           }}
         >
           <SelectTrigger id='spellcast-trait' className='capitalize'>
@@ -130,11 +126,10 @@ export const CardCreationSubclassForm: React.FC<
       <div className='flex items-center justify-end space-x-2 pr-4'>
         <Checkbox
           id='spellcast'
-          checked={showSpellcast}
+          checked={includeSpellcast}
           onCheckedChange={(e) => {
             if (e !== 'indeterminate') {
-              setShowSpellcast(e);
-              onChange({ ...card, spellcast: e ? spellcast : undefined });
+              changeCardOption({ property: 'includeSpellcast', value: e });
             }
           }}
         />

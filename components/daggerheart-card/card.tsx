@@ -4,29 +4,45 @@ import { getDivider } from './card-divider';
 import { CardStress } from './card-stress';
 import { CardBanner } from './card-banner';
 import { CardText } from './card-text';
+import { CardThresholds } from './card-thresholds';
 
-export type DaggerHeartCardProps = CardProperties & {
-  boldRulesText?: boolean;
+export type DaggerHeartCardProps = {
+  card: CardProperties;
+  options?: any;
+};
+
+const defaultOptions = {
+  cardBorder: true,
+  boldRulesText: true,
 };
 
 export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
-  type,
-  title,
-  subtitle,
-  image,
-  artist,
-  domain,
-  domainSecondary,
-  subtype,
-  spellcast,
-  cost,
-  level,
-  sections,
-  boldRulesText,
+  card: {
+    type,
+    title,
+    subtitle,
+    image,
+    artist,
+    domain,
+    domainSecondary,
+    subtype,
+    spellcast,
+    cost,
+    level,
+    sections,
+    thresholds,
+  },
+  options: { boldRulesText, cardBorder } = defaultOptions,
 }) => {
   const Divider = getDivider(type);
   return (
-    <div className='h-[476px] w-[340px] overflow-hidden'>
+    <div
+      className={cn(
+        'h-[476px] w-[340px]',
+        cardBorder &&
+          'overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg',
+      )}
+    >
       <div className='relative flex h-full flex-col bg-white'>
         {type === 'domain' || type === 'subclass' ? (
           <CardBanner
@@ -58,7 +74,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           >
             {title}
           </p>
-          {type === 'subclass' ? (
+          {type === 'subclass' || type === 'equipment' ? (
             <p className='text-card-subtitle font-semibold capitalize italic'>
               {subtitle}
             </p>

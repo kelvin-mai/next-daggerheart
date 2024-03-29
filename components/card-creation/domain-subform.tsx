@@ -1,5 +1,5 @@
-import type { CardProperties } from '@/lib/types';
 import { domains } from '@/constants/rules-texts';
+import { useCard, useCardActions } from '@/store';
 import { FormField } from '@/components/common';
 import {
   Input,
@@ -11,23 +11,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
-import { safeParseInt } from '@/lib/utils';
 
-type CardCreationDomainFormProps = {
-  card: CardProperties;
-  onChange: (card: CardProperties) => void;
-};
+type CardCreationDomainFormProps = {};
 
-export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
-  card,
-  onChange,
-}) => {
+export const CardCreationDomainForm: React.FC<
+  CardCreationDomainFormProps
+> = () => {
+  const { domain, subtype, cost, level } = useCard();
+  const { changeCardNumberProperty, changeCardStringProperty } =
+    useCardActions();
   return (
     <>
       <FormField label='Domain' htmlFor='domain'>
         <Select
-          defaultValue={card.domain}
-          onValueChange={(e) => onChange({ ...card, domain: e })}
+          value={domain}
+          onValueChange={(e) =>
+            changeCardStringProperty({ property: 'domain', value: e })
+          }
         >
           <SelectTrigger id='domain' className='capitalize'>
             <SelectValue placeholder='Domain' />
@@ -47,8 +47,10 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
       <div className='flex gap-2'>
         <FormField label='Ability Type' htmlFor='ability-type'>
           <Select
-            defaultValue={card.subtype}
-            onValueChange={(e) => onChange({ ...card, subtype: e })}
+            value={subtype}
+            onValueChange={(e) =>
+              changeCardStringProperty({ property: 'subtype', value: e })
+            }
           >
             <SelectTrigger id='ability-type'>
               <SelectValue placeholder='Ability Type' />
@@ -68,11 +70,14 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
             id='ability-cost'
             placeholder='Stress Cost'
             type='number'
-            defaultValue={card.cost}
+            value={cost}
             min={0}
             max={9}
             onChange={(e) =>
-              onChange({ ...card, cost: safeParseInt(e.target.value) })
+              changeCardNumberProperty({
+                property: 'cost',
+                value: e.target.value,
+              })
             }
           />
         </FormField>
@@ -81,11 +86,14 @@ export const CardCreationDomainForm: React.FC<CardCreationDomainFormProps> = ({
             id='ability-level'
             placeholder='Level'
             type='number'
-            defaultValue={card.level}
+            value={level}
             min={1}
             max={10}
             onChange={(e) =>
-              onChange({ ...card, level: safeParseInt(e.target.value) })
+              changeCardNumberProperty({
+                property: 'level',
+                value: e.target.value,
+              })
             }
           />
         </FormField>

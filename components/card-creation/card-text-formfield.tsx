@@ -1,4 +1,5 @@
 'use client';
+
 import { Fragment } from 'react';
 
 import type { CardTextListType, CardTextSection, Feature } from '@/lib/types';
@@ -44,7 +45,7 @@ const TextFormField: React.FC<TextFormFieldProps> = ({
       <FormField label={label} htmlFor={`card-section-${index}`}>
         <Textarea
           id={`card-section-${index}`}
-          defaultValue={text}
+          value={text}
           onChange={(e) => onChange(e.target.value)}
         />
       </FormField>
@@ -74,7 +75,7 @@ const FeatureFormField: React.FC<FeatureFormFieldProps> = ({
         <FormField label='Feature Name' htmlFor={`card-section-${index}-name`}>
           <Input
             id={`card-section-${index}-name`}
-            defaultValue={text.name}
+            value={text.name}
             onChange={(e) => onChange({ ...text, name: e.target.value })}
           />
         </FormField>
@@ -88,7 +89,7 @@ const FeatureFormField: React.FC<FeatureFormFieldProps> = ({
       >
         <Textarea
           id={`card-section-${index}-name`}
-          defaultValue={text.description}
+          value={text.description}
           onChange={(e) => onChange({ ...text, description: e.target.value })}
         />
       </FormField>
@@ -119,7 +120,7 @@ const ListFormField: React.FC<ListFormFieldProps> = ({
           htmlFor={`card-section-${index}-list-type`}
         >
           <Select
-            defaultValue={listType}
+            value={listType}
             onValueChange={(e) => onChange(text, e as CardTextListType)}
           >
             <SelectTrigger id={`card-section-${index}-list-type`}>
@@ -151,7 +152,7 @@ const ListFormField: React.FC<ListFormFieldProps> = ({
             htmlFor={`card-section-${index}-list-item-${i}`}
           >
             <Textarea
-              defaultValue={t}
+              value={t}
               onChange={(e) =>
                 onChange(
                   text.map((tt, j) => (j === i ? e.target.value : tt)),

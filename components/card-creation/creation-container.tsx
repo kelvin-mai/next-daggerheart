@@ -1,24 +1,14 @@
-'use client';
-
-import { useState } from 'react';
 import { useToPng } from '@hugocxl/react-to-image';
 
-import type { CardType, CardProperties } from '@/lib/types';
-import { cn } from '@/lib/utils';
-import {
-  ancestry,
-  community,
-  domain,
-  subclass,
-} from '@/constants/initial-cards';
+import { useCard, useCardActions, useCardOptions } from '@/store';
 import { DaggerHeartCard } from '@/components/daggerheart-card';
 import { Button, Checkbox, Label } from '@/components/ui';
 import { CardCreationForm } from './form';
 
 export const CardCreationContainer = () => {
-  const [card, setCard] = useState<CardProperties>(ancestry);
-  const [cardBorder, setCardBorder] = useState(true);
-  const [boldRulesText, setBoldRulesText] = useState(true);
+  const card = useCard();
+  const options = useCardOptions();
+  const { changeCardOption } = useCardActions();
 
   const [_, convert, ref] = useToPng({
     onSuccess: (data) => {
@@ -29,55 +19,22 @@ export const CardCreationContainer = () => {
     },
   });
 
-  const getInitialState = (t: CardType) => {
-    switch (t) {
-      case 'ancestry':
-        return ancestry;
-      case 'community':
-        return community;
-      case 'domain':
-        return domain;
-      case 'subclass':
-        return subclass;
-      default:
-        return ancestry;
-    }
-  };
-
-  const handleChangeType = (t: CardType) => {
-    const initialState = getInitialState(t);
-    setCard(initialState);
-  };
-
   return (
     <div className='flex flex-col-reverse gap-4 md:flex-row'>
-      <CardCreationForm
-        className='flex-grow'
-        card={card}
-        onChange={setCard}
-        onChangeType={handleChangeType}
-      />
+      <CardCreationForm className='flex-grow' />
       <div>
         <div className='flex justify-center'>
-          <div
-            className={cn(
-              'w-[340px]',
-              cardBorder &&
-                'overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg',
-            )}
-          >
-            <div ref={ref}>
-              <DaggerHeartCard {...card} boldRulesText={boldRulesText} />
-            </div>
+          <div ref={ref}>
+            <DaggerHeartCard card={card} options={options} />
           </div>
         </div>
         <div className='mt-2 flex items-center justify-end space-x-2'>
           <Checkbox
             id='bold-rules-text'
-            checked={boldRulesText}
+            checked={options['boldRulesText']}
             onCheckedChange={(e) => {
               if (e !== 'indeterminate') {
-                setBoldRulesText(e);
+                changeCardOption({ property: 'boldRulesText', value: e });
               }
             }}
           />
@@ -87,7 +44,15 @@ export const CardCreationContainer = () => {
           <Button className='w-full' onClick={convert}>
             Export
           </Button>
-          <Button className='w-full' onClick={() => setCardBorder(!cardBorder)}>
+          <Button
+            className='w-full'
+            onClick={() =>
+              changeCardOption({
+                property: 'cardBorder',
+                value: !options.cardBorder,
+              })
+            }
+          >
             Toggle Card Border
           </Button>
         </div>

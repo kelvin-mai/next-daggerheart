@@ -3,13 +3,16 @@ import { useState } from 'react';
 import { useMotionTemplate, useMotionValue, motion } from 'framer-motion';
 
 import { Label } from '@/components/ui';
+import { cn } from '@/lib/utils';
 
 type FormFieldProps = React.PropsWithChildren & {
+  className?: string;
   label?: string;
   htmlFor?: string;
 };
 
 export const FormField: React.FC<FormFieldProps> = ({
+  className,
   label,
   htmlFor,
   children,
@@ -27,7 +30,7 @@ export const FormField: React.FC<FormFieldProps> = ({
     mouseY.set(clientY - top);
   }
   return (
-    <div className='flex w-full flex-col space-y-2'>
+    <div className={cn('flex w-full flex-col space-y-2', className)}>
       {label ? <Label htmlFor={htmlFor}>{label}</Label> : null}
       <motion.div
         style={{

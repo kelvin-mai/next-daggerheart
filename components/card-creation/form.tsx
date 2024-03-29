@@ -1,6 +1,6 @@
 'use client';
 
-import type { CardType, CardProperties } from '@/lib/types';
+import type { CardType } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { FormField } from '@/components/common';
 import {
@@ -16,20 +16,19 @@ import {
 import { CardCreationDomainForm } from './domain-subform';
 import { CardCreationTextForm } from './card-text-subform';
 import { CardCreationSubclassForm } from './subclass-subform';
+import { CardCreationThresholdsForm } from './threshold-subform';
+import { CardCreationEquipmentForm } from './equipment-subform';
+import { useCard, useCardActions } from '@/store';
 
 type CardCreationFormProps = {
-  card: CardProperties;
   className?: string;
-  onChange: (card: CardProperties) => void;
-  onChangeType: (type: CardType) => void;
 };
 
 export const CardCreationForm: React.FC<CardCreationFormProps> = ({
-  card,
   className,
-  onChange,
-  onChangeType,
 }) => {
+  const { title, type: cardType, artist } = useCard();
+  const { changeCardType, changeCardStringProperty } = useCardActions();
   const fileToBase64 = (file: Blob): Promise<string> =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -40,7 +39,7 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
   const handleImageChange = async (e: any) => {
     if (e.target.files.length) {
       const image = await fileToBase64(e.target.files[0]);
-      onChange({ ...card, image });
+      changeCardStringProperty({ property: 'image', value: image });
     }
   };
   return (
@@ -54,8 +53,8 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
       <div className='flex gap-2'>
         <FormField label='Card Type' htmlFor='type'>
           <Select
-            defaultValue={card.type}
-            onValueChange={(e) => onChangeType(e as CardType)}
+            value={cardType}
+            onValueChange={(e) => changeCardType(e as CardType)}
           >
             <SelectTrigger id='type'>
               <SelectValue placeholder='Type' />
@@ -67,6 +66,7 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
                 <SelectItem value='community'>Community</SelectItem>
                 <SelectItem value='domain'>Domain</SelectItem>
                 <SelectItem value='subclass'>Subclass</SelectItem>
+                <SelectItem value='equipment'>Equipment</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -75,8 +75,13 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
           <Input
             id='title'
             placeholder='Title'
-            defaultValue={card.title}
-            onChange={(e) => onChange({ ...card, title: e.target.value })}
+            value={title}
+            onChange={(e) =>
+              changeCardStringProperty({
+                property: 'title',
+                value: e.target.value,
+              })
+            }
           />
         </FormField>
       </div>
@@ -92,17 +97,37 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
         <Input
           id='artist'
           placeholder='Artist Name'
-          defaultValue={card.artist}
-          onChange={(e) => onChange({ ...card, artist: e.target.value })}
+          value={artist || ''}
+          onChange={(e) =>
+            changeCardStringProperty({
+              property: 'artist',
+              value: e.target.value,
+            })
+          }
         />
       </FormField>
-      {card.type === 'domain' ? (
-        <CardCreationDomainForm card={card} onChange={onChange} />
+      {cardType === 'domain' ||
+      cardType === 'subclass' ||
+      cardType === 'equipment' ? (
+        <div className='flex items-center'>
+          <div className='w-full border border-dh-gold' />
+          <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase text-dh-gold'>
+            card properties
+          </span>
+          <div className='w-full border border-dh-gold' />
+        </div>
       ) : null}
-      {card.type === 'subclass' ? (
-        <CardCreationSubclassForm card={card} onChange={onChange} />
-      ) : null}
-      <CardCreationTextForm card={card} onChange={onChange} />
+      {cardType === 'domain' ? <CardCreationDomainForm /> : null}
+      {cardType === 'subclass' ? <CardCreationSubclassForm /> : null}
+      {cardType === 'equipment' ? <CardCreationEquipmentForm /> : null}
+      <div className='flex items-center'>
+        <div className='w-full border border-dh-gold' />
+        <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase text-dh-gold'>
+          card text
+        </span>
+        <div className='w-full border border-dh-gold' />
+      </div>
+      <CardCreationTextForm />
     </form>
   );
 };

@@ -1,12 +1,9 @@
 'use client';
+
 import { useState } from 'react';
 
-import type { CardProperties } from '@/lib/types';
-import type {
-  CardTextListType,
-  CardTextSection,
-  CardTextType,
-} from '@/lib/types';
+import type { CardTextListType, CardTextType } from '@/lib/types';
+import { useCard, useCardActions } from '@/store';
 import {
   Button,
   Select,
@@ -21,76 +18,30 @@ import {
 import { FormField } from '@/components/common';
 import { CardCreationSectionFormField } from './card-text-formfield';
 
-type CardCreationTextFormProps = {
-  card: CardProperties;
-  onChange: (card: CardProperties) => void;
-};
+type CardCreationTextFormProps = {};
 
-export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = ({
-  card,
-  onChange,
-}) => {
+export const CardCreationTextForm: React.FC<CardCreationTextFormProps> = () => {
   const [addTextType, setAddTextType] = useState<CardTextType>();
-  const getDefaultText = (textType: CardTextType) => {
-    switch (textType) {
-      case 'flavor':
-        return '';
-      case 'feature':
-        return { name: '', description: '' };
-      case 'rules':
-        return '';
-      case 'list':
-        return [''];
-      case 'custom':
-        return '';
-      default:
-        return '';
-    }
-  };
+  const { sections } = useCard();
+  const { addCardTextSection, removeCardTextSection, changeCardTextSection } =
+    useCardActions();
   const addType = () => {
     if (addTextType) {
-      onChange({
-        ...card,
-        sections: [
-          ...card.sections,
-          {
-            type: addTextType,
-            listType: 'bullet',
-            text: getDefaultText(addTextType),
-          } as CardTextSection,
-        ],
-      });
+      addCardTextSection(addTextType);
     }
   };
   return (
     <>
-      <div className='flex items-center'>
-        <div className='w-full border border-dh-gold' />
-        <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase text-dh-gold'>
-          card text
-        </span>
-        <div className='w-full border border-dh-gold' />
-      </div>
-      {card.sections.map((s, i) => (
+      {sections.map((s, i) => (
         <div key={i} className='space-y-2 rounded border-2 border-dh-gold p-2'>
           <Label>Card Text Section</Label>
           <CardCreationSectionFormField
             index={i}
             {...s}
             onChange={(text: any, listType?: CardTextListType) =>
-              onChange({
-                ...card,
-                sections: card.sections.map((ss, ii) =>
-                  ii === i ? { ...ss, listType, text } : ss,
-                ) as CardTextSection[],
-              })
+              changeCardTextSection({ text, listType, index: i })
             }
-            onRemove={() =>
-              onChange({
-                ...card,
-                sections: card.sections.filter((_, j) => j !== i),
-              })
-            }
+            onRemove={() => removeCardTextSection(i)}
           />
         </div>
       ))}

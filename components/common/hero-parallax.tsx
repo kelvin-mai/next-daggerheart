@@ -47,13 +47,13 @@ export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
     springConfig,
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.2], [-1000, 50]),
     springConfig,
   );
   return (
     <div
       ref={ref}
-      className='relative flex h-[250vh]  flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
+      className='relative flex h-[210vh]  flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
     >
       <Header />
       <div className='container z-10 flex w-full justify-center md:w-[800px]'>
@@ -129,9 +129,7 @@ export const HeroCard = ({
       key={card.title}
       className='group/card relative h-[476px] w-[340px] flex-shrink-0'
     >
-      <div className='overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg'>
-        <DaggerHeartCard {...card} />
-      </div>
+      <DaggerHeartCard card={card} />
     </motion.div>
   );
 };
