@@ -1,3 +1,5 @@
+'use client';
+
 import { domains } from '@/constants/rules-texts';
 import { useCard, useCardActions } from '@/store';
 import { FormField } from '@/components/common';

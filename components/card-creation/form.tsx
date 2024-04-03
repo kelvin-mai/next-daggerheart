@@ -127,6 +127,7 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
         </span>
         <div className='w-full border border-dh-gold' />
       </div>
+      <CardCreationThresholdsForm />
       <CardCreationTextForm />
     </form>
   );

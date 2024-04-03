@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import type { CardTextListType, CardTextSection } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { rulesTextRegex } from '@/constants/rules-texts';

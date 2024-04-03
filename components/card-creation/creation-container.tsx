@@ -1,3 +1,5 @@
+'use client';
+
 import { useToPng } from '@hugocxl/react-to-image';
 
 import { useCard, useCardActions, useCardOptions } from '@/store';

@@ -5,9 +5,9 @@ export default function HomePage() {
   const cards = [...playtestExamples, ...homebrewExamples];
   return (
     <>
-      <main className='bg-gradient-to-b from-dh-off-white to-dh-purple'>
+      <section className='bg-gradient-to-b from-dh-off-white to-dh-purple'>
         <HeroParallax cards={cards} />
-      </main>
+      </section>
       <SectionDivider />
       <section className='bg-gradient-to-b from-dh-purple to-dh-dark-blue'>
         <div className='container flex min-h-[500px] flex-col items-center justify-center gap-16 pb-8 pt-24 sm:flex-row sm:items-start sm:gap-10'>

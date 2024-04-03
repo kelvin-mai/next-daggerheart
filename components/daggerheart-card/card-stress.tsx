@@ -1,8 +1,8 @@
-type CardStress = {
+type CardStressProps = {
   cost?: number;
 };
 
-export const CardStress = ({ cost = 0 }) => {
+export const CardStress: React.FC<CardStressProps> = ({ cost = 0 }) => {
   return (
     <>
       <div className='absolute right-6 top-6'>

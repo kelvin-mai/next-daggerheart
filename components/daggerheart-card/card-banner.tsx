@@ -54,8 +54,7 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   const SecondaryIcon = getDomainIcon(domainSecondary);
   const domainPrimaryColor = getDomainColor(domainPrimary);
   const domainSecondaryColor = getDomainColor(domainSecondary);
-  const iconFill =
-    getBrightness(domainPrimaryColor) < 128 ? 'fill-white' : 'fill-black';
+  const highBrightness = getBrightness(domainPrimaryColor) < 128;
   return (
     <>
       <div className='absolute -top-1 left-[24px] z-40'>
@@ -67,16 +66,28 @@ export const CardBanner: React.FC<CardBannerProps> = ({
           domainSecondary ? 'left-[56px] top-[16px]' : 'left-[56px] top-[54px]',
         )}
       >
-        <PrimaryIcon className={cn('h-[32px] w-[32px]', iconFill)} />
+        <PrimaryIcon
+          className={cn(
+            'h-[32px] w-[32px]',
+            highBrightness ? 'fill-white' : 'fill-black',
+          )}
+        />
       </div>
       {domainSecondary ? (
         <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
-          <SecondaryIcon className={cn('h-[32px] w-[32px]', iconFill)} />
+          <SecondaryIcon
+            className={cn(
+              'h-[32px] w-[32px]',
+              highBrightness ? 'fill-white' : 'fill-black',
+            )}
+          />
         </div>
       ) : null}
       {level ? (
-        <p className='text-eveleth-clean absolute left-[56px] top-[28px] z-50 -translate-x-1/2 transform text-card-title-lg font-bold text-white'>
-          {level}
+        <p className='text-eveleth-clean absolute left-[56px] top-[28px] z-50 -translate-x-1/2 transform text-card-title-lg font-bold'>
+          <span className={cn(highBrightness ? 'text-white' : 'text-black')}>
+            {level}
+          </span>
         </p>
       ) : null}
       <div

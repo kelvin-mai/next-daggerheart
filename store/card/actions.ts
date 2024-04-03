@@ -50,6 +50,11 @@ export const changeCardType: CardAction<CardType> = (set) => (t) =>
   set((state) => ({
     ...state,
     card: getInitialCard(t),
+    options: {
+      ...state.options,
+      thresholdsAsText: false,
+      includePretext: true,
+    },
   }));
 
 export const changeCardStringProperty: CardAction<{
@@ -66,8 +71,6 @@ export const changeCardNumberProperty: CardAction<{
 }> =
   (set) =>
   ({ property, value }) => {
-    console.log(value);
-    console.log(safeParseInt(value));
     set((state) => ({
       ...state,
       card: { ...state.card, [property]: safeParseInt(value) },
@@ -116,6 +119,17 @@ export const removeCardTextSection: CardAction<number> = (set) => (i) =>
     },
   }));
 
+export const changeThresholds: CardAction<
+  [number, number, number] | undefined
+> = (set) => (thresholds) =>
+  set((state) => ({
+    ...state,
+    card: {
+      ...state.card,
+      thresholds,
+    },
+  }));
+
 export const changeCardOption: CardAction<{
   property: string;
   value: boolean;
@@ -137,5 +151,6 @@ export const setActions = (set: any) => ({
   addCardTextSection: addCardTextSection(set),
   changeCardTextSection: changeCardTextSection(set),
   removeCardTextSection: removeCardTextSection(set),
+  changeThresholds: changeThresholds(set),
   changeCardOption: changeCardOption(set),
 });

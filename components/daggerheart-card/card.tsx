@@ -11,9 +11,10 @@ export type DaggerHeartCardProps = {
   options?: any;
 };
 
-const defaultOptions = {
+export const defaultOptions = {
   cardBorder: true,
   boldRulesText: true,
+  thresholdsAsText: false,
 };
 
 export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
@@ -32,15 +33,18 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
     sections,
     thresholds,
   },
-  options: { boldRulesText, cardBorder } = defaultOptions,
+  options: {
+    boldRulesText,
+    cardBorder,
+    thresholdsAsText,
+  } = defaultOptions,
 }) => {
   const Divider = getDivider(type);
   return (
     <div
       className={cn(
-        'h-[476px] w-[340px]',
-        cardBorder &&
-          'overflow-hidden rounded-xl border-2 border-dh-gold-light shadow-lg',
+        'h-[476px] w-[340px] overflow-hidden',
+        cardBorder && 'rounded-xl border-2 border-dh-gold-light shadow-lg',
       )}
     >
       <div className='relative flex h-full flex-col bg-white'>
@@ -90,6 +94,9 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
               <CardText key={i} {...s} boldRulesText={boldRulesText} />
             ))}
           </div>
+          {thresholds ? (
+            <CardThresholds thresholds={thresholds} asText={thresholdsAsText} />
+          ) : null}
         </div>
         {artist ? (
           <div className='absolute bottom-2 left-2 text-card-credits text-xs italic text-slate-400'>
