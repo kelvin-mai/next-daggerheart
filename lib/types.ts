@@ -41,6 +41,13 @@ export type CardTextSection = {
     }
 );
 
+export type CardWeaponProperties = {
+  trait: string;
+  distance: string;
+  damageAmount: string;
+  damageType: string;
+};
+
 export type CardProperties = {
   type: CardType;
   title: string;
@@ -51,8 +58,11 @@ export type CardProperties = {
   subtype?: string;
   level?: number;
   cost?: number;
+  armor?: number;
+  hands?: number;
   subtitle?: string;
   spellcast?: string;
   sections: CardTextSection[];
   thresholds?: [number, number, number];
+  weapon?: CardWeaponProperties;
 };

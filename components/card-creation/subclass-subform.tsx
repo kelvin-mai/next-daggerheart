@@ -104,9 +104,9 @@ export const CardCreationSubclassForm: React.FC<
       <FormField label='Spellcast Trait' htmlFor='spellcast-trait'>
         <Select
           value={spellcast}
-          onValueChange={(e) => {
-            changeCardStringProperty({ property: 'spellcast', value: e });
-          }}
+          onValueChange={(e) =>
+            changeCardStringProperty({ property: 'spellcast', value: e })
+          }
         >
           <SelectTrigger id='spellcast-trait' className='capitalize'>
             <SelectValue placeholder='Spellcast Trait' />

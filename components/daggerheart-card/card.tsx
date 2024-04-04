@@ -5,6 +5,8 @@ import { CardStress } from './card-stress';
 import { CardBanner } from './card-banner';
 import { CardText } from './card-text';
 import { CardThresholds } from './card-thresholds';
+import { CardArmor } from './card-armor';
+import { CardHands } from './card-hands';
 
 export type DaggerHeartCardProps = {
   card: CardProperties;
@@ -15,6 +17,7 @@ export const defaultOptions = {
   cardBorder: true,
   boldRulesText: true,
   thresholdsAsText: false,
+  includeSpellcast: true,
 };
 
 export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
@@ -30,13 +33,17 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
     spellcast,
     cost,
     level,
+    armor,
+    hands,
     sections,
     thresholds,
+    weapon,
   },
   options: {
     boldRulesText,
     cardBorder,
     thresholdsAsText,
+    includeSpellcast,
   } = defaultOptions,
 }) => {
   const Divider = getDivider(type);
@@ -56,6 +63,13 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           />
         ) : null}
         {type === 'domain' ? <CardStress cost={cost} /> : null}
+        {type === 'equipment' && subtitle === 'armor' ? (
+          <CardArmor score={armor} />
+        ) : null}
+        {type === 'equipment' &&
+        (subtitle === 'primary weapon' || subtitle === 'secondary weapon') ? (
+          <CardHands hands={hands} />
+        ) : null}
         <div className='h-[240px] overflow-hidden'>
           <img
             className='-z-10 w-full object-cover object-center-top'
@@ -83,10 +97,24 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
               {subtitle}
             </p>
           ) : null}
-          {spellcast ? (
+          {spellcast && includeSpellcast ? (
             <p className='text-card-subtitle uppercase'>
               <span className='font-bold'>Spellcast: </span>
               {spellcast}
+            </p>
+          ) : null}
+
+          {(subtitle === 'primary weapon' || subtitle === 'secondary weapon') &&
+          weapon ? (
+            <p className='text-card-subtitle'>
+              <span className='font-bold capitalize'>
+                {weapon.trait} {weapon.distance}
+              </span>
+              <span> - </span>
+              <span>
+                {weapon.damageAmount}{' '}
+                <span className='capitalize'>({weapon.damageType})</span>
+              </span>
             </p>
           ) : null}
           <div className='my-2 w-full space-y-2 text-left'>

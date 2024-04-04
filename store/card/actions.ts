@@ -4,12 +4,15 @@ import type {
   CardTextSection,
   CardTextType,
   CardType,
+  CardWeaponProperties,
 } from '@/lib/types';
 import {
   ancestry,
   community,
   domain,
+  equipmentArmor,
   equipmentPrimaryWeapon,
+  equipmentSecondaryWeapon,
   subclass,
 } from '@/constants/initial-cards';
 import { safeParseInt } from '@/lib/utils';
@@ -53,7 +56,7 @@ export const changeCardType: CardAction<CardType> = (set) => (t) =>
     options: {
       ...state.options,
       thresholdsAsText: false,
-      includePretext: true,
+      includeSpellcast: true,
     },
   }));
 
@@ -119,6 +122,20 @@ export const removeCardTextSection: CardAction<number> = (set) => (i) =>
     },
   }));
 
+export const changeWeaponProperty: CardAction<any> =
+  (set) =>
+  ({ property, value }) =>
+    set((state) => ({
+      ...state,
+      card: {
+        ...state.card,
+        weapon: {
+          ...state.card.weapon,
+          [property]: value,
+        } as CardWeaponProperties,
+      },
+    }));
+
 export const changeThresholds: CardAction<
   [number, number, number] | undefined
 > = (set) => (thresholds) =>
@@ -151,6 +168,7 @@ export const setActions = (set: any) => ({
   addCardTextSection: addCardTextSection(set),
   changeCardTextSection: changeCardTextSection(set),
   removeCardTextSection: removeCardTextSection(set),
+  changeWeaponProperty: changeWeaponProperty(set),
   changeThresholds: changeThresholds(set),
   changeCardOption: changeCardOption(set),
 });
