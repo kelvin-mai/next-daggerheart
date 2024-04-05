@@ -1,5 +1,6 @@
 export * from './button';
 export * from './checkbox';
+export * from './color-picker';
 export * from './input';
 export * from './label';
 export * from './popover';

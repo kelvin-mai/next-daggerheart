@@ -41,3 +41,11 @@ export const getBrightness = (hex: string) => {
   const { r, g, b } = rgb;
   return (r * 299 + g * 587 + b * 114) / 1000;
 };
+
+export const fileToBase64 = (file: Blob): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });

@@ -31,6 +31,14 @@ export const terms = [
   'reaction roll',
   'repair armor',
 ];
+export const equipmentTypes = [
+  'armor',
+  'consumable',
+  'item',
+  'primary weapon',
+  'secondary weapon',
+];
+export const ranges = ['melee', 'very close', 'close', 'far', 'very far'];
 
 export const rulesTexts = [...dice, ...domains, ...traits, ...terms];
 

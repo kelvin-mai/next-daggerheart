@@ -1,4 +1,4 @@
-export * from './arcane-domain';
+export * from './arcana-domain';
 export * from './blade-domain';
 export * from './bone-domain';
 export * from './codex-domain';

@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
 
+import { domains } from '@/constants/rules-texts';
 import { getDomainColor } from '@/constants/domain-colors';
-import type { CardType } from '@/lib/types';
+import type { CardDomain, CardType } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
 
 type DividerProps = {
-  domainPrimary?: string;
-  domainSecondary?: string;
   text?: string;
+  domainPrimary?: CardDomain;
+  domainSecondary?: CardDomain;
 };
 
 export const CommunityDivider: React.FC<DividerProps> = () => {
@@ -56,7 +57,10 @@ export const DomainDivider: React.FC<DividerProps> = ({
   domainPrimary,
   text,
 }) => {
-  const background = getDomainColor(domainPrimary);
+  const background =
+    domainPrimary && domains.includes(domainPrimary.name)
+      ? getDomainColor(domainPrimary.name)
+      : domainPrimary?.color || '#ffffff';
   return (
     <>
       <div
@@ -90,8 +94,14 @@ export const SubclassDivider: React.FC<DividerProps> = ({
   domainSecondary,
   text,
 }) => {
-  const domainPrimaryColor = getDomainColor(domainPrimary);
-  const domainSecondaryColor = getDomainColor(domainSecondary);
+  const domainPrimaryColor =
+    domainPrimary && domains.includes(domainPrimary.name)
+      ? getDomainColor(domainPrimary.name)
+      : domainPrimary?.color || '#ffffff';
+  const domainSecondaryColor =
+    domainSecondary && domains.includes(domainSecondary.name)
+      ? getDomainColor(domainSecondary.name)
+      : domainSecondary?.color || '#ffffff';
   const background = domainSecondary
     ? `linear-gradient(to right,${domainPrimaryColor},${domainSecondaryColor})`
     : domainPrimaryColor;

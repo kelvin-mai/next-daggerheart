@@ -1,4 +1,4 @@
-export const ArcaneDomainIcon = ({ ...props }) => {
+export const ArcanaDomainIcon = ({ ...props }) => {
   return (
     <svg
       version='1.1'

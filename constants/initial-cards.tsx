@@ -39,8 +39,15 @@ export const startingClass = {
 export const equipmentPrimaryWeapon: CardProperties = {
   type: 'equipment',
   title: 'Asking-Stone Staff',
-  subtitle: 'Primary Weapon',
+  subtitle: 'primary weapon',
   image: '/assets/playtest/arcana.webp',
+  hands: 2,
+  weapon: {
+    trait: 'knowledge',
+    distance: 'far',
+    damageAmount: 'd12+5',
+    damageType: 'physical',
+  },
   sections: [
     {
       type: 'feature',
@@ -58,6 +65,13 @@ export const equipmentSecondaryWeapon = {
   title: 'Whip',
   subtitle: 'Secondary Weapon',
   image: '/assets/playtest/arcana.webp',
+  hands: 1,
+  weapon: {
+    trait: 'agility',
+    distance: 'very close',
+    damageAmount: 'd6',
+    damageType: 'physical',
+  },
   sections: [
     {
       type: 'feature',
@@ -70,11 +84,12 @@ export const equipmentSecondaryWeapon = {
   ],
 };
 
-export const equipmentArmor = {
+export const equipmentArmor: CardProperties = {
   type: 'equipment',
   title: 'Emberwoven Armor',
-  subtitle: 'Armor',
+  subtitle: 'armor',
   image: '/assets/playtest/arcana.webp',
+  armor: 7,
   sections: [
     {
       type: 'feature',

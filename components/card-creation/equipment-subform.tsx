@@ -1,16 +1,10 @@
 'use client';
 
-import {
-  domains,
-  traits,
-  equipmentTypes,
-  ranges,
-} from '@/constants/rules-texts';
+import { useCard, useCardActions } from '@/store';
+import { traits, equipmentTypes, ranges } from '@/constants/rules-texts';
 import { FormField } from '@/components/common';
 import {
-  Checkbox,
   Input,
-  Label,
   Select,
   SelectContent,
   SelectGroup,
@@ -19,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
-import { useCard, useCardActions } from '@/store';
 
 type CardCreationEquipmentFormProps = {};
 
@@ -157,7 +150,7 @@ export const CardCreationEquipmentForm: React.FC<
             <FormField label='Damage Amount' htmlFor='damage-amount'>
               <Input
                 id='damage-amount'
-                placeholder='damage amount'
+                placeholder='d8+5...'
                 value={weapon.damageAmount}
                 onChange={(e) =>
                   changeWeaponProperty({

@@ -1,4 +1,5 @@
 import type {
+  CardDomain,
   CardProperties,
   CardTextListType,
   CardTextSection,
@@ -10,13 +11,11 @@ import {
   ancestry,
   community,
   domain,
-  equipmentArmor,
   equipmentPrimaryWeapon,
-  equipmentSecondaryWeapon,
   subclass,
 } from '@/constants/initial-cards';
 import { safeParseInt } from '@/lib/utils';
-import type { CardAction } from './types';
+import type { CardAction, ZustandSet } from './types';
 
 const getInitialCard = (t: CardType) => {
   switch (t) {
@@ -161,7 +160,40 @@ export const changeCardOption: CardAction<{
       },
     }));
 
-export const setActions = (set: any) => ({
+export const changeCardDomain: CardAction<{
+  property: 'domain' | 'domainSecondary';
+  domain: CardDomain;
+}> =
+  (set) =>
+  ({ property, domain }) =>
+    set((state) => {
+      if (
+        domain.name !== 'custom' &&
+        ((property === 'domain' &&
+          state.card.domainSecondary?.name === domain.name) ||
+          (property === 'domainSecondary' &&
+            state.card.domain?.name === domain.name))
+      ) {
+        return {
+          ...state,
+          card: {
+            ...state.card,
+            domain,
+            domainSecondary: undefined,
+          },
+        };
+      } else {
+        return {
+          ...state,
+          card: {
+            ...state.card,
+            [property]: domain,
+          },
+        };
+      }
+    });
+
+export const setActions = (set: ZustandSet) => ({
   changeCardType: changeCardType(set),
   changeCardStringProperty: changeCardStringProperty(set),
   changeCardNumberProperty: changeCardNumberProperty(set),
@@ -171,4 +203,5 @@ export const setActions = (set: any) => ({
   changeWeaponProperty: changeWeaponProperty(set),
   changeThresholds: changeThresholds(set),
   changeCardOption: changeCardOption(set),
+  changeCardDomain: changeCardDomain(set),
 });

@@ -19,6 +19,14 @@ export type EquipmentSubType =
   | 'item'
   | 'consumable';
 
+export type Trait =
+  | 'agility'
+  | 'strength'
+  | 'finesse'
+  | 'instinct'
+  | 'presence'
+  | 'knowledge';
+
 export type CardTextType = 'flavor' | 'feature' | 'rules' | 'list' | 'custom';
 
 export type CardTextListType = 'bullet' | 'number';
@@ -42,10 +50,16 @@ export type CardTextSection = {
 );
 
 export type CardWeaponProperties = {
-  trait: string;
+  trait: Trait;
   distance: string;
   damageAmount: string;
   damageType: string;
+};
+
+export type CardDomain = {
+  name: string;
+  color?: string;
+  image?: string;
 };
 
 export type CardProperties = {
@@ -53,15 +67,15 @@ export type CardProperties = {
   title: string;
   image: string;
   artist?: string;
-  domain?: string;
-  domainSecondary?: string;
+  domain?: CardDomain;
+  domainSecondary?: CardDomain;
   subtype?: string;
   level?: number;
   cost?: number;
   armor?: number;
   hands?: number;
   subtitle?: string;
-  spellcast?: string;
+  spellcast?: Trait;
   sections: CardTextSection[];
   thresholds?: [number, number, number];
   weapon?: CardWeaponProperties;

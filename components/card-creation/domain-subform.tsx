@@ -1,6 +1,5 @@
 'use client';
 
-import { domains } from '@/constants/rules-texts';
 import { useCard, useCardActions } from '@/store';
 import { FormField } from '@/components/common';
 import {
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
+import { DomainFormField } from './domain-formfield';
 
 type CardCreationDomainFormProps = {};
 
@@ -20,32 +20,17 @@ export const CardCreationDomainForm: React.FC<
   CardCreationDomainFormProps
 > = () => {
   const { domain, subtype, cost, level } = useCard();
-  const { changeCardNumberProperty, changeCardStringProperty } =
-    useCardActions();
+  const {
+    changeCardNumberProperty,
+    changeCardStringProperty,
+    changeCardDomain,
+  } = useCardActions();
   return (
     <>
-      <FormField label='Domain' htmlFor='domain'>
-        <Select
-          value={domain}
-          onValueChange={(e) =>
-            changeCardStringProperty({ property: 'domain', value: e })
-          }
-        >
-          <SelectTrigger id='domain' className='capitalize'>
-            <SelectValue placeholder='Domain' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Domain</SelectLabel>
-              {domains.map((d) => (
-                <SelectItem key={d} className='capitalize' value={d}>
-                  {d}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </FormField>
+      <DomainFormField
+        defaultValue={domain}
+        onChange={(domain) => changeCardDomain({ property: 'domain', domain })}
+      />
       <div className='flex gap-2'>
         <FormField label='Ability Type' htmlFor='ability-type'>
           <Select

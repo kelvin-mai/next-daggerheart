@@ -1,7 +1,8 @@
 'use client';
 
 import type { CardType } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { cn, fileToBase64 } from '@/lib/utils';
+import { useCard, useCardActions } from '@/store';
 import { FormField } from '@/components/common';
 import {
   Input,
@@ -18,7 +19,6 @@ import { CardCreationTextForm } from './card-text-subform';
 import { CardCreationSubclassForm } from './subclass-subform';
 import { CardCreationThresholdsForm } from './threshold-subform';
 import { CardCreationEquipmentForm } from './equipment-subform';
-import { useCard, useCardActions } from '@/store';
 
 type CardCreationFormProps = {
   className?: string;
@@ -29,13 +29,6 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
 }) => {
   const { title, type: cardType, artist } = useCard();
   const { changeCardType, changeCardStringProperty } = useCardActions();
-  const fileToBase64 = (file: Blob): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
   const handleImageChange = async (e: any) => {
     if (e.target.files.length) {
       const image = await fileToBase64(e.target.files[0]);

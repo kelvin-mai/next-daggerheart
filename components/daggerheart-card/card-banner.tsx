@@ -1,7 +1,7 @@
 import { getDomainColor } from '@/constants/domain-colors';
 import { cn, getBrightness } from '@/lib/utils';
 import {
-  ArcaneDomainIcon,
+  ArcanaDomainIcon,
   BladeDomainIcon,
   BoneDomainIcon,
   CodexDomainIcon,
@@ -11,17 +11,20 @@ import {
   SplendorDomainIcon,
   ValorDomainIcon,
 } from '@/components/icons';
+import { CardDomain } from '@/lib/types';
+import { domains } from '@/constants/rules-texts';
+import { DaggerheartIcon } from '../icons/daggerheart';
 
 type CardBannerProps = {
-  domainPrimary?: string;
-  domainSecondary?: string;
+  domainPrimary?: CardDomain;
+  domainSecondary?: CardDomain;
   level?: number;
 };
 
 const getDomainIcon = (domain?: string) => {
   switch (domain) {
-    case 'arcane':
-      return ArcaneDomainIcon;
+    case 'arcana':
+      return ArcanaDomainIcon;
     case 'blade':
       return BladeDomainIcon;
     case 'bone':
@@ -39,21 +42,28 @@ const getDomainIcon = (domain?: string) => {
     case 'valor':
       return ValorDomainIcon;
     default:
-      return ArcaneDomainIcon;
+      return DaggerheartIcon;
   }
 };
 
 export const CardBanner: React.FC<CardBannerProps> = ({
-  domainPrimary = 'arcana',
+  domainPrimary,
   domainSecondary,
   level,
 }) => {
   const position = 'absolute left-[26px] -top-1';
   const size = 'h-[120px] w-[59px]';
-  const PrimaryIcon = getDomainIcon(domainPrimary);
-  const SecondaryIcon = getDomainIcon(domainSecondary);
-  const domainPrimaryColor = getDomainColor(domainPrimary);
-  const domainSecondaryColor = getDomainColor(domainSecondary);
+  const PrimaryIcon = getDomainIcon(domainPrimary?.name);
+  const SecondaryIcon = getDomainIcon(domainSecondary?.name);
+
+  const domainPrimaryColor =
+    domainPrimary && domains.includes(domainPrimary.name)
+      ? getDomainColor(domainPrimary.name)
+      : domainPrimary?.color || '#ffffff';
+  const domainSecondaryColor =
+    domainSecondary && domains.includes(domainSecondary.name)
+      ? getDomainColor(domainSecondary.name)
+      : domainSecondary?.color || '#ffffff';
   const highBrightness = getBrightness(domainPrimaryColor) < 128;
   return (
     <>
@@ -66,21 +76,29 @@ export const CardBanner: React.FC<CardBannerProps> = ({
           domainSecondary ? 'left-[56px] top-[16px]' : 'left-[56px] top-[54px]',
         )}
       >
-        <PrimaryIcon
-          className={cn(
-            'h-[32px] w-[32px]',
-            highBrightness ? 'fill-white' : 'fill-black',
-          )}
-        />
-      </div>
-      {domainSecondary ? (
-        <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
-          <SecondaryIcon
+        {domainPrimary?.name === 'custom' && domainPrimary?.image ? (
+          <img className='h-[32px] w-[32px]' src={domainPrimary.image} />
+        ) : (
+          <PrimaryIcon
             className={cn(
               'h-[32px] w-[32px]',
               highBrightness ? 'fill-white' : 'fill-black',
             )}
           />
+        )}
+      </div>
+      {domainSecondary ? (
+        <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
+          {domainSecondary.name === 'custom' && domainSecondary.image ? (
+            <img className='h-[32px] w-[32px]' src={domainSecondary.image} />
+          ) : (
+            <SecondaryIcon
+              className={cn(
+                'h-[32px] w-[32px]',
+                highBrightness ? 'fill-white' : 'fill-black',
+              )}
+            />
+          )}
         </div>
       ) : null}
       {level ? (

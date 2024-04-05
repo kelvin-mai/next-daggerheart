@@ -1,6 +1,7 @@
 'use client';
 
-import { domains, traits } from '@/constants/rules-texts';
+import { useCard, useCardActions, useCardOptions } from '@/store';
+import { traits } from '@/constants/rules-texts';
 import { FormField } from '@/components/common';
 import {
   Checkbox,
@@ -14,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui';
-import { useCard, useCardActions, useCardOptions } from '@/store';
+import { DomainFormField } from './domain-formfield';
 
 type CardCreationSubclassFormProps = {};
 
@@ -23,7 +24,8 @@ export const CardCreationSubclassForm: React.FC<
 > = () => {
   const { subtype, subtitle, domain, domainSecondary, spellcast } = useCard();
   const { includeSpellcast } = useCardOptions();
-  const { changeCardStringProperty, changeCardOption } = useCardActions();
+  const { changeCardStringProperty, changeCardOption, changeCardDomain } =
+    useCardActions();
   return (
     <>
       <div className='flex gap-2'>
@@ -52,55 +54,18 @@ export const CardCreationSubclassForm: React.FC<
           />
         </FormField>
       </div>
-      <div className='flex gap-2'>
-        <FormField label='Primary Domain' htmlFor='primary-domain'>
-          <Select
-            value={domain}
-            onValueChange={(e) =>
-              changeCardStringProperty({ property: 'domain', value: e })
-            }
-          >
-            <SelectTrigger id='primary-domain' className='capitalize'>
-              <SelectValue placeholder='Domain' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Domain</SelectLabel>
-                {domains.map((d) => (
-                  <SelectItem key={d} className='capitalize' value={d}>
-                    {d}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </FormField>
-        <FormField label='Secondary Domain' htmlFor='secondary-domain'>
-          <Select
-            value={domainSecondary}
-            onValueChange={(e) =>
-              changeCardStringProperty({
-                property: 'domainSecondary',
-                value: e,
-              })
-            }
-          >
-            <SelectTrigger id='secondary-domain' className='capitalize'>
-              <SelectValue placeholder='Domain' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Domain</SelectLabel>
-                {domains.map((d) => (
-                  <SelectItem key={d} className='capitalize' value={d}>
-                    {d}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </FormField>
-      </div>
+      <DomainFormField
+        label='Primary Domain'
+        defaultValue={domain}
+        onChange={(domain) => changeCardDomain({ property: 'domain', domain })}
+      />
+      <DomainFormField
+        label='Secondary Domain'
+        defaultValue={domainSecondary}
+        onChange={(domain) =>
+          changeCardDomain({ property: 'domainSecondary', domain })
+        }
+      />
       <FormField label='Spellcast Trait' htmlFor='spellcast-trait'>
         <Select
           value={spellcast}
