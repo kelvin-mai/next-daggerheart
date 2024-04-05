@@ -7,6 +7,7 @@ import { CardText } from './card-text';
 import { CardThresholds } from './card-thresholds';
 import { CardArmor } from './card-armor';
 import { CardHands } from './card-hands';
+import { CardEvasion } from './card-evasion';
 
 export type DaggerHeartCardProps = {
   card: CardProperties;
@@ -35,6 +36,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
     level,
     armor,
     hands,
+    evasion,
     sections,
     thresholds,
     weapon,
@@ -55,7 +57,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
       )}
     >
       <div className='relative flex h-full flex-col bg-white'>
-        {type === 'domain' || type === 'subclass' ? (
+        {type === 'domain' || type === 'subclass' || type === 'class' ? (
           <CardBanner
             domainPrimary={domain}
             domainSecondary={domainSecondary}
@@ -70,6 +72,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
         (subtitle === 'primary weapon' || subtitle === 'secondary weapon') ? (
           <CardHands hands={hands} />
         ) : null}
+        {type === 'class' && <CardEvasion score={evasion} />}
         <div className='h-[240px] overflow-hidden'>
           <img
             className='-z-10 w-full object-cover object-center-top'
@@ -92,7 +95,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           >
             {title}
           </p>
-          {type === 'subclass' || type === 'equipment' ? (
+          {type === 'subclass' || type === 'equipment' || type === 'class' ? (
             <p className='text-card-subtitle font-semibold capitalize italic'>
               {subtitle}
             </p>

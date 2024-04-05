@@ -138,6 +138,8 @@ export const getDivider = (type: CardType) => {
       return DomainDivider;
     case 'subclass':
       return SubclassDivider;
+    case 'class':
+      return SubclassDivider;
     default:
       return Fragment;
   }

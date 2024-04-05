@@ -2,6 +2,7 @@ export type CardType =
   | 'ancestry'
   | 'community'
   | 'domain'
+  | 'class'
   | 'subclass'
   | 'equipment';
 
@@ -74,6 +75,7 @@ export type CardProperties = {
   cost?: number;
   armor?: number;
   hands?: number;
+  evasion?: number;
   subtitle?: string;
   spellcast?: Trait;
   sections: CardTextSection[];

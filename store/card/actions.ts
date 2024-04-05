@@ -9,6 +9,7 @@ import type {
 } from '@/lib/types';
 import {
   ancestry,
+  classCard,
   community,
   domain,
   equipmentPrimaryWeapon,
@@ -29,6 +30,8 @@ const getInitialCard = (t: CardType) => {
       return subclass;
     case 'equipment':
       return equipmentPrimaryWeapon;
+    case 'class':
+      return classCard;
     default:
       return ancestry;
   }

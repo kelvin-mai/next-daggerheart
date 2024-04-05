@@ -19,6 +19,7 @@ import { CardCreationTextForm } from './card-text-subform';
 import { CardCreationSubclassForm } from './subclass-subform';
 import { CardCreationThresholdsForm } from './threshold-subform';
 import { CardCreationEquipmentForm } from './equipment-subform';
+import { CardCreationClassForm } from './class-subform';
 
 type CardCreationFormProps = {
   className?: string;
@@ -57,9 +58,10 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
                 <SelectLabel>Type</SelectLabel>
                 <SelectItem value='ancestry'>Ancestry</SelectItem>
                 <SelectItem value='community'>Community</SelectItem>
-                <SelectItem value='domain'>Domain</SelectItem>
-                <SelectItem value='subclass'>Subclass</SelectItem>
                 <SelectItem value='equipment'>Equipment</SelectItem>
+                <SelectItem value='domain'>Domain</SelectItem>
+                <SelectItem value='class'>Class</SelectItem>
+                <SelectItem value='subclass'>Subclass</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -101,7 +103,8 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
       </FormField>
       {cardType === 'domain' ||
       cardType === 'subclass' ||
-      cardType === 'equipment' ? (
+      cardType === 'equipment' ||
+      cardType === 'class' ? (
         <div className='flex items-center'>
           <div className='w-full border border-dh-gold' />
           <span className='text-eveleth-clean text-nowrap px-2 font-bold uppercase text-dh-gold'>
@@ -111,6 +114,7 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
         </div>
       ) : null}
       {cardType === 'domain' ? <CardCreationDomainForm /> : null}
+      {cardType === 'class' ? <CardCreationClassForm /> : null}
       {cardType === 'subclass' ? <CardCreationSubclassForm /> : null}
       {cardType === 'equipment' ? <CardCreationEquipmentForm /> : null}
       <div className='flex items-center'>

@@ -127,3 +127,33 @@ export const equipmentItem = {
     },
   ],
 };
+
+export const classCard: CardProperties = {
+  type: 'class',
+  title: 'Wizard',
+  image: '/assets/playtest/wizard.webp',
+  subtype: 'class',
+  subtitle: 'class features',
+  domain: { name: 'codex' },
+  domainSecondary: { name: 'splendor' },
+  evasion: 8,
+  thresholds: [2, 7, 12],
+  sections: [
+    {
+      type: 'feature',
+      text: {
+        name: 'Prestidigitation',
+        description:
+          'You can perform harmless, subtle magical effects at will. Examples might include changing an object’s color, creating a smell, lighting a candle, floating something small, illuminating a room, repairing a small object, etc.',
+      },
+    },
+    {
+      type: 'feature',
+      text: {
+        name: 'Strange Patterns',
+        description:
+          'Choose a number between 1-12. Anytime you roll that number on a Duality Die, gain a hope or clear a stress. You may change this number on any long rest.',
+      },
+    },
+  ],
+};
