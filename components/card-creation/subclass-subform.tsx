@@ -47,7 +47,7 @@ export const CardCreationSubclassForm: React.FC<
             value={subtitle}
             onChange={(e) =>
               changeCardStringProperty({
-                property: 'subtype',
+                property: 'subtitle',
                 value: e.target.value,
               })
             }
