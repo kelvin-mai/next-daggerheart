@@ -1,10 +1,12 @@
 'use client';
 
-import { useCard, useCardActions } from '@/store';
+import { useCard, useCardActions, useCardOptions } from '@/store';
 import { traits, equipmentTypes, ranges } from '@/constants/rules-texts';
 import { FormField } from '@/components/common';
 import {
+  Checkbox,
   Input,
+  Label,
   Select,
   SelectContent,
   SelectGroup,
@@ -19,11 +21,13 @@ type CardCreationEquipmentFormProps = {};
 export const CardCreationEquipmentForm: React.FC<
   CardCreationEquipmentFormProps
 > = () => {
-  const { subtitle, armor, hands, weapon } = useCard();
+  const { subtitle, level, armor, hands, weapon } = useCard();
+  const { includeEquipmentTier } = useCardOptions();
   const {
     changeCardStringProperty,
     changeCardNumberProperty,
     changeWeaponProperty,
+    changeCardOption,
   } = useCardActions();
   const changeEquipmentType = (value: string) => {
     changeCardStringProperty({
@@ -42,23 +46,62 @@ export const CardCreationEquipmentForm: React.FC<
   };
   return (
     <>
-      <FormField label='Equipment Type' htmlFor='subtitle'>
-        <Select value={subtitle} onValueChange={(e) => changeEquipmentType(e)}>
-          <SelectTrigger id='subtitle' className='capitalize'>
-            <SelectValue placeholder='Equipment Type' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Equipment Type</SelectLabel>
-              {equipmentTypes.map((t) => (
-                <SelectItem key={t} className='capitalize' value={t}>
-                  {t}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </FormField>
+      <div className='flex gap-2'>
+        <FormField label='Equipment Type' htmlFor='subtitle'>
+          <Select
+            value={subtitle}
+            onValueChange={(e) => changeEquipmentType(e)}
+          >
+            <SelectTrigger id='subtitle' className='capitalize'>
+              <SelectValue placeholder='Equipment Type' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Equipment Type</SelectLabel>
+                {equipmentTypes.map((t) => (
+                  <SelectItem key={t} className='capitalize' value={t}>
+                    {t}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </FormField>
+        <FormField label='Equipment Tier' htmlFor='level'>
+          <Input
+            id='level'
+            placeholder='Tier'
+            type='number'
+            value={level}
+            min={0}
+            max={5}
+            onChange={(e) =>
+              changeCardNumberProperty({
+                property: 'level',
+                value: e.target.value,
+              })
+            }
+          />
+        </FormField>
+      </div>
+
+      <div className='flex justify-end space-x-2 pr-4'>
+        <div className='flex items-center justify-end space-x-2'>
+          <Checkbox
+            id='show-thresholds'
+            checked={!!includeEquipmentTier}
+            onCheckedChange={(e) => {
+              if (e !== 'indeterminate') {
+                changeCardOption({
+                  property: 'includeEquipmentTier',
+                  value: e,
+                });
+              }
+            }}
+          />
+          <Label htmlFor='show-thresholds'>Show equipment tier?</Label>
+        </div>
+      </div>
       {subtitle === 'armor' ? (
         <FormField label='Armor Base Score' htmlFor='armor'>
           <Input

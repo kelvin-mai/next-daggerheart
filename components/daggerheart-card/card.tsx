@@ -8,6 +8,7 @@ import { CardThresholds } from './card-thresholds';
 import { CardArmor } from './card-armor';
 import { CardHands } from './card-hands';
 import { CardEvasion } from './card-evasion';
+import { CardTier } from './card-tier';
 
 export type DaggerHeartCardProps = {
   card: CardProperties;
@@ -46,6 +47,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
     cardBorder,
     thresholdsAsText,
     includeSpellcast,
+    includeEquipmentTier,
   } = defaultOptions,
 }) => {
   const Divider = getDivider(type);
@@ -71,6 +73,9 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
         {type === 'equipment' &&
         (subtitle === 'primary weapon' || subtitle === 'secondary weapon') ? (
           <CardHands hands={hands} />
+        ) : null}
+        {type === 'equipment' && includeEquipmentTier ? (
+          <CardTier level={level} />
         ) : null}
         {type === 'class' && <CardEvasion score={evasion} />}
         <div className='h-[240px] overflow-hidden'>
