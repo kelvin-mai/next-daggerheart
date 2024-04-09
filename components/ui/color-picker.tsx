@@ -35,7 +35,7 @@ export function ColorPicker({
       <PopoverTrigger asChild>
         <Button
           variant='outline'
-          className={cn(!color && 'text-muted-foreground', className)}
+          className={cn(!color && 'text-slate-500', className)}
         >
           <div className='flex w-full items-center gap-2'>
             {color ? (

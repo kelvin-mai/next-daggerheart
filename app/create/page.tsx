@@ -1,19 +1,23 @@
 import { CardCreationContainer } from '@/components/card-creation';
+import { SectionDivider } from '@/components/common';
 
 export default function CreateCardPage() {
   return (
     <>
-      <header>
-        <h1 className='text-eveleth-clean pt-4 text-center text-4xl font-bold uppercase'>
-          Create a card
-        </h1>
-        <p className='text-center text-slate-500'>
-          Create your very own homebrew Daggerheart card!
-        </p>
-      </header>
-      <section className='container py-8'>
-        <CardCreationContainer />
-      </section>
+      <div className='bg-dh-purple'>
+        <header className='container pb-2 pt-8'>
+          <h1 className='text-eveleth-clean pt-4 text-4xl font-bold uppercase text-dh-gold-light'>
+            Create a card
+          </h1>
+          <p className='text-dh-gold'>
+            Create your very own homebrew Daggerheart card!
+          </p>
+        </header>
+        <section className='container py-8'>
+          <CardCreationContainer />
+        </section>
+      </div>
+      <SectionDivider />
     </>
   );
 }

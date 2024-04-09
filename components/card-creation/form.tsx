@@ -2,9 +2,10 @@
 
 import type { CardType } from '@/lib/types';
 import { cn, fileToBase64 } from '@/lib/utils';
-import { useCard, useCardActions } from '@/store';
+import { useCard, useCardActions, useCardOptions } from '@/store';
 import { FormField } from '@/components/common';
 import {
+  Label,
   Input,
   Select,
   SelectLabel,
@@ -13,6 +14,7 @@ import {
   SelectItem,
   SelectContent,
   SelectGroup,
+  Checkbox,
 } from '@/components/ui';
 import { CardCreationDomainForm } from './domain-subform';
 import { CardCreationTextForm } from './card-text-subform';
@@ -29,7 +31,9 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
   className,
 }) => {
   const { title, type: cardType, artist } = useCard();
-  const { changeCardType, changeCardStringProperty } = useCardActions();
+  const { boldRulesText } = useCardOptions();
+  const { changeCardType, changeCardStringProperty, changeCardOption } =
+    useCardActions();
   const handleImageChange = async (e: any) => {
     if (e.target.files.length) {
       const image = await fileToBase64(e.target.files[0]);
@@ -40,7 +44,7 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
     <form
       onSubmit={(e) => e.preventDefault()}
       className={cn(
-        'space-y-2 rounded-xl border-2 border-dh-gold-light p-4 shadow-lg',
+        'space-y-2 rounded-xl border-2 border-dh-gold-light bg-dh-off-white p-4 shadow-lg',
         className,
       )}
     >
@@ -101,6 +105,20 @@ export const CardCreationForm: React.FC<CardCreationFormProps> = ({
           }
         />
       </FormField>
+      <div className='flex justify-end space-x-2 pr-4'>
+        <div className='flex items-center justify-end space-x-2'>
+          <Checkbox
+            id='bold-rules-text'
+            checked={!!boldRulesText}
+            onCheckedChange={(e) => {
+              if (e !== 'indeterminate') {
+                changeCardOption({ property: 'boldRulesText', value: e });
+              }
+            }}
+          />
+          <Label htmlFor='bold-rules-text'>Bold rules text?</Label>
+        </div>
+      </div>
       {cardType === 'domain' ||
       cardType === 'subclass' ||
       cardType === 'equipment' ||

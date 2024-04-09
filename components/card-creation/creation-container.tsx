@@ -30,21 +30,9 @@ export const CardCreationContainer = () => {
             <DaggerHeartCard card={card} options={options} />
           </div>
         </div>
-        <div className='mt-2 flex items-center justify-end space-x-2'>
-          <Checkbox
-            id='bold-rules-text'
-            checked={options['boldRulesText']}
-            onCheckedChange={(e) => {
-              if (e !== 'indeterminate') {
-                changeCardOption({ property: 'boldRulesText', value: e });
-              }
-            }}
-          />
-          <Label htmlFor='spellcast'>Bold rules text?</Label>
-        </div>
         <div className='mt-4 flex gap-2'>
           <Button className='w-full' onClick={convert}>
-            Export
+            Export as PNG
           </Button>
           <Button
             className='w-full'

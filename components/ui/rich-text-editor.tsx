@@ -35,7 +35,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     editorProps: {
       attributes: {
         class:
-          'min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm focus-visible:ring-offset-2 ring-offset-white placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
+          'min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
       },
     },
     extensions: [
@@ -66,7 +66,10 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
   return (
     <div
       id={id}
-      className={cn('rounded-md border border-slate-200 bg-white', className)}
+      className={cn(
+        'overflow-hidden rounded-md border border-slate-200 bg-white ring-offset-white focus-within:ring-dh-purple-light focus-within:ring-offset-2',
+        className,
+      )}
     >
       <EditorContent editor={editor} />
       {editor ? <RichTextEditorToolbar editor={editor} /> : null}
