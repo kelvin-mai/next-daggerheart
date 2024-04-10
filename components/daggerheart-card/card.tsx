@@ -140,7 +140,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           </div>
         ) : null}
         <div className='absolute bottom-2 right-2 text-card-credits text-xs italic text-slate-400'>
-          © 2024 Daggerheart v1.2 Open Beta
+          © 2024 Daggerheart v1.3 Open Beta
         </div>
       </div>
     </div>
