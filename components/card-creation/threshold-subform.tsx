@@ -11,7 +11,7 @@ export const CardCreationThresholdsForm: React.FC<
   CardCreationThresholdsFormProps
 > = () => {
   const { thresholds: cardThresholds } = useCard();
-  const { thresholdsAsText, showThresholds } = useCardOptions();
+  const { thresholdsAsText } = useCardOptions();
   const { changeCardOption, changeThresholds } = useCardActions();
   const thresholds = cardThresholds || [5, 10, 15];
   const onThresholdChange = (i: number, v: string) => {

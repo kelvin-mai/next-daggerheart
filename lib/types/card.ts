@@ -1,3 +1,5 @@
+import type { Feature } from './common';
+
 export type CardType =
   | 'ancestry'
   | 'community'
@@ -5,11 +7,6 @@ export type CardType =
   | 'class'
   | 'subclass'
   | 'equipment';
-
-export type Feature = {
-  name: string;
-  description: string;
-};
 
 export type SubclassSubType = 'foundation' | 'specialization' | 'mastery';
 
