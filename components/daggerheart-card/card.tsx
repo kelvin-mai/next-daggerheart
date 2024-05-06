@@ -78,13 +78,13 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           <CardTier level={level} />
         ) : null}
         {type === 'class' && <CardEvasion score={evasion} />}
-        <div className='h-[240px] overflow-hidden'>
+        <div className='h-1/2 overflow-hidden'>
           <img
             className='-z-10 w-full object-cover object-center-top'
             src={image}
           />
         </div>
-        <div className='flex-start absolute bottom-[36px] flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white px-6'>
+        <div className='flex-start absolute bottom-9 flex min-h-[40%] w-full flex-col items-center gap-1.5 bg-white px-6'>
           <Divider
             domainPrimary={domain}
             domainSecondary={domainSecondary}
@@ -135,11 +135,11 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           ) : null}
         </div>
         {artist ? (
-          <div className='absolute bottom-2 left-2 text-card-credits text-xs italic text-slate-400'>
+          <div className='absolute bottom-2 left-2 text-card-credits italic text-slate-400'>
             {artist}
           </div>
         ) : null}
-        <div className='absolute bottom-2 right-2 text-card-credits text-xs italic text-slate-400'>
+        <div className='absolute bottom-2 right-2 text-card-credits italic text-slate-400'>
           © 2024 Daggerheart v1.3 Open Beta
         </div>
       </div>

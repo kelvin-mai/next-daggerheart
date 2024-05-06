@@ -28,7 +28,7 @@ export const CardThresholds: React.FC<CardThresholdsProps> = ({
       {thresholds.map((t, i) => (
         <Fragment key={`threshold-${i}`}>
           <div className='relative -left-1 flex items-center justify-center'>
-            <div className='absolute left-1/2 top-1/2 h-[44px] w-[44px] -translate-x-1/2 -translate-y-1/2 transform'>
+            <div className='absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 transform'>
               <Image
                 src='/assets/card/damage-block.png'
                 height={44}
@@ -36,7 +36,7 @@ export const CardThresholds: React.FC<CardThresholdsProps> = ({
                 alt='damage-block'
               />
             </div>
-            <div className='z-10 flex w-[44px] items-center justify-center text-card-title-sm font-bold'>
+            <div className='z-10 flex w-11 items-center justify-center text-card-title-sm font-bold'>
               {t}
             </div>
           </div>
