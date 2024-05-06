@@ -8,7 +8,6 @@ import { Button, Input, Label, Textarea } from '@/components/ui';
 import { FormField } from '../common';
 import { AdversaryThresholdsForm } from './threshold-subform';
 import { AdversaryMovesSelect } from './moves-select';
-import { changeCardStringProperty } from '@/store/card/actions';
 
 type AdversaryFormProps = { className?: string };
 

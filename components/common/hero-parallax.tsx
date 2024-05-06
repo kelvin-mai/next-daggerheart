@@ -56,7 +56,7 @@ export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
       className='relative flex h-[210vh]  flex-col self-auto overflow-hidden py-40 antialiased [perspective:1000px] [transform-style:preserve-3d]'
     >
       <Header />
-      <div className='container z-10 flex w-full justify-center md:w-[800px]'>
+      <div className='container z-10 mt-4 flex w-full justify-center md:w-[800px]'>
         <BuyMeCofffeeBanner />
       </div>
       <motion.div
@@ -85,15 +85,15 @@ export const HeroParallax = ({ cards }: { cards: CardProperties[] }) => {
 
 export const Header = () => {
   return (
-    <div className='relative left-0 top-0 z-10 mx-auto w-full max-w-7xl px-4 py-20 md:py-40'>
+    <div className='relative left-0 top-0 z-10 mx-auto w-full max-w-7xl rounded-xl bg-slate-950/20 px-4 py-20 md:py-40'>
       <Image
         src='/assets/logo.svg'
         width={808}
         height={149}
         alt='Daggerheart Logo'
       />
-      <p className='mt-8 max-w-2xl text-slate-500 dark:text-neutral-200 md:text-xl'>
-        This is a fan web application created by{' '}
+      <p className='mt-8 text-white md:text-xl'>
+        This is a "Work in Progress" fan web application created by{' '}
         <a
           className='text-dh-purple hover:underline'
           href='https://kelvinmai.io'
@@ -106,6 +106,23 @@ export const Header = () => {
         <Link className='text-dh-purple hover:underline' href='/create'>
           here.
         </Link>
+      </p>
+      <p className='mt-2 text-lg text-white'>
+        This tool is a supplament to the Daggerheart 1.3 Open Playtest
+        Manuscript (which can be downloaded{' '}
+        <Link
+          href='https://www.daggerheart.com/'
+          className='text-dh-purple hover:underline'
+          target='_blank'
+        >
+          here
+        </Link>
+        ) and assumes that the user is familiar with the rules and terminology
+        of the game.
+      </p>
+      <p className='mt-2 text-white'>
+        This project is not affiliated with Darrington Press, LLC. and to be
+        used for personal use only.
       </p>
     </div>
   );

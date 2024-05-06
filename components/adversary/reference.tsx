@@ -15,9 +15,9 @@ export const AdversaryReference = () => {
       attack: '-4 ~ +4',
       damage: '4-16',
       difficulty: '8-15',
-      minor: '1-5',
-      major: '3-12',
-      severe: '5-20',
+      fragile: '1|4|7',
+      standard: '1|6|11',
+      tough: '1|8|15',
       hp: '2-9',
       stress: '0-4',
     },
@@ -26,9 +26,9 @@ export const AdversaryReference = () => {
       attack: '-3 ~ +5',
       damage: '5-20',
       difficulty: '13-16',
-      minor: '2-7',
-      major: '8-19',
-      severe: '15-40',
+      fragile: '1|8|14',
+      standard: '1|10|19',
+      tough: '1|14|27',
       hp: '3-10',
       stress: '2-6',
     },
@@ -37,9 +37,9 @@ export const AdversaryReference = () => {
       attack: '-2 ~ +6',
       damage: '7-35',
       difficulty: '15-19',
-      minor: '5-12',
-      major: '16-35',
-      severe: '30-80',
+      fragile: '1|14|27',
+      standard: '1|17|34',
+      tough: '1|21|43',
       hp: '5-12',
       stress: '2-6',
     },
@@ -48,9 +48,9 @@ export const AdversaryReference = () => {
       attack: '-1 ~ +7',
       damage: '10-48',
       difficulty: '17-23',
-      minor: '9-18',
-      major: '30-50',
-      severe: '40-100',
+      fragile: '1|25|50',
+      standard: '1|30|58',
+      tough: '1|40|71',
       hp: '7-15',
       stress: '2-10',
     },
@@ -58,11 +58,11 @@ export const AdversaryReference = () => {
   const thresholdLabels = ['minor', 'major', 'severe'];
   const damage = [
     ['3-6', '4-8', '5-10', '8-16'],
-    ['7-10', '9-13', '11-17', '8-16'],
+    ['7-10', '9-13', '11-17', '17-30'],
     ['11-13', '14-19', '18-23', '31-42'],
   ];
   const scaling = [
-    ['+1', '+1', '+3', '+5'],
+    ['Always', 'Stays', 'At', '1'],
     ['+3', '+4', '+9', '+16'],
     ['+4', '+10', '+13', '+27'],
   ];
@@ -79,9 +79,9 @@ export const AdversaryReference = () => {
               <TableHead>Attack</TableHead>
               <TableHead>Damage</TableHead>
               <TableHead>Difficulty</TableHead>
-              <TableHead>Minor</TableHead>
-              <TableHead>Major</TableHead>
-              <TableHead>Severe</TableHead>
+              <TableHead>Fragile</TableHead>
+              <TableHead>Standard</TableHead>
+              <TableHead>Tough</TableHead>
               <TableHead>Hit Points</TableHead>
               <TableHead>Stress</TableHead>
             </TableRow>
@@ -93,9 +93,9 @@ export const AdversaryReference = () => {
                 <TableCell>{attr.attack}</TableCell>
                 <TableCell>{attr.damage}</TableCell>
                 <TableCell>{attr.difficulty}</TableCell>
-                <TableCell>{attr.minor}</TableCell>
-                <TableCell>{attr.major}</TableCell>
-                <TableCell>{attr.severe}</TableCell>
+                <TableCell>{attr.fragile}</TableCell>
+                <TableCell>{attr.standard}</TableCell>
+                <TableCell>{attr.tough}</TableCell>
                 <TableCell>{attr.hp}</TableCell>
                 <TableCell>{attr.stress}</TableCell>
               </TableRow>
