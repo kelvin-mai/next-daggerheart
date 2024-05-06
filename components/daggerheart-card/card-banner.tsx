@@ -51,8 +51,8 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   domainSecondary,
   level,
 }) => {
-  const position = 'absolute left-[1.625rem] -top-1';
-  const size = 'h-[7.5rem] w-[3.75rem]';
+  const position = 'absolute left-[26px] -top-1';
+  const size = 'h-[120px] w-[59px]';
   const PrimaryIcon = getDomainIcon(domainPrimary?.name);
   const SecondaryIcon = getDomainIcon(domainSecondary?.name);
 
@@ -67,34 +67,34 @@ export const CardBanner: React.FC<CardBannerProps> = ({
   const highBrightness = getBrightness(domainPrimaryColor) < 128;
   return (
     <>
-      <div className='absolute -top-1 left-6 z-40'>
-        <img className='h-[7.5rem] w-16' src='/assets/card/banner.webp' />
+      <div className='absolute -top-1 left-[24px] z-40'>
+        <img className='h-[120px] w-[63px]' src='/assets/card/banner.webp' />
       </div>
       <div
         className={cn(
           'absolute  z-50 -translate-x-1/2 transform',
-          domainSecondary ? 'left-14 top-4' : 'left-14 top-14',
+          domainSecondary ? 'left-[56px] top-[16px]' : 'left-[56px] top-[54px]',
         )}
       >
         {domainPrimary?.name === 'custom' && domainPrimary?.image ? (
-          <img className='h-8 w-8' src={domainPrimary.image} />
+          <img className='h-[32px] w-[32px]' src={domainPrimary.image} />
         ) : (
           <PrimaryIcon
             className={cn(
-              'h-8 w-8',
+              'h-[32px] w-[32px]',
               highBrightness ? 'fill-white' : 'fill-black',
             )}
           />
         )}
       </div>
       {domainSecondary ? (
-        <div className='absolute left-14 top-14 z-50 -translate-x-1/2 transform'>
+        <div className='absolute left-[56px] top-[54px] z-50 -translate-x-1/2 transform'>
           {domainSecondary.name === 'custom' && domainSecondary.image ? (
-            <img className='h-8 w-8' src={domainSecondary.image} />
+            <img className='h-[32px] w-[32px]' src={domainSecondary.image} />
           ) : (
             <SecondaryIcon
               className={cn(
-                'h-8 w-8',
+                'h-[32px] w-[32px]',
                 highBrightness ? 'fill-white' : 'fill-black',
               )}
             />
@@ -102,7 +102,7 @@ export const CardBanner: React.FC<CardBannerProps> = ({
         </div>
       ) : null}
       {level ? (
-        <p className='text-eveleth-clean absolute left-14 top-7 z-50 -translate-x-1/2 transform text-card-title-lg font-bold'>
+        <p className='text-eveleth-clean absolute left-[56px] top-[28px] z-50 -translate-x-1/2 transform text-card-title-lg font-bold'>
           <span className={cn(highBrightness ? 'text-white' : 'text-black')}>
             {level}
           </span>
