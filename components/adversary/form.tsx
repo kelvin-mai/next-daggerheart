@@ -27,7 +27,7 @@ export const AdversaryForm: React.FC<AdversaryFormProps> = ({ className }) => {
     <form
       onSubmit={(e) => e.preventDefault()}
       className={cn(
-        'flex flex-col gap-2 rounded-xl border-2 border-dh-gold-light bg-white p-4 shadow-lg md:flex-row',
+        'flex flex-col gap-2 rounded-xl border-2 border-dh-gold-light bg-dh-off-white p-4 shadow-lg md:flex-row',
         className,
       )}
     >

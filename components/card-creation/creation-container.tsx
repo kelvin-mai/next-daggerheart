@@ -4,7 +4,7 @@ import { useToPng } from '@hugocxl/react-to-image';
 
 import { useCard, useCardActions, useCardOptions } from '@/store';
 import { DaggerHeartCard } from '@/components/daggerheart-card';
-import { Button, Checkbox, Label } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { CardCreationForm } from './form';
 
 export const CardCreationContainer = () => {

@@ -1,26 +1,9 @@
-import {
-  AdversaryCreateContainer,
-  AdversaryReference,
-} from '@/components/adversary';
+import { AdversaryReference } from '@/components/adversary';
 import { SectionDivider } from '@/components/common/section-divider';
 
-export default function AdversaryPage() {
+export default function AdversaryReferencePage() {
   return (
     <>
-      <section className='bg-dh-purple'>
-        <div className='container py-8'>
-          <header>
-            <h1 className='text-eveleth-clean pt-4 text-4xl font-bold uppercase text-dh-gold-light'>
-              Create an adversary
-            </h1>
-            <p className='pb-8 pt-4 text-dh-gold'>
-              Create your very own homebrew Daggerheart adversary!
-            </p>
-          </header>
-          <AdversaryCreateContainer />
-        </div>
-      </section>
-      <SectionDivider />
       <section className='bg-gradient-to-b from-dh-purple to-dh-dark-blue'>
         <div className='container py-8'>
           <header>
@@ -59,6 +42,7 @@ export default function AdversaryPage() {
           <AdversaryReference />
         </div>
       </section>
+      <SectionDivider />
     </>
   );
 }
