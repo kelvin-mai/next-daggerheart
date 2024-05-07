@@ -1,4 +1,5 @@
 import type { CardProperties } from '@/lib/types';
+import { daggerheartVersion } from '@/constants/version';
 import { cn } from '@/lib/utils';
 import { getDivider } from './card-divider';
 import { CardStress } from './card-stress';
@@ -135,12 +136,12 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
           ) : null}
         </div>
         {artist ? (
-          <div className='absolute bottom-2 left-2 text-card-credits text-xs italic text-slate-400'>
+          <div className='absolute bottom-2 left-2 text-card-credits italic text-slate-400'>
             {artist}
           </div>
         ) : null}
-        <div className='absolute bottom-2 right-2 text-card-credits text-xs italic text-slate-400'>
-          © 2024 Daggerheart v1.3 Open Beta
+        <div className='absolute bottom-2 right-2 text-card-credits italic text-slate-400'>
+          © 2024 {daggerheartVersion}
         </div>
       </div>
     </div>
