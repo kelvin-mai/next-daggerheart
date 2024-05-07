@@ -19,7 +19,9 @@ export const CommunityDivider: React.FC<DividerProps> = () => {
         src='/assets/card/card-divider-communities.webp'
       />
       <div className='absolute right-[36px] top-[-32px] z-10'>
-        <p className='text-xs uppercase tracking-[1px]'>community</p>
+        <p className='text-xs font-normal uppercase tracking-[1px]'>
+          community
+        </p>
       </div>
     </>
   );
@@ -33,7 +35,9 @@ export const EquipmentDivider: React.FC<DividerProps> = () => {
         src='/assets/card/card-divider-equipment.webp'
       />
       <div className='absolute left-[35px] top-[-32px] z-10'>
-        <p className='text-xs uppercase tracking-[2px]'>equipment</p>
+        <p className='text-xs font-normal uppercase tracking-[2px]'>
+          equipment
+        </p>
       </div>
     </>
   );
@@ -43,10 +47,10 @@ export const AncestryDivider: React.FC<DividerProps> = () => {
   return (
     <>
       <img
-        className='absolute top-[-26px] z-10 h-[80px] w-[500px]'
+        className='absolute -top-9 z-10 h-20 w-full'
         src='/assets/card/card-divider-ancestries.png'
       />
-      <div className='absolute right-[16px] top-[-8px] z-10'>
+      <div className='absolute -top-4 right-4 z-10 font-normal'>
         <p className='text-xs uppercase tracking-[2px]'>ancestry</p>
       </div>
     </>

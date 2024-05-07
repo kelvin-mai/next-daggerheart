@@ -85,7 +85,7 @@ export const DaggerHeartCard: React.FC<DaggerHeartCardProps> = ({
             src={image}
           />
         </div>
-        <div className='flex-start absolute bottom-[36px] flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white px-6'>
+        <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white px-6 font-barlow font-medium'>
           <Divider
             domainPrimary={domain}
             domainSecondary={domainSecondary}
