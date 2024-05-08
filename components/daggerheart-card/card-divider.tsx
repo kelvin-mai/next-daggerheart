@@ -15,10 +15,10 @@ export const CommunityDivider: React.FC<DividerProps> = () => {
   return (
     <>
       <img
-        className='absolute top-[-76px] h-[80px] w-full'
+        className='absolute top-[-76px] w-full'
         src='/assets/card/card-divider-communities.webp'
       />
-      <div className='absolute right-[36px] top-[-32px] z-10'>
+      <div className='absolute right-[36px] top-[-36px] z-10'>
         <p className='text-xs font-normal uppercase tracking-[1px]'>
           community
         </p>
@@ -31,10 +31,10 @@ export const EquipmentDivider: React.FC<DividerProps> = () => {
   return (
     <>
       <img
-        className='absolute top-[-76px] h-[80px] w-full'
+        className='absolute top-[-76px] w-full'
         src='/assets/card/card-divider-equipment.webp'
       />
-      <div className='absolute left-[35px] top-[-32px] z-10'>
+      <div className='absolute left-[35px] top-[-36px] z-10'>
         <p className='text-xs font-normal uppercase tracking-[2px]'>
           equipment
         </p>
@@ -47,10 +47,10 @@ export const AncestryDivider: React.FC<DividerProps> = () => {
   return (
     <>
       <img
-        className='absolute -top-9 z-10 h-20 w-full'
+        className='absolute -top-6 z-10 h-20 w-full'
         src='/assets/card/card-divider-ancestries.png'
       />
-      <div className='absolute -top-4 right-4 z-10 font-normal'>
+      <div className='absolute -top-2 right-4 z-10 font-normal'>
         <p className='text-xs uppercase tracking-[2px]'>ancestry</p>
       </div>
     </>
@@ -77,7 +77,7 @@ export const DomainDivider: React.FC<DividerProps> = ({
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
-        src='/assets/card/domain-divider.webp'
+        src='/assets/card/domain-divider.png'
       />
       <div className='absolute left-1/2 top-[-12px] z-10 -translate-x-1/2 transform'>
         <p
@@ -113,13 +113,13 @@ export const SubclassDivider: React.FC<DividerProps> = ({
     <>
       <div
         className={cn(
-          'clip-card-class-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[265px] -translate-x-1/2 transform',
+          'clip-card-class-subtype absolute left-1/2 top-[-12px] z-10 h-[18px] w-[300px] -translate-x-1/2 transform',
         )}
         style={{ background }}
       />
       <img
         className='absolute top-[-14px] z-10 h-[20px] w-full'
-        src='/assets/card/subclass-divider.webp'
+        src='/assets/card/subclass-divider.png'
       />
       <div className='absolute left-1/2 top-[-12px] z-10 -translate-x-1/2 transform'>
         <p className='font-barlow text-xs font-bold uppercase text-dh-gold-light'>
