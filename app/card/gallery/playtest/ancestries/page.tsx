@@ -2,7 +2,7 @@ import { SectionDivider } from '@/components/common';
 import { DaggerHeartCard } from '@/components/daggerheart-card';
 import { ancestries } from '@/constants/playtest-cards';
 
-export default function GalleryPage() {
+export default function AncestriesGalleryPage() {
   return (
     <>
       <section className='bg-dh-purple'>
