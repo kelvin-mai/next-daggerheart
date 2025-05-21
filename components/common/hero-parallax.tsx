@@ -11,7 +11,6 @@ import {
 } from 'framer-motion';
 
 import type { CardProperties } from '@/lib/types';
-import { daggerheartVersion } from '@/constants/version';
 import { DaggerHeartCard } from '@/components/daggerheart-card';
 import Link from 'next/link';
 import { BuyMeCofffeeBanner } from '.';
@@ -109,10 +108,10 @@ export const Header = () => {
         </Link>
       </p>
       <p className='mt-2 text-lg text-white'>
-        This tool is a supplament to the {daggerheartVersion} Playtest
-        Manuscript (which can be downloaded{' '}
+        This tool is a supplament to the Daggerheart Core Set (which can be
+        bought{' '}
         <Link
-          href='https://www.daggerheart.com/'
+          href='https://www.daggerheart.com/buy'
           className='text-dh-purple hover:underline'
           target='_blank'
         >
@@ -123,7 +122,15 @@ export const Header = () => {
       </p>
       <p className='mt-2 text-white'>
         This project is not affiliated with Darrington Press, LLC. and to be
-        used for personal use only.
+        used for personal use only. Please read the Darrington Press{' '}
+        <Link
+          href='https://darringtonpress.com/license/'
+          className='text-dh-purple hover:underline'
+          target='_blank'
+        >
+          Community Gaming License
+        </Link>{' '}
+        before attempting to publish any materials.
       </p>
     </div>
   );
