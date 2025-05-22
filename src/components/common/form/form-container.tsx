@@ -1,0 +1,41 @@
+import * as React from 'react';
+import { ChevronsUpDown } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
+
+type FormContainerProps = {
+  className?: string;
+  title: string;
+  children: React.ReactNode;
+  collapsible?: boolean;
+};
+
+export const FormContainer: React.FC<FormContainerProps> = ({
+  className,
+  title,
+  collapsible,
+  children,
+}) => {
+  const Component = collapsible ? Collapsible : 'div';
+  return (
+    <Component
+      className={cn('bg-card rounded-sm border px-4 pt-2 pb-4', className)}
+    >
+      <div className='flex h-8 items-center justify-between'>
+        <Label>{title}</Label>
+        {collapsible ? (
+          <CollapsibleTrigger asChild>
+            <Button variant='ghost' size='sm'>
+              <ChevronsUpDown className='size-4' />
+              <span className='sr-only'>Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        ) : null}
+      </div>
+      <div className='space-y-2'>{children}</div>
+    </Component>
+  );
+};
