@@ -1,15 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 
 export const FormInput: React.FC<
-  React.ComponentProps<"input"> & { id: string; label?: string }
-> = ({ id, label, ...props }) => {
+  React.ComponentProps<'input'> & { id: string; label?: string }
+> = ({ id, label, className, ...props }) => {
   return (
-    <div className="space-y-2">
+    <div className={cn('space-y-2', className)}>
       <Label htmlFor={id}>
-        {label || <span className="capitalize">{id}</span>}
+        {label || <span className='capitalize'>{id}</span>}
       </Label>
       <Input id={id} {...props} />
     </div>

@@ -15,6 +15,7 @@
     "@origin-space/image-cropper": "^0.1.9",
     "@radix-ui/react-collapsible": "^1.1.11",
     "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toggle": "^1.1.9",

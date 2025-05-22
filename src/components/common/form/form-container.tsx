@@ -6,7 +6,7 @@ import { Collapsible, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 
-type FormContainerProps = {
+type FormContainerProps = React.ComponentProps<typeof Collapsible> & {
   className?: string;
   title: string;
   children: React.ReactNode;
@@ -18,11 +18,13 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   title,
   collapsible,
   children,
+  ...props
 }) => {
   const Component = collapsible ? Collapsible : 'div';
   return (
     <Component
       className={cn('bg-card rounded-sm border px-4 pt-2 pb-4', className)}
+      {...props}
     >
       <div className='flex h-8 items-center justify-between'>
         <Label>{title}</Label>
