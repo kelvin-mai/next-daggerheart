@@ -1,5 +1,5 @@
 import { CardCreationContainer } from '@/components/card-creation';
-import { SectionDivider } from '@/components/common';
+import { SectionDivider, WeMovedBanner } from '@/components/common';
 
 export default function CreateCardPage() {
   return (
@@ -12,6 +12,7 @@ export default function CreateCardPage() {
           <p className='text-dh-gold'>
             Create your very own homebrew Daggerheart card!
           </p>
+          <WeMovedBanner />
         </header>
         <section className='container py-8'>
           <CardCreationContainer />
