@@ -25,6 +25,7 @@ const setSettings =
     }));
 
 export const createActions = (set: ZustandSet<CardState>): CardActions => ({
+  setPreviewRef: (ref: any) => set({ preview: ref }),
   setImage: setImage(set),
   setCardText: setCardText(set),
   setCardDetails: setCardDetails(set),

@@ -4,6 +4,7 @@ import {
   SettingsForm,
 } from '@/components/card-creation/forms';
 import { CardPreview } from '@/components/card-creation/preview';
+import { DownloadImageButton } from '@/components/card-creation/preview/download-image-button';
 
 export default function Page() {
   return (
@@ -15,6 +16,7 @@ export default function Page() {
         </div>
         <div className='space-y-2'>
           <CardPreview />
+          <DownloadImageButton />
           <SettingsForm />
         </div>
       </div>

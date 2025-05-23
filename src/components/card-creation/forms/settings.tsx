@@ -1,31 +1,15 @@
 'use client';
 
-import { ChevronsUpDown } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { Label } from '@/components/ui/label';
+import { CollapsibleContent } from '@/components/ui/collapsible';
 import { useCardActions, useCardStore } from '@/store';
 import { FormCheckbox } from '@/components/common/form/form-checkbox';
+import { FormContainer } from '@/components/common/form';
 
 export const SettingsForm = () => {
   const { settings } = useCardStore();
   const { setSettings } = useCardActions();
   return (
-    <Collapsible className='bg-card rounded-sm border px-4 py-2'>
-      <div className='flex items-center justify-between'>
-        <Label>Display Settings</Label>
-        <CollapsibleTrigger asChild>
-          <Button variant='ghost' size='sm'>
-            <ChevronsUpDown className='size-4' />
-            <span className='sr-only'>Toggle</span>
-          </Button>
-        </CollapsibleTrigger>
-      </div>
+    <FormContainer title='Settings' className='pb-2' collapsible>
       <CollapsibleContent>
         <div className='grid grid-cols-2 gap-2'>
           <FormCheckbox
@@ -70,6 +54,6 @@ export const SettingsForm = () => {
           />
         </div>
       </CollapsibleContent>
-    </Collapsible>
+    </FormContainer>
   );
 };

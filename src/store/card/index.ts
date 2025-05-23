@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { CardState, CardStore } from './types';
 import { createActions } from './actions';
+import { createEffects } from './effects';
 
 const initialState: CardState = {
   settings: {
@@ -18,12 +19,13 @@ const initialState: CardState = {
     artist: '',
     credits: 'Daggerheart © Darrington Press 2025',
   },
+  preview: null,
 };
 
 export const useCardStore = create<CardStore>((set, get) => ({
   ...initialState,
   actions: createActions(set),
-  effects: {},
+  effects: createEffects(set, get),
 }));
 
 export const useCardActions = () => useCardStore((store) => store.actions);

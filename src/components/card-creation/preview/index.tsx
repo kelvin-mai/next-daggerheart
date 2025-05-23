@@ -1,5 +1,7 @@
 'use client';
 
+import * as React from 'react';
+
 import {
   ImageCropper,
   ImageCropperArea,
@@ -9,16 +11,31 @@ import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
 import { Divider } from './template/core';
 
-type CardPreviewProps = {};
+type CardPreviewProps = React.ComponentProps<'div'>;
 
-export const CardPreview: React.FC<CardPreviewProps> = ({}) => {
+export const CardPreview: React.FC<CardPreviewProps> = ({
+  className,
+  ...props
+}) => {
   const store = useCardStore();
+
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    store.actions.setPreviewRef(ref);
+  }, [ref]);
+
+  console.log('cardStore', store);
+
   return (
     <div
       className={cn(
         'aspect-card w-[340px] overflow-hidden',
         store.settings.border && 'rounded-lg border-2 border-amber-300 shadow',
+        className,
       )}
+      ref={ref}
+      {...props}
     >
       <div className='relative flex h-full flex-col bg-white'>
         <div className='overflow-hidden'>
