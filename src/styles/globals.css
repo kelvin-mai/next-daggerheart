@@ -69,15 +69,11 @@
 }
 
 @layer components {
-  .clip-card-domain-subtype {
+  .clip-card-divider {
     clip-path: polygon(67% 16%, 73% 49%, 66% 87%, 33% 81%, 27% 48%, 35% 16%);
   }
 
-  .clip-card-class-subtype {
-    clip-path: polygon(65% 14%, 73% 47%, 66% 89%, 35% 87%, 28% 53%, 34% 16%);
-  }
-
-  .clip-banner-bg {
+  .clip-card-banner-bg {
     clip-path: polygon(
       91% 100%,
       91% 0,
@@ -98,7 +94,7 @@
     );
   }
 
-  .clip-banner-fg {
+  .clip-card-banner-fg {
     clip-path: polygon(
       0 0,
       11% 1%,

@@ -66,8 +66,14 @@ export const BaseForm = () => {
         <FormInput
           id='artist'
           type='text'
-          value={card.name}
-          onChange={(e) => setCardDetails({ name: e.target.value })}
+          value={card.artist}
+          onChange={(e) => setCardDetails({ artist: e.target.value })}
+        />
+        <FormInput
+          id='credits'
+          type='credits'
+          value={card.credits}
+          onChange={(e) => setCardDetails({ credits: e.target.value })}
         />
       </CollapsibleContent>
     </FormContainer>

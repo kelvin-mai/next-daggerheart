@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChevronsUpDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -23,7 +23,11 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   const Component = collapsible ? Collapsible : 'div';
   return (
     <Component
-      className={cn('bg-card rounded-sm border px-4 pt-2 pb-4', className)}
+      className={cn(
+        'bg-card rounded-sm border px-4 pt-2 pb-4',
+        collapsible && 'group/collapsible',
+        className,
+      )}
       {...props}
     >
       <div className='flex h-8 items-center justify-between'>
@@ -31,7 +35,7 @@ export const FormContainer: React.FC<FormContainerProps> = ({
         {collapsible ? (
           <CollapsibleTrigger asChild>
             <Button variant='ghost' size='sm'>
-              <ChevronsUpDown className='size-4' />
+              <ChevronDown className='size-4 group-data-[state=open]/collapsible:rotate-180' />
               <span className='sr-only'>Toggle</span>
             </Button>
           </CollapsibleTrigger>

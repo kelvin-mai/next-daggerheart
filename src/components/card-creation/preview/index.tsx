@@ -7,6 +7,7 @@ import {
 } from '@/components/common';
 import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
+import { Divider } from './template/core';
 
 type CardPreviewProps = {};
 
@@ -28,11 +29,35 @@ export const CardPreview: React.FC<CardPreviewProps> = ({}) => {
             />
           )}
         </div>
-        <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white px-6'>
+        <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white'>
+          <Divider />
+          <div className={cn('z-20 pt-4 text-2xl font-bold uppercase')}>
+            {store.card.name}
+          </div>
           <div
-            className='w-full text-sm'
+            className='z-20 w-full px-6 text-sm'
             dangerouslySetInnerHTML={{ __html: store.card.text }}
           />
+        </div>
+        <div
+          className='absolute italic'
+          style={{
+            bottom: '8px',
+            left: '10px',
+            fontSize: '10px',
+          }}
+        >
+          {store.settings.artist && store.card.artist}
+        </div>
+        <div
+          className='absolute italic'
+          style={{
+            bottom: '8px',
+            right: '10px',
+            fontSize: '10px',
+          }}
+        >
+          {store.settings.credits && store.card.credits}
         </div>
       </div>
     </div>

@@ -8,13 +8,15 @@ const initialState: CardState = {
     border: true,
     boldRulesText: true,
     artist: true,
+    credits: true,
   },
   card: {
     name: '',
-    type: '',
+    type: 'ancestry',
     image: undefined,
     text: '',
     artist: '',
+    credits: 'Daggerheart © Darrington Press 2025',
   },
 };
 

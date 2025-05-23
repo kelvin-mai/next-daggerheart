@@ -8,14 +8,14 @@ import { CardPreview } from '@/components/card-creation/preview';
 export default function Page() {
   return (
     <>
-      <div className='container flex gap-2'>
-        <div className='bg-card grow space-y-2 rounded p-4'>
+      <div className='container flex gap-2 py-4'>
+        <div className='grow space-y-2'>
           <BaseForm />
           <RulesForm />
-          <SettingsForm />
         </div>
-        <div>
+        <div className='space-y-2'>
           <CardPreview />
+          <SettingsForm />
         </div>
       </div>
     </>

@@ -7,12 +7,13 @@ export const cardTypes = [
   'subclass',
 ] as const;
 
-export type CardTypes = (typeof cardTypes)[number];
+export type CardType = (typeof cardTypes)[number];
 
 export type CardDetails = {
   name: string;
-  type: string;
+  type: CardType;
   image?: string;
   text: string;
   artist: string;
+  credits: string;
 };

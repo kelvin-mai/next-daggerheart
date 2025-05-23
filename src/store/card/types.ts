@@ -5,6 +5,7 @@ export type CardState = {
     border: boolean;
     boldRulesText: boolean;
     artist: boolean;
+    credits: boolean;
   };
   card: CardDetails;
 };
