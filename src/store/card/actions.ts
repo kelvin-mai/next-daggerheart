@@ -16,8 +16,17 @@ const setCardDetails =
   (details) =>
     set((state) => ({ ...state, card: { ...state.card, ...details } }));
 
+const setSettings =
+  (set: ZustandSet<CardState>): CardActions['setSettings'] =>
+  (settings) =>
+    set((state) => ({
+      ...state,
+      settings: { ...state.settings, ...settings },
+    }));
+
 export const createActions = (set: ZustandSet<CardState>): CardActions => ({
   setImage: setImage(set),
   setCardText: setCardText(set),
   setCardDetails: setCardDetails(set),
+  setSettings: setSettings(set),
 });
