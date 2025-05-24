@@ -68,14 +68,14 @@ export const ImageForm = () => {
   const {
     card: { image },
   } = useCardStore();
-  const { setImage } = useCardActions();
+  const { setCardDetails } = useCardActions();
   const [{ files }, { removeFile, openFileDialog, getInputProps }] =
     useFileUpload({ accept: 'image/*' });
   const [file] = files;
 
   React.useEffect(() => {
     if (file?.preview) {
-      setImage(file.preview);
+      setCardDetails({ image: file.preview });
     }
   }, [file]);
 
@@ -85,7 +85,7 @@ export const ImageForm = () => {
       if (blob) {
         const cropped = await fileToBase64(blob);
         if (image !== cropped) {
-          setImage(cropped);
+          setCardDetails({ image: cropped });
         }
       }
     }

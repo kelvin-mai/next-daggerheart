@@ -36,8 +36,10 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
       {...props}
     >
       <div className='relative flex h-full flex-col bg-white'>
-        <Banner />
-        <Stress />
+        {['domain', 'class', 'subclass'].includes(store.card.type) && (
+          <Banner />
+        )}
+        {store.card.type === 'domain' && <Stress />}
         <div className='overflow-hidden'>
           {store.card.image && (
             <img

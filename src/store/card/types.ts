@@ -15,8 +15,6 @@ export type CardState = {
 
 export type CardActions = {
   setPreviewRef(ref: any): void;
-  setImage(image: string): void;
-  setCardText(value: string): void;
   setCardDetails(details: Partial<CardDetails>): void;
   setSettings(settings: Partial<CardSettings>): void;
 };

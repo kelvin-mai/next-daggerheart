@@ -6,12 +6,12 @@ import { useCardActions, useCardStore } from '@/store';
 
 export const RulesForm = () => {
   const { card } = useCardStore();
-  const { setCardText } = useCardActions();
+  const { setCardDetails } = useCardActions();
   return (
     <FormContainer title='Rules Text'>
       <RichTextEditor
         defaultValue={card.text}
-        onChange={(e) => setCardText(e)}
+        onChange={(e) => setCardDetails({ text: e })}
       />
     </FormContainer>
   );

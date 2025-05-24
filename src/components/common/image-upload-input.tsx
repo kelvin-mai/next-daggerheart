@@ -13,13 +13,13 @@ import {
 } from './image-cropper';
 
 export const ImageUploadInput: React.FC<any> = ({ id }) => {
-  const { setImage } = useCardActions();
+  const { setCardDetails } = useCardActions();
   const [{ files }, { removeFile, openFileDialog, getInputProps }] =
     useFileUpload({ accept: 'image/*' });
   const [file] = files;
   React.useEffect(() => {
     if (file?.preview) {
-      setImage(file.preview);
+      setCardDetails({ image: file.preview });
     }
   }, [file]);
   return (

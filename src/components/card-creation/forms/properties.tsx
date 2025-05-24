@@ -1,5 +1,7 @@
 'use client';
 
+import * as React from 'react';
+
 import { FormInput, FormContainer } from '@/components/common/form';
 import { CollapsibleContent } from '@/components/ui/collapsible';
 import { Label } from '@/components/ui/label';
@@ -12,21 +14,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { fileToBase64 } from '@/lib/utils';
+import { cn, fileToBase64 } from '@/lib/utils';
 import { cardTypes, domainAbilityTypes } from '@/lib/types/card-creation';
 import { useCardStore, useCardActions } from '@/store';
-
-export const domains = [
-  'arcana',
-  'blade',
-  'bone',
-  'codex',
-  'grace',
-  'midnight',
-  'sage',
-  'splendor',
-  'valor',
-];
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { Check, ChevronDown } from 'lucide-react';
+import {
+  Command,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command';
+import { DomainSelect } from '@/components/common/domain-select';
+import { Input } from '@/components/ui/input';
 
 export const DomainPropertiesForm = () => {
   const {
@@ -34,27 +39,10 @@ export const DomainPropertiesForm = () => {
   } = useCardStore();
   const { setCardDetails } = useCardActions();
   return (
-    <FormContainer title='Domain Properties'>
+    <FormContainer title='Domain Properties' collapsible defaultOpen>
       <div className='space-y-2'>
-        <div className='flex gap-2'>
-          <div className='w-full space-y-2'>
-            <Label htmlFor='subtype'>Domain</Label>
-            <Select>
-              <SelectTrigger id='subtype' className='w-full capitalize'>
-                <SelectValue placeholder='Domain' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Official Domains</SelectLabel>
-                  {domains.map((t) => (
-                    <SelectItem key={t} value={t} className='capitalize'>
-                      {t}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+        <DomainSelect id='domain' label='Domain' className='w-full' />
+        <CollapsibleContent className='flex gap-2'>
           <div className='w-full space-y-2'>
             <Label htmlFor='subtype'>Ability Type</Label>
             <Select
@@ -76,8 +64,6 @@ export const DomainPropertiesForm = () => {
               </SelectContent>
             </Select>
           </div>
-        </div>
-        <div className='flex gap-2'>
           <FormInput
             className='w-full'
             id='stress'
@@ -96,7 +82,7 @@ export const DomainPropertiesForm = () => {
             value={level}
             onChange={(e) => setCardDetails({ level: Number(e.target.value) })}
           />
-        </div>
+        </CollapsibleContent>
       </div>
     </FormContainer>
   );
