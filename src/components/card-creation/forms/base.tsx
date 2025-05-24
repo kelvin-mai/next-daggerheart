@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { fileToBase64 } from '@/lib/utils';
-import { cardTypes } from '@/lib/types/card-creation';
+import { type CardType, cardTypes } from '@/lib/types/card-creation';
 import { useCardStore, useCardActions } from '@/store';
 
 export const BaseForm = () => {
@@ -33,7 +33,7 @@ export const BaseForm = () => {
           <Label htmlFor='type'>Type</Label>
           <Select
             value={card.type}
-            onValueChange={(v) => setCardDetails({ type: v })}
+            onValueChange={(v: CardType) => setCardDetails({ type: v })}
           >
             <SelectTrigger id='type' className='w-full capitalize'>
               <SelectValue placeholder='Type' />

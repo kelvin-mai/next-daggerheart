@@ -7,6 +7,8 @@ export const cardTypes = [
   'subclass',
 ] as const;
 
+export const domainAbilityTypes = ['ability', 'spell', 'grimoire'] as const;
+
 export type CardType = (typeof cardTypes)[number];
 
 export type CardDetails = {
@@ -16,4 +18,7 @@ export type CardDetails = {
   text: string;
   artist: string;
   credits: string;
+  subtype: string;
+  level: number;
+  stress: number;
 };

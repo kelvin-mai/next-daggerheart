@@ -61,7 +61,9 @@ const titleStyle = (type: CardType): React.CSSProperties => {
 export const Divider = () => {
   const { card } = useCardStore();
   const { type } = card;
-  const text = type;
+  const text = ['ancestry', 'community', 'equipment'].includes(type)
+    ? type
+    : card.subtype;
   const dividerBadge = ['class', 'subclass', 'domain'].includes(type);
   const background = '#000000';
   return (

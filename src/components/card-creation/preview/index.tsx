@@ -9,7 +9,7 @@ import {
 } from '@/components/common';
 import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
-import { Divider } from './template/core';
+import { Banner, Divider, Stress } from './template/core';
 
 type CardPreviewProps = React.ComponentProps<'div'>;
 
@@ -25,8 +25,6 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
     store.actions.setPreviewRef(ref);
   }, [ref]);
 
-  console.log('cardStore', store);
-
   return (
     <div
       className={cn(
@@ -38,6 +36,8 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
       {...props}
     >
       <div className='relative flex h-full flex-col bg-white'>
+        <Banner />
+        <Stress />
         <div className='overflow-hidden'>
           {store.card.image && (
             <img

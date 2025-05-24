@@ -9,7 +9,7 @@ export const SettingsForm = () => {
   const { settings } = useCardStore();
   const { setSettings } = useCardActions();
   return (
-    <FormContainer title='Settings' className='pb-2' collapsible>
+    <FormContainer className='w-full' title='Settings' collapsible>
       <CollapsibleContent>
         <div className='grid grid-cols-2 gap-2'>
           <FormCheckbox

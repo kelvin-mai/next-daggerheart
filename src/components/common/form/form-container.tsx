@@ -23,7 +23,7 @@ export const FormContainer: React.FC<FormContainerProps> = ({
   return (
     <Component
       className={cn(
-        'bg-card rounded-sm border px-4 py-2 pb-4',
+        'bg-card rounded-sm border px-4 py-2',
         collapsible && 'group/collapsible',
         className,
       )}
@@ -37,8 +37,10 @@ export const FormContainer: React.FC<FormContainerProps> = ({
             <span className='sr-only'>Toggle</span>
           </div>
         </CollapsibleTrigger>
-      ) : null}
-      <div className='space-y-2'>{children}</div>
+      ) : (
+        <Label className='h-8'>{title}</Label>
+      )}
+      {children}
     </Component>
   );
 };

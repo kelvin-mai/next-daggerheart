@@ -1,5 +1,7 @@
 import {
   BaseForm,
+  DomainPropertiesForm,
+  PropertiesForm,
   RulesForm,
   SettingsForm,
 } from '@/components/card-creation/forms';
@@ -9,14 +11,15 @@ import { DownloadImageButton } from '@/components/card-creation/preview/download
 export default function Page() {
   return (
     <>
-      <div className='container flex gap-2 py-4'>
+      <div className='container flex flex-col-reverse gap-2 py-4 md:flex-row'>
         <div className='grow space-y-2'>
           <BaseForm />
+          <DomainPropertiesForm />
           <RulesForm />
         </div>
-        <div className='space-y-2'>
+        <div className='flex flex-col items-center space-y-2'>
           <CardPreview />
-          <DownloadImageButton />
+          <DownloadImageButton className='w-full' />
           <SettingsForm />
         </div>
       </div>
