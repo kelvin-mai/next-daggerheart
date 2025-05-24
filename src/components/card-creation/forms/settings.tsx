@@ -13,17 +13,7 @@ export const SettingsForm = () => {
       <CollapsibleContent>
         <div className='grid grid-cols-2 gap-2'>
           <FormCheckbox
-            id='bold-rules-text'
-            label='Bold rules text?'
-            checked={settings.boldRulesText}
-            onCheckedChange={(e) => {
-              if (e !== 'indeterminate') {
-                setSettings({ boldRulesText: e });
-              }
-            }}
-          />
-          <FormCheckbox
-            id='border'
+            id='show-border'
             label='Show border?'
             checked={settings.border}
             onCheckedChange={(e) => {
@@ -33,7 +23,7 @@ export const SettingsForm = () => {
             }}
           />
           <FormCheckbox
-            id='border'
+            id='show-artist'
             label='Show artist?'
             checked={settings.artist}
             onCheckedChange={(e) => {
@@ -43,7 +33,7 @@ export const SettingsForm = () => {
             }}
           />
           <FormCheckbox
-            id='border'
+            id='show-credits'
             label='Show credits?'
             checked={settings.credits}
             onCheckedChange={(e) => {

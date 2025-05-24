@@ -3,7 +3,11 @@
 import { useCardStore } from '@/store';
 import { BaseForm } from './base';
 import { ImageForm } from './image';
-import { DomainPropertiesForm } from './properties';
+import {
+  ClassPropertiesForm,
+  DomainPropertiesForm,
+  SubClassPropertiesForm,
+} from './properties';
 import { RulesForm } from './rules';
 
 export const CardCreationForms = () => {
@@ -15,6 +19,8 @@ export const CardCreationForms = () => {
       <BaseForm />
       <ImageForm />
       {type === 'domain' && <DomainPropertiesForm />}
+      {type === 'class' && <ClassPropertiesForm />}
+      {type === 'subclass' && <SubClassPropertiesForm />}
       <RulesForm />
     </div>
   );

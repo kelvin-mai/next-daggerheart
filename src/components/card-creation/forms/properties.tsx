@@ -88,39 +88,70 @@ export const DomainPropertiesForm = () => {
   );
 };
 
-export const PropertiesForm = () => {
-  const { card } = useCardStore();
+export const ClassPropertiesForm = () => {
+  const {
+    card: { evasion },
+  } = useCardStore();
   const { setCardDetails } = useCardActions();
   return (
-    <FormContainer title='Card Properties' collapsible>
-      <FormInput
-        className='w-full'
-        id='subtype'
-        type='text'
-        value={card.subtype}
-        onChange={(e) => setCardDetails({ subtype: e.target.value })}
-      />
-      <CollapsibleContent className='space-y-2'>
-        <div className='flex gap-2'>
-          <FormInput
-            className='w-full'
-            id='stress'
-            type='number'
-            min={0}
-            max={9}
-            value={card.stress}
-            onChange={(e) => setCardDetails({ stress: Number(e.target.value) })}
-          />
-          <FormInput
-            className='w-full'
-            id='level'
-            type='number'
-            min={0}
-            max={9}
-            value={card.level}
-            onChange={(e) => setCardDetails({ level: Number(e.target.value) })}
-          />
+    <FormContainer title='Class properties'>
+      <div className='space-y-2'>
+        <DomainSelect id='domain' label='Primary Domain' className='w-full' />
+        <DomainSelect id='domain' label='Secondary Domain' className='w-full' />
+        <FormInput
+          id='evasion'
+          label='Starting Evasion Score'
+          className='w-full'
+          type='number'
+          min={0}
+          value={evasion}
+          onChange={(e) => setCardDetails({ evasion: Number(e.target.value) })}
+        />
+      </div>
+    </FormContainer>
+  );
+};
+
+export const SubClassPropertiesForm = () => {
+  const {
+    card: { subtype, subtitle },
+  } = useCardStore();
+  const { setCardDetails } = useCardActions();
+  return (
+    <FormContainer title='Class properties' collapsible>
+      <div className='flex gap-2'>
+        <FormInput
+          id='class-name'
+          label='Class Name'
+          className='w-full'
+          value={subtype}
+          onChange={(e) => setCardDetails({ subtype: e.target.value })}
+        />
+        <div className='w-full space-y-2'>
+          <Label htmlFor='sub-feature'>Subclass Feature</Label>
+          <Select
+            value={subtitle}
+            onValueChange={(v) => setCardDetails({ subtitle: v })}
+          >
+            <SelectTrigger id='sub-feature' className='w-full capitalize'>
+              <SelectValue placeholder='Feature' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Features</SelectLabel>
+                {['foundation', 'specialization', 'mastery'].map((f) => (
+                  <SelectItem key={f} value={f} className='capitalize'>
+                    {f}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
+      </div>
+      <CollapsibleContent className='space-y-2 pt-2'>
+        <DomainSelect id='domain' label='Primary Domain' className='w-full' />
+        <DomainSelect id='domain' label='Secondary Domain' className='w-full' />
       </CollapsibleContent>
     </FormContainer>
   );

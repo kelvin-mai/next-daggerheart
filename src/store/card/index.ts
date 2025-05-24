@@ -19,8 +19,10 @@ const initialState: CardState = {
     artist: '',
     credits: 'Daggerheart © Darrington Press 2025',
     subtype: '',
+    subtitle: '',
     level: 1,
     stress: 0,
+    evasion: 0,
   },
   preview: null,
 };

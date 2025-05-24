@@ -2,14 +2,9 @@
 
 import * as React from 'react';
 
-import {
-  ImageCropper,
-  ImageCropperArea,
-  ImageCropperImage,
-} from '@/components/common';
 import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
-import { Banner, Divider, Stress } from './template/core';
+import { Banner, Divider, Evasion, Stress } from './template/core';
 
 type CardPreviewProps = React.ComponentProps<'div'>;
 
@@ -40,6 +35,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
           <Banner />
         )}
         {store.card.type === 'domain' && <Stress />}
+        {store.card.type === 'class' && <Evasion />}
         <div className='overflow-hidden'>
           {store.card.image && (
             <img
@@ -53,6 +49,16 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
           <div className={cn('z-20 pt-4 text-2xl font-bold uppercase')}>
             {store.card.name}
           </div>
+          {['class', 'subclass', 'equipment'].includes(store.card.type) ? (
+            <p
+              className='font-semibold capitalize italic'
+              style={{ fontSize: '12px' }}
+            >
+              {store.card.type === 'class'
+                ? 'Class Features'
+                : store.card.subtitle}
+            </p>
+          ) : null}
           <div
             className='z-20 w-full px-6 text-sm'
             dangerouslySetInnerHTML={{ __html: store.card.text }}

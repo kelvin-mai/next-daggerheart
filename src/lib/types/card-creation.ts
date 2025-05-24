@@ -19,6 +19,8 @@ export type CardDetails = {
   artist: string;
   credits: string;
   subtype?: string;
+  subtitle?: string;
   level?: number;
   stress?: number;
+  evasion?: number;
 };
