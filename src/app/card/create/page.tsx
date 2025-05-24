@@ -1,7 +1,7 @@
 import {
   BaseForm,
   DomainPropertiesForm,
-  PropertiesForm,
+  ImageForm,
   RulesForm,
   SettingsForm,
 } from '@/components/card-creation/forms';
@@ -14,6 +14,7 @@ export default function Page() {
       <div className='container flex flex-col-reverse gap-2 py-4 md:flex-row'>
         <div className='grow space-y-2'>
           <BaseForm />
+          <ImageForm />
           <DomainPropertiesForm />
           <RulesForm />
         </div>

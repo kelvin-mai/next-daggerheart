@@ -12,13 +12,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { fileToBase64 } from '@/lib/utils';
 import { type CardType, cardTypes } from '@/lib/types/card-creation';
 import { useCardStore, useCardActions } from '@/store';
 
 export const BaseForm = () => {
   const { card } = useCardStore();
-  const { setImage, setCardDetails } = useCardActions();
+  const { setCardDetails } = useCardActions();
   return (
     <FormContainer title='Basic Details' collapsible defaultOpen>
       <div className='flex gap-2'>
@@ -51,18 +50,7 @@ export const BaseForm = () => {
           </Select>
         </div>
       </div>
-      <CollapsibleContent className='space-y-2'>
-        <FormInput
-          id='image'
-          type='file'
-          accept='image/png, image/jpeg, image/webp, image/jpg'
-          onChange={async (e) => {
-            if (e.target.files?.length) {
-              const image = await fileToBase64(e.target.files[0]);
-              setImage(image);
-            }
-          }}
-        />
+      <CollapsibleContent className='space-y-2 pt-2'>
         <FormInput
           id='artist'
           type='text'
