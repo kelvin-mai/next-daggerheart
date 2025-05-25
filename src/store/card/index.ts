@@ -23,6 +23,10 @@ const initialState: CardState = {
     level: 1,
     stress: 0,
     evasion: 0,
+
+    // TODO: coordinate with types
+    domainPrimary: 'arcana',
+    domainSecondary: 'arcana',
   },
   preview: null,
 };

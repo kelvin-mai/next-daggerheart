@@ -6,6 +6,30 @@ import { useCardStore } from '@/store';
 import type { CardType } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
 
+export const domains = [
+  'arcana',
+  'blade',
+  'bone',
+  'codex',
+  'grace',
+  'midnight',
+  'sage',
+  'splendor',
+  'valor',
+] as const;
+
+export const domainColors: { [key: string]: string } = {
+  arcana: '#664295',
+  blade: '#b93035',
+  bone: '#c1c7cc',
+  codex: '#3370ab',
+  grace: '#cb3b90',
+  midnight: '#2c2c2c',
+  sage: '#0e854d',
+  splendor: '#d1b447',
+  valor: '#dc7a27',
+};
+
 const imgStyle = (type: CardType): React.CSSProperties => {
   switch (type) {
     case 'ancestry':
@@ -60,12 +84,12 @@ const titleStyle = (type: CardType): React.CSSProperties => {
 
 export const Divider = () => {
   const { card } = useCardStore();
-  const { type } = card;
+  const { type, domainPrimary, domainSecondary } = card;
   const text = ['ancestry', 'community', 'equipment'].includes(type)
     ? type
     : card.subtype;
   const dividerBadge = ['class', 'subclass', 'domain'].includes(type);
-  const background = '#000000';
+  const background = domainColors[domainPrimary];
   return (
     <>
       {dividerBadge ? (

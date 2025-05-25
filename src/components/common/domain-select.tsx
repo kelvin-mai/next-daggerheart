@@ -47,6 +47,7 @@ export const domainColors: { [key: string]: string } = {
 type DomainSelectProps = {
   id: string;
   label: string;
+  value: string;
   className?: string;
   onChange?: (value: string) => void;
 };
@@ -54,17 +55,18 @@ type DomainSelectProps = {
 export const DomainSelect: React.FC<DomainSelectProps> = ({
   id,
   label,
+  value,
   className,
   onChange,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  // const [value, setValue] = React.useState();
 
   const handleSelect = (value: string) => {
     if (onChange) {
       onChange(value);
     }
-    setValue(value);
+    // setValue(value);
     setOpen(false);
   };
 
@@ -112,7 +114,7 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
                   </p>
                 </div>
               </CommandEmpty>
-              <CommandGroup heading='Core Set Domains'>
+              <CommandGroup heading='Core Set'>
                 {domains.map((d) => (
                   <CommandItem
                     key={d}

@@ -23,4 +23,8 @@ export type CardDetails = {
   level?: number;
   stress?: number;
   evasion?: number;
+
+  // TODO: move to separate types?
+  domainPrimary: string;
+  domainSecondary: string;
 };

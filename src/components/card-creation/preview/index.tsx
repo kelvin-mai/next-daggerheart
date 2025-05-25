@@ -46,7 +46,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
         </div>
         <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white'>
           <Divider />
-          <div className={cn('z-20 pt-4 text-2xl font-bold uppercase')}>
+          <div className={cn('font-eveleth-clean z-20 pt-4 text-2xl')}>
             {store.card.name}
           </div>
           {['class', 'subclass', 'equipment'].includes(store.card.type) ? (

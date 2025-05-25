@@ -60,6 +60,9 @@
   .font-barlow {
     font-family: var(--font-barlow);
   }
+  .font-eveleth-clean {
+    font-family: var(--font-eveleth-clean);
+  }
   .font-geist {
     font-family: var(--font-geist);
   }

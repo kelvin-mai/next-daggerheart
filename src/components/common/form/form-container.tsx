@@ -31,15 +31,19 @@ export const FormContainer: React.FC<FormContainerProps> = ({
       {...props}
     >
       {collapsible ? (
-        <CollapsibleTrigger className='flex h-8 w-full items-center justify-between'>
-          <Label>{title}</Label>
-          <Button variant='ghost' size='icon' className='hover:cursor-pointer'>
+        <CollapsibleTrigger asChild>
+          <Button
+            variant='ghost'
+            size='icon'
+            className='flex h-8 w-full items-center justify-between px-2 hover:cursor-pointer'
+          >
+            <Label>{title}</Label>
             <ChevronDown className='size-4 group-data-[state=open]/collapsible:rotate-180' />
             <span className='sr-only'>Toggle</span>
           </Button>
         </CollapsibleTrigger>
       ) : (
-        <Label className='h-8'>{title}</Label>
+        <Label className='h-8 px-2'>{title}</Label>
       )}
       {children}
     </Component>

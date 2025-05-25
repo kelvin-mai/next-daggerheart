@@ -10,8 +10,20 @@ import {
   SplendorDomainIcon,
   ValorDomainIcon,
 } from '@/components/icons';
-import { cn } from '@/lib/utils';
+import { cn, getBrightness } from '@/lib/utils';
 import { useCardStore } from '@/store';
+
+export const domainColors: { [key: string]: string } = {
+  arcana: '#664295',
+  blade: '#b93035',
+  bone: '#c1c7cc',
+  codex: '#3370ab',
+  grace: '#cb3b90',
+  midnight: '#2c2c2c',
+  sage: '#0e854d',
+  splendor: '#d1b447',
+  valor: '#dc7a27',
+};
 
 const getDomainIcon = (domain?: string) => {
   switch (domain) {
@@ -40,10 +52,12 @@ const getDomainIcon = (domain?: string) => {
 
 export const Banner = () => {
   const {
-    card: { level },
+    card: { type, level, domainPrimary, domainSecondary },
   } = useCardStore();
-  const PrimaryIcon = getDomainIcon();
-  const SecondaryIcon = getDomainIcon();
+  const PrimaryIcon = getDomainIcon(domainPrimary);
+  const SecondaryIcon = getDomainIcon(domainSecondary);
+  const foregroundColor =
+    getBrightness(domainColors[domainPrimary]) < 128 ? 'white' : 'black';
   return (
     <>
       <div
@@ -66,20 +80,33 @@ export const Banner = () => {
         className='absolute z-50'
         style={{ transform: 'translateX(-50%)', left: '56px', top: '16px' }}
       >
-        {/* top */}
-        {/* <PrimaryIcon style={{ height: '32px', width: '32px' }} /> */}
-        <p className='font-bold' style={{ fontSize: '26px' }}>
-          {level}
-        </p>
+        {type === 'domain' ? (
+          <p
+            className='font-eveleth-clean'
+            style={{ fontSize: '26px', color: foregroundColor }}
+          >
+            {level}
+          </p>
+        ) : domainPrimary !== domainSecondary ? (
+          <PrimaryIcon
+            style={{ height: '32px', width: '32px', color: foregroundColor }}
+          />
+        ) : null}
       </div>
 
       <div
         className='absolute z-50'
         style={{ transform: 'translateX(-50%)', left: '56px', top: '54px' }}
       >
-        {/* bottom */}
-        {/* <SecondaryIcon style={{ height: '32px', width: '32px' }} /> */}
-        <PrimaryIcon style={{ height: '32px', width: '32px' }} />
+        {['class', 'subclass'].includes(type) ? (
+          <SecondaryIcon
+            style={{ height: '32px', width: '32px', color: foregroundColor }}
+          />
+        ) : (
+          <PrimaryIcon
+            style={{ height: '32px', width: '32px', color: foregroundColor }}
+          />
+        )}
       </div>
 
       <div
@@ -89,7 +116,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: '#c1c7cc',
+          background: domainColors[domainPrimary],
         }}
       />
       <div
@@ -99,7 +126,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: '#b93035',
+          background: domainColors[domainSecondary],
         }}
       />
     </>
