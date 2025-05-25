@@ -28,7 +28,7 @@ export const CardCreationThresholdsForm: React.FC<
     <>
       <Label>Rules Texts Includes Damage Thresholds?</Label>
       <div className='flex gap-2'>
-        <FormField>
+        {/* <FormField>
           <Input
             id='threshold-minor'
             placeholder='Minor'
@@ -38,7 +38,7 @@ export const CardCreationThresholdsForm: React.FC<
             min={0}
             max={99}
           />
-        </FormField>
+        </FormField> */}
         <FormField>
           <Input
             id='threshold-major'
