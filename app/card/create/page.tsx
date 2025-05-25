@@ -1,5 +1,9 @@
 import { CardCreationContainer } from '@/components/card-creation';
-import { SectionDivider, WeMovedBanner } from '@/components/common';
+import {
+  BuyMeCofffeeBanner,
+  SectionDivider,
+  WeMovedBanner,
+} from '@/components/common';
 
 export default function CreateCardPage() {
   return (
@@ -16,6 +20,9 @@ export default function CreateCardPage() {
         </header>
         <section className='container py-8'>
           <CardCreationContainer />
+        </section>
+        <section className='container pb-8'>
+          <BuyMeCofffeeBanner />
         </section>
       </div>
       <SectionDivider />
