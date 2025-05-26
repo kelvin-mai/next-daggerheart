@@ -10,6 +10,8 @@ const schema = z.object({
     ])
     .default('development'),
   DATABASE_URL: z.string(),
+  BETTER_AUTH_SECRET: z.string(),
+  BETTER_AUTH_URL: z.string(),
 });
 
 export const env = schema.parse(process.env);
