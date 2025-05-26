@@ -62,7 +62,9 @@ export const Divider = () => {
   const {
     card: { type, subtype, domainPrimaryColor, domainSecondaryColor },
   } = useCardStore();
-  const subtypeText = ['ancestry', 'community', 'equipment'].includes(type)
+  const subtypeText = ['ancestry', 'community', 'equipment', 'class'].includes(
+    type,
+  )
     ? type
     : subtype;
   const dividerBadge = ['class', 'subclass', 'domain'].includes(type);

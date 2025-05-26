@@ -6,6 +6,10 @@ export const createComputed = (get: ZustandGet<CardStore>): CardComputed => ({
     const { domains } = get();
     return domains?.find((d) => d.name === domain)?.color!;
   },
+  domainIncludes: (domain: string) => {
+    const { domains } = get();
+    return domains?.map((d) => d.name).includes(domain);
+  },
   classDomains: (className: string) => {
     const { classes } = get();
     const selected = classes?.find((c) => c.name === className);

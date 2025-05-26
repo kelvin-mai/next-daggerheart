@@ -5,39 +5,15 @@ import * as React from 'react';
 import { FormInput, FormContainer } from '@/components/common/form';
 import { CollapsibleContent } from '@/components/ui/collapsible';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { cn, fileToBase64 } from '@/lib/utils';
-import { cardTypes, domainAbilityTypes } from '@/lib/types/card-creation';
-import { useCardStore, useCardActions } from '@/store';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Check, ChevronDown } from 'lucide-react';
-import {
-  Command,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from '@/components/ui/command';
-import { DomainSelect } from '@/components/common/domain-select';
-import { Input } from '@/components/ui/input';
-import { CustomSelect } from '@/components/common/custom-select';
+import { useCardStore, useCardActions, useCardComputed } from '@/store';
+import { CustomSelect } from '@/components/common';
+import { DomainSelect } from './domain-select';
 
 export const DomainPropertiesForm = () => {
   const {
-    card: { subtype, stress, level, domainPrimary },
+    card: { subtype, stress, level, domainPrimary, domainPrimaryColor },
   } = useCardStore();
+  const { domainColor, domainIncludes } = useCardComputed();
   const { setCardDetails } = useCardActions();
   return (
     <FormContainer title='Domain Properties' collapsible defaultOpen>
@@ -47,8 +23,22 @@ export const DomainPropertiesForm = () => {
           label='Domain'
           className='w-full'
           value={domainPrimary}
-          onChange={(v) =>
-            setCardDetails({ domainPrimary: v, domainSecondary: v })
+          color={domainPrimaryColor}
+          onChange={(v) => {
+            domainIncludes(v)
+              ? setCardDetails({
+                  domainPrimary: v,
+                  domainSecondary: v,
+                  domainPrimaryColor: domainColor(v),
+                  domainSecondaryColor: domainColor(v),
+                })
+              : setCardDetails({
+                  domainPrimary: 'custom',
+                  domainSecondary: 'custom',
+                });
+          }}
+          onColorChange={(v) =>
+            setCardDetails({ domainPrimaryColor: v, domainSecondaryColor: v })
           }
         />
         <CollapsibleContent className='flex gap-2'>
@@ -93,8 +83,15 @@ export const DomainPropertiesForm = () => {
 
 export const ClassPropertiesForm = () => {
   const {
-    card: { evasion, domainPrimary, domainSecondary },
+    card: {
+      evasion,
+      domainPrimary,
+      domainSecondary,
+      domainPrimaryColor,
+      domainSecondaryColor,
+    },
   } = useCardStore();
+  const { domainColor, domainIncludes } = useCardComputed();
   const { setCardDetails } = useCardActions();
   return (
     <FormContainer title='Class Properties'>
@@ -104,14 +101,34 @@ export const ClassPropertiesForm = () => {
           label='Primary Domain'
           className='w-full'
           value={domainPrimary}
-          onChange={(v) => setCardDetails({ domainPrimary: v })}
+          color={domainPrimaryColor}
+          onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
+          onChange={(v) =>
+            domainIncludes(v)
+              ? setCardDetails({
+                  domainPrimary: v,
+                  domainPrimaryColor: domainColor(v),
+                })
+              : setCardDetails({
+                  domainPrimary: 'custom',
+                })
+          }
         />
         <DomainSelect
           id='domain'
           label='Secondary Domain'
           className='w-full'
           value={domainSecondary}
-          onChange={(v) => setCardDetails({ domainSecondary: v })}
+          color={domainSecondaryColor}
+          onColorChange={(v) => setCardDetails({ domainSecondaryColor: v })}
+          onChange={(v) =>
+            domainIncludes(v)
+              ? setCardDetails({
+                  domainSecondary: v,
+                  domainSecondaryColor: domainColor(v),
+                })
+              : setCardDetails({ domainSecondary: 'custom' })
+          }
         />
         <FormInput
           id='evasion'
@@ -130,9 +147,17 @@ export const ClassPropertiesForm = () => {
 export const SubClassPropertiesForm = () => {
   const {
     classes,
-    card: { subtype, subtitle, domainPrimary, domainSecondary },
-    computed: { classColors, classDomains },
+    card: {
+      subtype,
+      subtitle,
+      domainPrimary,
+      domainSecondary,
+      domainPrimaryColor,
+      domainSecondaryColor,
+    },
   } = useCardStore();
+  const { classColors, classDomains, domainColor, domainIncludes } =
+    useCardComputed();
   const { setCardDetails } = useCardActions();
   const classOptions = classes!
     .reduce((acc: string[], curr) => {
@@ -155,23 +180,27 @@ export const SubClassPropertiesForm = () => {
             placeholder='Class'
             options={classOptions}
             value={subtype}
-            renderValue={(v) => (
-              <div className='flex items-center gap-2'>
-                <div
-                  className='size-3 rounded-full'
-                  style={{
-                    background: classColors(v).primary,
-                  }}
-                />
-                <div
-                  className='size-3 rounded-full'
-                  style={{
-                    background: classColors(v).secondary,
-                  }}
-                />
+            renderValue={(v) =>
+              classes!.map((c) => c.name).includes(v) ? (
+                <div className='flex items-center gap-2'>
+                  <div
+                    className='size-3 rounded-full'
+                    style={{
+                      background: classColors(v).primary,
+                    }}
+                  />
+                  <div
+                    className='size-3 rounded-full'
+                    style={{
+                      background: classColors(v).secondary,
+                    }}
+                  />
+                  <span>{v}</span>
+                </div>
+              ) : (
                 <span>{v}</span>
-              </div>
-            )}
+              )
+            }
             onChange={(v) => {
               if (classes!.map((c) => c.name).includes(v)) {
                 setCardDetails({
@@ -207,30 +236,44 @@ export const SubClassPropertiesForm = () => {
           />
         </div>
       </div>
-      <CollapsibleContent className='space-y-2 pt-2'>
-        {/* <DomainSelect
-          id='domain'
-          label='Primary Domain'
-          className='w-full'
-          value={domainPrimary}
-          onChange={(v) =>
-            setCardDetails({
-              domainPrimary: v,
-            })
-          }
-        />
-        <DomainSelect
-          id='domain'
-          label='Secondary Domain'
-          className='w-full'
-          value={domainSecondary}
-          onChange={(v) =>
-            setCardDetails({
-              domainSecondary: v,
-            })
-          }
-        /> */}
-      </CollapsibleContent>
+      {!classes!.map((c) => c.name).includes(subtype!) ? (
+        <>
+          <DomainSelect
+            id='domain'
+            label='Primary Domain'
+            className='w-full'
+            value={domainPrimary}
+            color={domainPrimaryColor}
+            onChange={(v) =>
+              domainIncludes(v)
+                ? setCardDetails({
+                    domainPrimary: v,
+                    domainPrimaryColor: domainColor(v),
+                  })
+                : setCardDetails({
+                    domainPrimary: 'custom',
+                  })
+            }
+            onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
+          />
+          <DomainSelect
+            id='domain'
+            label='Secondary Domain'
+            className='w-full'
+            value={domainSecondary}
+            color={domainSecondaryColor}
+            onChange={(v) =>
+              domainIncludes(v)
+                ? setCardDetails({
+                    domainSecondary: v,
+                    domainSecondaryColor: domainColor(v),
+                  })
+                : setCardDetails({ domainSecondary: 'custom' })
+            }
+            onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
+          />
+        </>
+      ) : null}
     </FormContainer>
   );
 };

@@ -22,6 +22,7 @@ export type CardState = {
 
 export type CardComputed = {
   domainColor(domain: string): string;
+  domainIncludes(domain: string): boolean | undefined;
   classDomains(className: string): {
     primary: string;
     secondary: string;

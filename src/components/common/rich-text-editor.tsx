@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEditor, EditorContent, type Editor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
+import { useEditor, EditorContent, type Editor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
 import {
   AlignCenter,
   AlignLeft,
@@ -12,11 +12,11 @@ import {
   List,
   ListOrdered,
   Strikethrough,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { cn } from "@/lib/utils";
-import { Toggle } from "@/components/ui/toggle";
-import { Separator } from "@/components/ui/separator";
+import { cn } from '@/lib/utils';
+import { Toggle } from '@/components/ui/toggle';
+import { Separator } from '@/components/ui/separator';
 
 type RichTextEditorProps = {
   id?: string;
@@ -35,24 +35,24 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
     editorProps: {
       attributes: {
         class:
-          "min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
+          'min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
       },
     },
     extensions: [
       StarterKit.configure({
         orderedList: {
           HTMLAttributes: {
-            class: "list-outside list-decimal pl-4",
+            class: 'list-outside list-decimal pl-4',
           },
         },
         bulletList: {
           HTMLAttributes: {
-            class: "list-outside list-disc pl-4",
+            class: 'list-outside list-disc pl-4',
           },
         },
       }),
       TextAlign.configure({
-        types: ["heading", "paragraph"],
+        types: ['heading', 'paragraph'],
       }),
     ],
     content: defaultValue,
@@ -61,13 +61,14 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
         onChange(editor.getHTML());
       }
     },
+    immediatelyRender: true,
   });
 
   return (
     <div
       id={id}
       className={cn(
-        "overflow-hidden rounded-md border border-slate-200 bg-white ring-offset-white focus-within:ring-dh-purple-light focus-within:ring-offset-2",
+        'focus-within:ring-dh-purple-light overflow-hidden rounded-md border border-slate-200 bg-white ring-offset-white focus-within:ring-offset-2',
         className,
       )}
     >
@@ -79,70 +80,70 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
-    <div className="flex flex-row items-center gap-1 border-t border-slate-200 p-1">
+    <div className='flex flex-row items-center gap-1 border-t border-slate-200 p-1'>
       <Toggle
-        size="sm"
-        pressed={editor.isActive("bold")}
+        size='sm'
+        pressed={editor.isActive('bold')}
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
       >
-        <Bold className="h-4 w-4" />
+        <Bold className='h-4 w-4' />
       </Toggle>
       <Toggle
-        size="sm"
-        pressed={editor.isActive("italic")}
+        size='sm'
+        pressed={editor.isActive('italic')}
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
       >
-        <Italic className="h-4 w-4" />
+        <Italic className='h-4 w-4' />
       </Toggle>
       <Toggle
-        size="sm"
-        pressed={editor.isActive("strike")}
+        size='sm'
+        pressed={editor.isActive('strike')}
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
-        <Strikethrough className="h-4 w-4" />
+        <Strikethrough className='h-4 w-4' />
       </Toggle>
-      <Separator orientation="vertical" className="h-8 w-[1px]" />
+      <Separator orientation='vertical' className='h-8 w-[1px]' />
       <Toggle
-        size="sm"
-        pressed={editor.isActive({ textAlign: "left" })}
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'left' })}
         onPressedChange={() =>
-          editor.chain().focus().setTextAlign("left").run()
+          editor.chain().focus().setTextAlign('left').run()
         }
       >
-        <AlignLeft className="h-4 w-4" />
+        <AlignLeft className='h-4 w-4' />
       </Toggle>
       <Toggle
-        size="sm"
-        pressed={editor.isActive({ textAlign: "center" })}
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'center' })}
         onPressedChange={() =>
-          editor.chain().focus().setTextAlign("center").run()
+          editor.chain().focus().setTextAlign('center').run()
         }
       >
-        <AlignCenter className="h-4 w-4" />
+        <AlignCenter className='h-4 w-4' />
       </Toggle>
       <Toggle
-        size="sm"
-        pressed={editor.isActive({ textAlign: "right" })}
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'right' })}
         onPressedChange={() =>
-          editor.chain().focus().setTextAlign("right").run()
+          editor.chain().focus().setTextAlign('right').run()
         }
       >
-        <AlignRight className="h-4 w-4" />
+        <AlignRight className='h-4 w-4' />
       </Toggle>
-      <Separator orientation="vertical" className="h-8 w-[1px]" />
+      <Separator orientation='vertical' className='h-8 w-[1px]' />
       <Toggle
-        size="sm"
-        pressed={editor.isActive("bulletList")}
+        size='sm'
+        pressed={editor.isActive('bulletList')}
         onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
       >
-        <List className="h-4 w-4" />
+        <List className='h-4 w-4' />
       </Toggle>
       <Toggle
-        size="sm"
-        pressed={editor.isActive("orderedList")}
+        size='sm'
+        pressed={editor.isActive('orderedList')}
         onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
       >
-        <ListOrdered className="h-4 w-4" />
+        <ListOrdered className='h-4 w-4' />
       </Toggle>
     </div>
   );
