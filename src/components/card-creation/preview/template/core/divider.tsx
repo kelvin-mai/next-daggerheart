@@ -6,31 +6,6 @@ import { useCardStore } from '@/store';
 import type { CardType } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
 
-export const domains = [
-  'arcana',
-  'blade',
-  'bone',
-  'codex',
-  'grace',
-  'midnight',
-  'sage',
-  'splendor',
-  'valor',
-] as const;
-
-export const domainColors: { [key: string]: string } = {
-  arcana: '#664295',
-  blade: '#b93035',
-  bone: '#c1c7cc',
-  codex: '#3370ab',
-  grace: '#cb3b90',
-  midnight: '#2c2c2c',
-  sage: '#0e854d',
-  splendor: '#d1b447',
-  valor: '#dc7a27',
-  dread: '#654294',
-};
-
 const imgStyle = (type: CardType): React.CSSProperties => {
   switch (type) {
     case 'ancestry':
@@ -84,19 +59,14 @@ const titleStyle = (type: CardType): React.CSSProperties => {
 };
 
 export const Divider = () => {
-  const { card } = useCardStore();
-  const { type, domainPrimary, domainSecondary } = card;
-  const text = ['ancestry', 'community', 'equipment'].includes(type)
+  const {
+    card: { type, subtype, domainPrimaryColor, domainSecondaryColor },
+  } = useCardStore();
+  const subtypeText = ['ancestry', 'community', 'equipment'].includes(type)
     ? type
-    : card.subtype;
+    : subtype;
   const dividerBadge = ['class', 'subclass', 'domain'].includes(type);
-  const background =
-    domainPrimary === 'custom' ? '#000000' : domainColors[domainPrimary];
-  // const backgroundV2 = `linear-gradient(to right, ${domainPrimary}, ${domainSecondary})`
-  console.log({
-    dividerBadge,
-    text,
-  });
+  const background = `linear-gradient(to right, ${domainPrimaryColor}, ${domainSecondaryColor})`;
   return (
     <>
       {dividerBadge ? (
@@ -120,13 +90,16 @@ export const Divider = () => {
       <div
         className={cn(
           'absolute z-10 text-xs tracking-[1px] uppercase',
-          dividerBadge && getBrightness(background) < 128
+          type === 'domain' &&
+            dividerBadge &&
+            getBrightness(domainPrimaryColor) < 128
             ? 'text-white'
             : 'text-black',
+          ['class', 'subclass'].includes(type) && 'text-[#fef790]',
         )}
         style={titleStyle(type)}
       >
-        {text}
+        {subtypeText}
       </div>
     </>
   );

@@ -1,6 +1,9 @@
 'use client';
 
-import { useCardStore } from '@/store';
+import * as React from 'react';
+
+import { useCardEffects, useCardStore } from '@/store';
+import { Skeleton } from '@/components/ui/skeleton';
 import { BaseForm } from './base';
 import { ImageForm } from './image';
 import {
@@ -11,9 +14,19 @@ import {
 import { RulesForm } from './rules';
 
 export const CardCreationForms = () => {
+  const store = useCardStore();
   const {
+    loading,
     card: { type },
-  } = useCardStore();
+  } = store;
+  const { loadOptions } = useCardEffects();
+  console.log(store);
+  React.useEffect(() => {
+    loadOptions();
+  }, []);
+  if (loading) {
+    return <Skeleton className='grow rounded-lg' />;
+  }
   return (
     <div className='grow space-y-2'>
       <BaseForm />

@@ -11,6 +11,21 @@ export const domainAbilityTypes = ['ability', 'spell', 'grimoire'] as const;
 
 export type CardType = (typeof cardTypes)[number];
 
+export type CardClassOption = {
+  id: string;
+  name: string;
+  domain_primary: string;
+  domain_secondary: string;
+  source: string;
+};
+
+export type CardDomainOption = {
+  id: string;
+  name: string;
+  color: string;
+  source: string;
+};
+
 export type CardDetails = {
   name: string;
   type: CardType;
@@ -23,8 +38,8 @@ export type CardDetails = {
   level?: number;
   stress?: number;
   evasion?: number;
-
-  // TODO: move to separate types?
   domainPrimary: string;
+  domainPrimaryColor: string;
   domainSecondary: string;
+  domainSecondaryColor: string;
 };

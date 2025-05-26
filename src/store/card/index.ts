@@ -3,8 +3,10 @@ import { create } from 'zustand';
 import { CardState, CardStore } from './types';
 import { createActions } from './actions';
 import { createEffects } from './effects';
+import { createComputed } from './computed';
 
 const initialState: CardState = {
+  loading: true,
   settings: {
     border: true,
     boldRulesText: true,
@@ -23,19 +25,20 @@ const initialState: CardState = {
     level: 1,
     stress: 0,
     evasion: 0,
-
-    // TODO: coordinate with types
-    domainPrimary: 'arcana',
-    domainSecondary: 'arcana',
+    domainPrimary: 'custom',
+    domainPrimaryColor: '#000000',
+    domainSecondary: 'custom',
+    domainSecondaryColor: '#000000',
   },
-  preview: null,
 };
 
 export const useCardStore = create<CardStore>((set, get) => ({
   ...initialState,
+  computed: createComputed(get),
   actions: createActions(set),
   effects: createEffects(set, get),
 }));
 
+export const useCardComputed = () => useCardStore((store) => store.computed);
 export const useCardActions = () => useCardStore((store) => store.actions);
 export const useCardEffects = () => useCardStore((store) => store.effects);

@@ -14,8 +14,16 @@ const setSettings =
       settings: { ...state.settings, ...settings },
     }));
 
+const setOptions =
+  (set: ZustandSet<CardState>): CardActions['setOptions'] =>
+  ({ domains, classes }) =>
+    set({ domains, classes });
+
 export const createActions = (set: ZustandSet<CardState>): CardActions => ({
-  setPreviewRef: (ref: any) => set({ preview: ref }),
+  setLoading: (loading: boolean) => set({ loading }),
+  setPreviewRef: (ref: React.RefObject<HTMLDivElement | null>) =>
+    set({ preview: ref }),
   setCardDetails: setCardDetails(set),
   setSettings: setSettings(set),
+  setOptions: setOptions(set),
 });

@@ -11,7 +11,7 @@ import {
   ValorDomainIcon,
 } from '@/components/icons';
 import { cn, getBrightness } from '@/lib/utils';
-import { useCardStore } from '@/store';
+import { useCardComputed, useCardStore } from '@/store';
 
 export const domainColors: { [key: string]: string } = {
   arcana: '#664295',
@@ -53,16 +53,19 @@ const getDomainIcon = (domain?: string) => {
 
 export const Banner = () => {
   const {
-    card: { type, level, domainPrimary, domainSecondary },
+    card: {
+      type,
+      level,
+      domainPrimary,
+      domainSecondary,
+      domainPrimaryColor,
+      domainSecondaryColor,
+    },
   } = useCardStore();
   const PrimaryIcon = getDomainIcon(domainPrimary);
   const SecondaryIcon = getDomainIcon(domainSecondary);
   const foregroundColor =
-    getBrightness(
-      domainPrimary === 'custom' ? '#000000' : domainColors[domainPrimary],
-    ) < 128
-      ? 'white'
-      : 'black';
+    getBrightness(domainPrimaryColor) < 128 ? 'white' : 'black';
   return (
     <>
       <div
@@ -121,7 +124,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: domainColors[domainPrimary] ?? '#000000',
+          background: domainPrimaryColor,
         }}
       />
       <div
@@ -131,7 +134,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: domainColors[domainSecondary] ?? '#000000',
+          background: domainSecondaryColor,
         }}
       />
     </>

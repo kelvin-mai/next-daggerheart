@@ -15,6 +15,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@/components/ui/command';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -101,7 +102,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
               <p className='text-muted-foreground text-sm'>None found.</p>
             </div>
           </CommandEmpty>
-          <ScrollArea className='h-56'>
+          <CommandList>
             <CommandGroup heading='Custom'>
               <CommandItem>
                 <Input
@@ -148,7 +149,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
                 ))}
               </CommandGroup>
             ))}
-          </ScrollArea>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>

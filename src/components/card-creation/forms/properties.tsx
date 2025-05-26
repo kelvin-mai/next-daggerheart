@@ -33,7 +33,6 @@ import {
 import { DomainSelect } from '@/components/common/domain-select';
 import { Input } from '@/components/ui/input';
 import { CustomSelect } from '@/components/common/custom-select';
-import { classes, domains } from '@/data';
 
 export const DomainPropertiesForm = () => {
   const {
@@ -130,10 +129,12 @@ export const ClassPropertiesForm = () => {
 
 export const SubClassPropertiesForm = () => {
   const {
+    classes,
     card: { subtype, subtitle, domainPrimary, domainSecondary },
+    computed: { classColors, classDomains },
   } = useCardStore();
   const { setCardDetails } = useCardActions();
-  const classOptions = classes
+  const classOptions = classes!
     .reduce((acc: string[], curr) => {
       if (!acc.includes(curr.source)) {
         return [...acc, curr.source];
@@ -142,7 +143,7 @@ export const SubClassPropertiesForm = () => {
     }, [])
     .map((source) => ({
       category: source,
-      options: classes.filter((c) => c.source === source).map((c) => c.name),
+      options: classes!.filter((c) => c.source === source).map((c) => c.name),
     }));
   return (
     <FormContainer title='Subclass Properties' collapsible>
@@ -159,40 +160,26 @@ export const SubClassPropertiesForm = () => {
                 <div
                   className='size-3 rounded-full'
                   style={{
-                    background: domains.find(
-                      (d) =>
-                        d.name ===
-                        classes.find((c) => c.name === v)?.domainPrimary,
-                    )?.color,
+                    background: classColors(v).primary,
                   }}
                 />
                 <div
                   className='size-3 rounded-full'
                   style={{
-                    background: domains.find(
-                      (d) =>
-                        d.name ===
-                        classes.find((c) => c.name === v)?.domainSecondary,
-                    )?.color,
+                    background: classColors(v).secondary,
                   }}
                 />
                 <span>{v}</span>
               </div>
             )}
             onChange={(v) => {
-              if (classes.map((c) => c.name).includes(v)) {
+              if (classes!.map((c) => c.name).includes(v)) {
                 setCardDetails({
                   subtype: v,
-                  domainPrimary: domains.find(
-                    (d) =>
-                      d.name ===
-                      classes.find((c) => c.name === v)?.domainPrimary,
-                  )?.name,
-                  domainSecondary: domains.find(
-                    (d) =>
-                      d.name ===
-                      classes.find((c) => c.name === v)?.domainSecondary,
-                  )?.name,
+                  domainPrimary: classDomains(v).primary,
+                  domainPrimaryColor: classColors(v).primary,
+                  domainSecondary: classDomains(v).secondary,
+                  domainSecondaryColor: classColors(v).secondary,
                 });
               } else {
                 setCardDetails({
@@ -221,7 +208,7 @@ export const SubClassPropertiesForm = () => {
         </div>
       </div>
       <CollapsibleContent className='space-y-2 pt-2'>
-        <DomainSelect
+        {/* <DomainSelect
           id='domain'
           label='Primary Domain'
           className='w-full'
@@ -242,7 +229,7 @@ export const SubClassPropertiesForm = () => {
               domainSecondary: v,
             })
           }
-        />
+        /> */}
       </CollapsibleContent>
     </FormContainer>
   );
