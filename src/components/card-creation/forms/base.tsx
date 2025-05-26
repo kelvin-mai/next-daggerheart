@@ -21,13 +21,6 @@ export const BaseForm = () => {
   return (
     <FormContainer title='Basic Details' collapsible defaultOpen>
       <div className='flex gap-2'>
-        <FormInput
-          className='w-full'
-          id='name'
-          type='text'
-          value={card.name}
-          onChange={(e) => setCardDetails({ name: e.target.value })}
-        />
         <div className='w-full space-y-2'>
           <Label htmlFor='type'>Type</Label>
           <Select
@@ -49,17 +42,27 @@ export const BaseForm = () => {
             </SelectContent>
           </Select>
         </div>
+        <FormInput
+          className='w-full'
+          id='name'
+          type='text'
+          placeholder='Card Name'
+          value={card.name}
+          onChange={(e) => setCardDetails({ name: e.target.value })}
+        />
       </div>
       <CollapsibleContent className='space-y-2 pt-2'>
         <FormInput
           id='artist'
           type='text'
+          placeholder='Artist Credit'
           value={card.artist}
           onChange={(e) => setCardDetails({ artist: e.target.value })}
         />
         <FormInput
           id='credits'
           type='credits'
+          placeholder='Daggerheart © Darrington Press 2025'
           value={card.credits}
           onChange={(e) => setCardDetails({ credits: e.target.value })}
         />

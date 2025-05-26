@@ -28,6 +28,7 @@ export const domainColors: { [key: string]: string } = {
   sage: '#0e854d',
   splendor: '#d1b447',
   valor: '#dc7a27',
+  dread: '#654294',
 };
 
 const imgStyle = (type: CardType): React.CSSProperties => {
@@ -89,7 +90,13 @@ export const Divider = () => {
     ? type
     : card.subtype;
   const dividerBadge = ['class', 'subclass', 'domain'].includes(type);
-  const background = domainColors[domainPrimary];
+  const background =
+    domainPrimary === 'custom' ? '#000000' : domainColors[domainPrimary];
+  // const backgroundV2 = `linear-gradient(to right, ${domainPrimary}, ${domainSecondary})`
+  console.log({
+    dividerBadge,
+    text,
+  });
   return (
     <>
       {dividerBadge ? (

@@ -60,14 +60,12 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
   onChange,
 }) => {
   const [open, setOpen] = React.useState(false);
-  // const [value, setValue] = React.useState();
 
   const handleSelect = (value: string) => {
+    setOpen(false);
     if (onChange) {
       onChange(value);
     }
-    // setValue(value);
-    setOpen(false);
   };
 
   return (
@@ -114,6 +112,18 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
                   </p>
                 </div>
               </CommandEmpty>
+              <CommandGroup heading='Custom'>
+                <CommandItem value='custom' onSelect={handleSelect}>
+                  <div className='bg-primary size-3 rounded-full' />
+                  Custom
+                  <Check
+                    className={cn(
+                      'ml-auto size-4',
+                      value === 'custom' ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
+                </CommandItem>
+              </CommandGroup>
               <CommandGroup heading='Core Set'>
                 {domains.map((d) => (
                   <CommandItem
@@ -135,18 +145,6 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
                     />
                   </CommandItem>
                 ))}
-              </CommandGroup>
-              <CommandGroup heading='Custom'>
-                <CommandItem value='custom' onSelect={handleSelect}>
-                  <div className='bg-primary size-3 rounded-full' />
-                  Custom
-                  <Check
-                    className={cn(
-                      'ml-auto size-4',
-                      value === 'custom' ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                </CommandItem>
               </CommandGroup>
             </CommandList>
           </Command>

@@ -33,6 +33,7 @@ import {
 import { DomainSelect } from '@/components/common/domain-select';
 import { Input } from '@/components/ui/input';
 import { CustomSelect } from '@/components/common/custom-select';
+import { classes, domains } from '@/data';
 
 export const DomainPropertiesForm = () => {
   const {
@@ -47,29 +48,25 @@ export const DomainPropertiesForm = () => {
           label='Domain'
           className='w-full'
           value={domainPrimary}
-          onChange={(v) => setCardDetails({ domainPrimary: v })}
+          onChange={(v) =>
+            setCardDetails({ domainPrimary: v, domainSecondary: v })
+          }
         />
         <CollapsibleContent className='flex gap-2'>
           <div className='w-full space-y-2'>
             <Label htmlFor='subtype'>Ability Type</Label>
-            <Select
+            <CustomSelect
+              id='subtype'
+              placeholder='Ability Type'
+              options={[
+                {
+                  category: 'Types',
+                  options: ['ability', 'spell', 'grimoire'],
+                },
+              ]}
               value={subtype}
-              onValueChange={(v) => setCardDetails({ subtype: v })}
-            >
-              <SelectTrigger id='subtype' className='w-full capitalize'>
-                <SelectValue placeholder='Ability Type' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Ability Type</SelectLabel>
-                  {domainAbilityTypes.map((t) => (
-                    <SelectItem key={t} value={t} className='capitalize'>
-                      {t}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+              onChange={(v) => setCardDetails({ subtype: v })}
+            />
           </div>
           <FormInput
             className='w-full'
@@ -136,37 +133,88 @@ export const SubClassPropertiesForm = () => {
     card: { subtype, subtitle, domainPrimary, domainSecondary },
   } = useCardStore();
   const { setCardDetails } = useCardActions();
+  const classOptions = classes
+    .reduce((acc: string[], curr) => {
+      if (!acc.includes(curr.source)) {
+        return [...acc, curr.source];
+      }
+      return acc;
+    }, [])
+    .map((source) => ({
+      category: source,
+      options: classes.filter((c) => c.source === source).map((c) => c.name),
+    }));
   return (
     <FormContainer title='Subclass Properties' collapsible>
       <div className='flex gap-2'>
         <div className='w-full space-y-2'>
-          <Label htmlFor='sub-feature'>Subclass Feature</Label>
+          <Label htmlFor='class-name'>Class</Label>
           <CustomSelect
             id='class-name'
-            heading='Classes'
             placeholder='Class'
-            options={[
-              'bard',
-              'druid',
-              'guardian',
-              'ranger',
-              'rogue',
-              'seraph',
-              'sorcerer',
-              'warrior',
-              'wizard',
-            ]}
+            options={classOptions}
             value={subtype}
-            onChange={(v) => setCardDetails({ subtype: v })}
+            renderValue={(v) => (
+              <div className='flex items-center gap-2'>
+                <div
+                  className='size-3 rounded-full'
+                  style={{
+                    background: domains.find(
+                      (d) =>
+                        d.name ===
+                        classes.find((c) => c.name === v)?.domainPrimary,
+                    )?.color,
+                  }}
+                />
+                <div
+                  className='size-3 rounded-full'
+                  style={{
+                    background: domains.find(
+                      (d) =>
+                        d.name ===
+                        classes.find((c) => c.name === v)?.domainSecondary,
+                    )?.color,
+                  }}
+                />
+                <span>{v}</span>
+              </div>
+            )}
+            onChange={(v) => {
+              if (classes.map((c) => c.name).includes(v)) {
+                setCardDetails({
+                  subtype: v,
+                  domainPrimary: domains.find(
+                    (d) =>
+                      d.name ===
+                      classes.find((c) => c.name === v)?.domainPrimary,
+                  )?.name,
+                  domainSecondary: domains.find(
+                    (d) =>
+                      d.name ===
+                      classes.find((c) => c.name === v)?.domainSecondary,
+                  )?.name,
+                });
+              } else {
+                setCardDetails({
+                  subtype: v,
+                  domainPrimary: 'custom',
+                  domainSecondary: 'custom',
+                });
+              }
+            }}
           />
         </div>
         <div className='w-full space-y-2'>
           <Label htmlFor='sub-feature'>Subclass Feature</Label>
           <CustomSelect
             id='sub-feature'
-            heading='Features'
             placeholder='Feature'
-            options={['foundation', 'specialization', 'mastery']}
+            options={[
+              {
+                category: 'Features',
+                options: ['foundation', 'specialization', 'mastery'],
+              },
+            ]}
             value={subtitle}
             onChange={(v) => setCardDetails({ subtitle: v })}
           />

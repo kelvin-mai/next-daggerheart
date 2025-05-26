@@ -23,6 +23,7 @@ export const domainColors: { [key: string]: string } = {
   sage: '#0e854d',
   splendor: '#d1b447',
   valor: '#dc7a27',
+  dread: '#654294',
 };
 
 const getDomainIcon = (domain?: string) => {
@@ -57,7 +58,11 @@ export const Banner = () => {
   const PrimaryIcon = getDomainIcon(domainPrimary);
   const SecondaryIcon = getDomainIcon(domainSecondary);
   const foregroundColor =
-    getBrightness(domainColors[domainPrimary]) < 128 ? 'white' : 'black';
+    getBrightness(
+      domainPrimary === 'custom' ? '#000000' : domainColors[domainPrimary],
+    ) < 128
+      ? 'white'
+      : 'black';
   return (
     <>
       <div
@@ -116,7 +121,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: domainColors[domainPrimary],
+          background: domainColors[domainPrimary] ?? '#000000',
         }}
       />
       <div
@@ -126,7 +131,7 @@ export const Banner = () => {
           top: '-4px',
           height: '120px',
           width: '59px',
-          background: domainColors[domainSecondary],
+          background: domainColors[domainSecondary] ?? '#000000',
         }}
       />
     </>
