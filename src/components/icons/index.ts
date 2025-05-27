@@ -3,6 +3,7 @@ export * from './blade-domain';
 export * from './bone-domain';
 export * from './codex-domain';
 export * from './daggerheart';
+export * from './daggerheart-brews';
 export * from './grace-domain';
 export * from './midnight-domain';
 export * from './sage-domain';
