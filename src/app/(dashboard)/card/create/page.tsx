@@ -7,8 +7,12 @@ import { DownloadImageButton } from '@/components/card-creation/preview/download
 
 export default function Page() {
   return (
-    <>
-      <div className='container flex flex-col-reverse gap-2 py-4 md:flex-row'>
+    <div>
+      <h1 className='text-2xl font-bold'>Create a card</h1>
+      <p className='text-muted-foreground'>
+        Create your very own Daggerheart card!
+      </p>
+      <div className='flex flex-col-reverse gap-2 py-4 md:flex-row'>
         <CardCreationForms />
         <div className='flex flex-col items-center space-y-2'>
           <CardPreview />
@@ -16,6 +20,6 @@ export default function Page() {
           <SettingsForm />
         </div>
       </div>
-    </>
+    </div>
   );
 }

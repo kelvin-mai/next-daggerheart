@@ -2,10 +2,11 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { logout } from '@/lib/auth/client';
-import { Loader2 } from 'lucide-react';
 
 export const LogoutButton: React.FC<React.ComponentProps<typeof Button>> = ({
   ...props
@@ -18,9 +19,11 @@ export const LogoutButton: React.FC<React.ComponentProps<typeof Button>> = ({
       fetchOptions: {
         onRequest: () => setPending(true),
         onResponse: () => setPending(false),
-        // onError: (ctx) => toast
+        onError: (ctx) => {
+          toast(ctx.error.message);
+        },
         onSuccess: () => {
-          // toast
+          toast('You have been logged out. See you soon!');
           router.push('/auth/login');
         },
       },

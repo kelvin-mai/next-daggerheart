@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 
+import { Toaster } from '@/components/ui/toast';
 import { fontVariables } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={cn(fontVariables, 'antialiased')}>
         {children}
         <Analytics />
+        <Toaster />
       </body>
     </html>
   );
