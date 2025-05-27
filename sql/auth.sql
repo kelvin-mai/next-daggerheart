@@ -1,5 +1,5 @@
 create table users (
-  id text not null primary key,
+  id uuid not null primary key default gen_random_uuid(),
   name text not null,
   email text not null unique,
   email_verified boolean not null,
@@ -9,21 +9,21 @@ create table users (
 );
 
 create table sessions (
-  id text not null primary key,
+  id uuid not null primary key default gen_random_uuid(),
   expires_at timestamp not null,
   token text not null unique,
   created_at timestamp default now(),
   updated_at timestamp,
   ip_address text,
   user_agent text,
-  user_id text not null references users (id)
+  user_id uuid not null references users (id)
 );
 
 create table accounts (
-  id text not null primary key,
+  id uuid not null primary key default gen_random_uuid(),
   account_id text not null,
   provider_id text not null,
-  user_id text not null references users (id),
+  user_id uuid not null references users (id),
   access_token text,
   refresh_token text,
   id_token text,
@@ -36,7 +36,7 @@ create table accounts (
 );
 
 create table verification (
-  id text not null primary key default gen_random_uuid(),
+  id uuid not null primary key default gen_random_uuid(),
   identifier text not null,
   value text not null,
   expires_at timestamp not null,

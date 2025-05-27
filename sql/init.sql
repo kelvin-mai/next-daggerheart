@@ -13,7 +13,7 @@ create table if not exists class_options (
   source text not null
 );
 
-INSERT INTO domain_options (name, color, source) VALUES
+insert into domain_options (name, color, source) values
 ('arcana', '#664295', 'Core Set'),
 ('blade', '#b93035', 'Core Set'),
 ('bone', '#c1c7cc', 'Core Set'),
@@ -25,7 +25,7 @@ INSERT INTO domain_options (name, color, source) VALUES
 ('valor', '#dc7a27', 'Core Set'),
 ('dread', '#654294', 'The Void');
 
-INSERT INTO class_options (name, domain_primary, domain_secondary, source) VALUES
+insert into class_options (name, domain_primary, domain_secondary, source) values
 ('bard', 'grace', 'codex', 'Core Set'),
 ('druid', 'sage', 'arcana', 'Core Set'),
 ('guardian', 'valor', 'blade', 'Core Set'),
