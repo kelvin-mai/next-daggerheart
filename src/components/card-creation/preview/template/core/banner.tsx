@@ -11,7 +11,7 @@ import {
   ValorDomainIcon,
 } from '@/components/icons';
 import { cn, getBrightness } from '@/lib/utils';
-import { useCardComputed, useCardStore } from '@/store';
+import { useCardStore } from '@/store';
 
 export const domainColors: { [key: string]: string } = {
   arcana: '#664295',

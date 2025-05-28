@@ -9,13 +9,16 @@ import { login } from '@/actions/auth';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { FormField, PasswordInput } from '../common';
+import { cn } from '@/lib/utils';
+import { REDIRECT_LINK } from '@/lib/constants';
 
 export const LoginForm = () => {
   const [state, action, pending] = React.useActionState(login, {
     success: false,
   });
   if (state.success) {
-    redirect('/');
+    redirect(REDIRECT_LINK);
   }
 
   return (
@@ -25,15 +28,16 @@ export const LoginForm = () => {
           <p>{state.errors.action}</p>
         </div>
       ) : null}
-      <div className='space-y-2'>
-        <Label htmlFor='email'>Email</Label>
-        <Input id='email' type='email' name='email' />
-        {state.errors?.validation?.email ? (
-          <div className='text-destructive text-sm'>
-            {state.errors.validation.email[0]}
-          </div>
-        ) : null}
-      </div>
+      <FormField id='email' errors={state.errors?.validation?.email}>
+        <Input
+          id='email'
+          type='email'
+          name='email'
+          className={cn(
+            state.errors?.validation?.email && 'border-destructive',
+          )}
+        />
+      </FormField>
       <div className='space-y-2'>
         <div className='flex justify-between'>
           <Label htmlFor='password'>Password</Label>
@@ -44,7 +48,14 @@ export const LoginForm = () => {
             Forgot your password?
           </Link>
         </div>
-        <Input id='password' type='password' name='password' />
+        <PasswordInput
+          id='password'
+          type='password'
+          name='password'
+          className={cn(
+            state.errors?.validation?.password && 'border-destructive',
+          )}
+        />
         {state.errors?.validation?.password ? (
           <div className='text-destructive text-sm'>
             {state.errors.validation.password[0]}

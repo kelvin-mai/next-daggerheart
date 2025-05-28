@@ -6,17 +6,18 @@ import { redirect } from 'next/navigation';
 
 import { register } from '@/actions/auth';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { FormField, PasswordInput } from '../common';
+import { cn } from '@/lib/utils';
+import { REDIRECT_LINK } from '@/lib/constants';
 
 export const RegisterForm = () => {
   const [state, action, pending] = React.useActionState(register, {
     success: false,
   });
   if (state.success) {
-    redirect('/');
+    redirect(REDIRECT_LINK);
   }
-
   return (
     <form action={action} className='flex flex-col space-y-4'>
       {state.errors?.action ? (
@@ -24,33 +25,48 @@ export const RegisterForm = () => {
           <p>{state.errors.action}</p>
         </div>
       ) : null}
-      <div className='space-y-2'>
-        <Label htmlFor='name'>Name</Label>
-        <Input id='name' name='name' />
-        {state.errors?.validation?.name ? (
-          <div className='text-destructive text-sm'>
-            {state.errors.validation.name[0]}
-          </div>
-        ) : null}
-      </div>
-      <div className='space-y-2'>
-        <Label htmlFor='email'>Email</Label>
-        <Input id='email' type='email' name='email' />
-        {state.errors?.validation?.email ? (
-          <div className='text-destructive text-sm'>
-            {state.errors.validation.email[0]}
-          </div>
-        ) : null}
-      </div>
-      <div className='space-y-2'>
-        <Label htmlFor='password'>Password</Label>
-        <Input id='password' type='password' name='password' />
-        {state.errors?.validation?.password ? (
-          <div className='text-destructive text-sm'>
-            {state.errors.validation.password[0]}
-          </div>
-        ) : null}
-      </div>
+      <FormField
+        id='name'
+        label='Username'
+        errors={state.errors?.validation?.name}
+      >
+        <Input
+          id='name'
+          name='name'
+          className={cn(state.errors?.validation?.name && 'border-destructive')}
+        />
+      </FormField>
+      <FormField id='email' errors={state.errors?.validation?.email}>
+        <Input
+          id='email'
+          type='email'
+          name='email'
+          className={cn(
+            state.errors?.validation?.email && 'border-destructive',
+          )}
+        />
+      </FormField>
+      <FormField id='password' errors={state.errors?.validation?.password}>
+        <PasswordInput
+          id='password'
+          name='password'
+          className={cn(
+            state.errors?.validation?.password && 'border-destructive',
+          )}
+        />
+      </FormField>
+      <FormField
+        id='confirm-password'
+        errors={state.errors?.validation?.confirmPassword}
+      >
+        <PasswordInput
+          id='confirm-password'
+          name='confirm-password'
+          className={cn(
+            state.errors?.validation?.confirmPassword && 'border-destructive',
+          )}
+        />
+      </FormField>
       <Button type='submit' disabled={pending}>
         {pending ? <Loader2 className='animate-spin' /> : null}
         Register

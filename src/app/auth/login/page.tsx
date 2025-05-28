@@ -5,11 +5,12 @@ import Link from 'next/link';
 import { AuthFormContainer, LoginForm } from '@/components/auth';
 import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
+import { REDIRECT_LINK } from '@/lib/constants';
 
 export default async function Page() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (session?.session) {
-    redirect('/');
+    redirect(REDIRECT_LINK);
   }
   return (
     <div className='flex items-center justify-center'>

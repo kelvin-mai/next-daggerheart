@@ -5,10 +5,22 @@ import { z } from 'zod';
 import type { ActionState } from '@/lib/types';
 import { auth } from '@/lib/auth';
 
-const loginSchema = z.object({
+const authSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(8).max(128),
 });
+
+const loginSchema = authSchema;
+
+const registerSchema = authSchema
+  .extend({
+    name: z.string().min(1),
+    confirmPassword: z.string(),
+  })
+  .refine((values) => values.password === values.confirmPassword, {
+    message: 'Passwords must match',
+    path: ['confirmPassword'],
+  });
 
 export const login = async (
   _: ActionState<typeof loginSchema>,
@@ -44,12 +56,6 @@ export const login = async (
   }
 };
 
-const registerSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(8),
-});
-
 export const register = async (
   _: ActionState<typeof registerSchema>,
   formData: FormData,
@@ -58,7 +64,9 @@ export const register = async (
     name: formData.get('name'),
     email: formData.get('email'),
     password: formData.get('password'),
+    confirmPassword: formData.get('confirm-password'),
   });
+  console.log('register', validation);
   if (!validation.success) {
     return {
       errors: { validation: validation.error.flatten().fieldErrors },

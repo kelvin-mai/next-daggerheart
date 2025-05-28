@@ -8,7 +8,7 @@ import { DownloadImageButton } from '@/components/card-creation/preview/download
 export default function Page() {
   return (
     <div>
-      <h1 className='text-2xl font-bold'>Create a card</h1>
+      <h1 className='font-eveleth-clean text-2xl font-bold'>Create a card</h1>
       <p className='text-muted-foreground'>
         Create your very own Daggerheart card!
       </p>
