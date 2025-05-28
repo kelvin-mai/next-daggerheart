@@ -54,6 +54,20 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  socialProviders: {
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    },
+    discord: {
+      clientId: env.DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
+    },
+    reddit: {
+      clientId: env.REDDIT_CLIENT_ID,
+      clientSecret: env.REDDIT_CLIENT_SECRET,
+    },
+  },
   advanced: {
     database: {
       generateId: false,

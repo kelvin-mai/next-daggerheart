@@ -12,6 +12,12 @@ const schema = z.object({
   DATABASE_URL: z.string(),
   BETTER_AUTH_SECRET: z.string(),
   BETTER_AUTH_URL: z.string(),
+  DISCORD_CLIENT_ID: z.string(),
+  DISCORD_CLIENT_SECRET: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  REDDIT_CLIENT_ID: z.string(),
+  REDDIT_CLIENT_SECRET: z.string(),
 });
 
 export const env = schema.parse(process.env);

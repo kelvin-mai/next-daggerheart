@@ -24,7 +24,7 @@ export const LogoutButton: React.FC<React.ComponentProps<typeof Button>> = ({
         },
         onSuccess: () => {
           toast('You have been logged out. See you soon!');
-          router.push('/auth/login');
+          router.push('/login');
         },
       },
     });

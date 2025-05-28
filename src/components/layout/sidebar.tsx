@@ -91,7 +91,7 @@ const AppSidebarFooter = () => {
             </DropdownMenu>
           ) : (
             <SidebarMenuButton asChild>
-              <Link href='/auth/login' className='font-semibold'>
+              <Link href='/login' className='font-semibold'>
                 Login
               </Link>
             </SidebarMenuButton>

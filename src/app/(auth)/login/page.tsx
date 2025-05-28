@@ -20,13 +20,13 @@ export default async function Page() {
           description='Enter your email below to login to your account'
         >
           <LoginForm />
+          <div className='my-2 text-center text-sm'>
+            Don&apos;t have an account?{' '}
+            <Link href='/register' className='underline underline-offset-4'>
+              Register
+            </Link>
+          </div>
         </AuthFormContainer>
-        <div className='my-2 text-center text-sm'>
-          Don&apos;t have an account?{' '}
-          <Link href='/auth/register' className='underline underline-offset-4'>
-            Register
-          </Link>
-        </div>
       </div>
     </div>
   );
