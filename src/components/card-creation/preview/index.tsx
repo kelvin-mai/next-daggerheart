@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
-import { Banner, Divider, Evasion, Stress } from './template/core';
+import { Banner, Divider, Evasion, Stress, Thresholds } from './template/core';
 
 type CardPreviewProps = React.ComponentProps<'div'>;
 
@@ -63,6 +63,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
             className='z-20 w-full px-6 text-sm'
             dangerouslySetInnerHTML={{ __html: store.card.text }}
           />
+          <Thresholds />
         </div>
         <div
           className='absolute italic'

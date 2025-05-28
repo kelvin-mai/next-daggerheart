@@ -38,8 +38,12 @@ export type CardDetails = {
   level?: number;
   stress?: number;
   evasion?: number;
+  thresholds?: [number, number];
+  thresholdsEnabled?: boolean;
   domainPrimary: string;
   domainPrimaryColor: string;
+  domainPrimaryIcon?: string;
   domainSecondary: string;
   domainSecondaryColor: string;
+  domainSecondaryIcon?: string;
 };

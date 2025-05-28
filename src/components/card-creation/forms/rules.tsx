@@ -9,13 +9,14 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
+  Check,
   Italic,
   List,
   ListOrdered,
   Strikethrough,
 } from 'lucide-react';
 
-import { FormContainer } from '@/components/common/form';
+import { FormContainer, FormInput } from '@/components/common/form';
 import { Button } from '@/components/ui/button';
 import { useCardActions, useCardStore } from '@/store';
 import {
@@ -32,6 +33,8 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { CollapsibleContent } from '@radix-ui/react-collapsible';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
@@ -112,22 +115,23 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
   editor,
 }) => {
   const [sectionType, setSectionType] = React.useState('');
+  const [text, setText] = React.useState('');
+  const [description, setDescription] = React.useState('');
 
   const getSection = () => {
     switch (sectionType) {
       case 'flavor':
-        return '<em>flavor text</em>';
+        return `<em>${text}</em>`;
       case 'feature':
-        return '<strong><em>feature:</em></strong> description';
+        return `<strong><em>${text}:</em></strong> ${description}`;
       case 'spellcast':
-        return `<p style='text-align: center'><strong>SPELLCAST:</strong> trait</p>`;
+        return `<p style='text-align: center'><strong>SPELLCAST:</strong> ${text.toUpperCase()}</p>`;
       default:
         return '';
     }
   };
 
   const handleClick = () => {
-    console.log('handleclick', editor);
     if (editor) {
       const section = getSection();
       editor
@@ -136,31 +140,86 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
         .insertContent('<p></p>')
         .insertContent(section)
         .run();
+      setText('');
+      setDescription('');
     }
   };
 
   return (
-    <div className='flex gap-2'>
-      <Select value={sectionType} onValueChange={(v) => setSectionType(v)}>
-        <SelectTrigger className='w-full'>
-          <SelectValue placeholder='Rules Text Section Type' />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Rules Text Section</SelectLabel>
-            <SelectItem value='spellcast'>Spellcast Trait</SelectItem>
-            <SelectItem value='flavor'>Flavor Text</SelectItem>
-            <SelectItem value='feature'>Feature Text</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Button onClick={handleClick}>Add Section</Button>
-    </div>
+    <>
+      <div className='flex gap-2'>
+        <Select value={sectionType} onValueChange={(v) => setSectionType(v)}>
+          <SelectTrigger className='w-full'>
+            <SelectValue placeholder='Rules Text Section Type' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Rules Text Section</SelectLabel>
+              <SelectItem value='spellcast'>Spellcast Trait</SelectItem>
+              <SelectItem value='flavor'>Flavor Text</SelectItem>
+              <SelectItem value='feature'>Feature Text</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Button onClick={handleClick}>Add Section</Button>
+      </div>
+      {sectionType === 'spellcast' && (
+        <div className='space-y-2'>
+          <Label htmlFor='spellcast-trait'>Spellcast Trait</Label>
+          <Select value={text} onValueChange={setText}>
+            <SelectTrigger className='w-full capitalize'>
+              <SelectValue id='spellcast-trait' placeholder='Spellcast Trait' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Trait</SelectLabel>
+                {['instinct'].map((t) => (
+                  <SelectItem key={t} value={t} className='capitalize'>
+                    {t}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+      {sectionType === 'flavor' && (
+        <FormInput
+          id='flavor-text'
+          label='Flavor Text'
+          placeholder='Flavor text'
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      )}
+      {sectionType === 'feature' && (
+        <>
+          <FormInput
+            id='feature-title'
+            label='Feature Name'
+            placeholder='Feature Name'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <div className='space-y-2'>
+            <Label htmlFor='feature-description'>Feature Description</Label>
+            <Textarea
+              id='feature-description'
+              placeholder='Feature Description'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
 export const RulesForm = () => {
-  const { card } = useCardStore();
+  const {
+    card: { text, thresholds, thresholdsEnabled },
+  } = useCardStore();
   const { setCardDetails } = useCardActions();
 
   const editor = useEditor({
@@ -187,7 +246,7 @@ export const RulesForm = () => {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: card.text,
+    content: text,
     onUpdate: ({ editor }) => {
       setCardDetails({ text: editor.getHTML() });
     },
@@ -202,10 +261,49 @@ export const RulesForm = () => {
         <EditorContent editor={editor} />
         {editor && <RichTextEditorToolbar editor={editor} />}
       </div>
-      <CollapsibleContent>
+      <CollapsibleContent className='mt-2'>
+        {thresholds ? (
+          <div className='space-y-2'>
+            <Label>Thresholds</Label>
+            <div className='flex gap-2'>
+              <Input
+                value={thresholds[0]}
+                type='number'
+                min={0}
+                max={99}
+                onChange={(e) =>
+                  setCardDetails({
+                    thresholds: [Number(e.target.value), thresholds[1]],
+                  })
+                }
+              />
+              <Input
+                value={thresholds[1]}
+                type='number'
+                min={0}
+                max={99}
+                onChange={(e) =>
+                  setCardDetails({
+                    thresholds: [thresholds[0], Number(e.target.value)],
+                  })
+                }
+              />
+              <div>
+                <Toggle
+                  pressed={thresholdsEnabled}
+                  onPressedChange={() =>
+                    setCardDetails({ thresholdsEnabled: !thresholdsEnabled })
+                  }
+                >
+                  <Check />
+                </Toggle>
+              </div>
+            </div>
+          </div>
+        ) : null}
         {editor && (
           <div className='space-y-2 pt-2'>
-            <Label>Add Rules Text Section</Label>
+            <Label>Rules Text Assistance</Label>
             <AssistedRulesText editor={editor} />
           </div>
         )}

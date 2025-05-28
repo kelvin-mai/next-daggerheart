@@ -40,6 +40,7 @@ export const DomainPropertiesForm = () => {
           onColorChange={(v) =>
             setCardDetails({ domainPrimaryColor: v, domainSecondaryColor: v })
           }
+          onIconChange={(v) => setCardDetails({ domainPrimaryIcon: v })}
         />
         <CollapsibleContent className='flex gap-2'>
           <div className='w-full space-y-2'>
@@ -113,6 +114,7 @@ export const ClassPropertiesForm = () => {
                   domainPrimary: 'custom',
                 })
           }
+          onIconChange={(v) => setCardDetails({ domainPrimaryIcon: v })}
         />
         <DomainSelect
           id='domain'
@@ -129,6 +131,7 @@ export const ClassPropertiesForm = () => {
                 })
               : setCardDetails({ domainSecondary: 'custom' })
           }
+          onIconChange={(v) => setCardDetails({ domainSecondaryIcon: v })}
         />
         <FormInput
           id='evasion'
@@ -255,6 +258,7 @@ export const SubClassPropertiesForm = () => {
                   })
             }
             onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
+            onIconChange={(v) => setCardDetails({ domainPrimaryIcon: v })}
           />
           <DomainSelect
             id='domain'
@@ -271,6 +275,7 @@ export const SubClassPropertiesForm = () => {
                 : setCardDetails({ domainSecondary: 'custom' })
             }
             onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
+            onIconChange={(v) => setCardDetails({ domainSecondaryIcon: v })}
           />
         </>
       ) : null}

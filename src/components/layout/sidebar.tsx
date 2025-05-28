@@ -126,7 +126,7 @@ const AppSidebarContent = () => {
                   >
                     <Link href='/card/create'>
                       Create
-                      <Badge>New</Badge>
+                      <Badge>Redesigned</Badge>
                     </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>

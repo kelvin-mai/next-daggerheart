@@ -25,6 +25,7 @@ const initialState: CardState = {
     level: 1,
     stress: 0,
     evasion: 0,
+    thresholds: [5, 12],
     domainPrimary: 'custom',
     domainPrimaryColor: '#000000',
     domainSecondary: 'custom',

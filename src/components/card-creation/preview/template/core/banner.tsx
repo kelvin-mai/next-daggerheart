@@ -11,20 +11,7 @@ import {
   ValorDomainIcon,
 } from '@/components/icons';
 import { cn, getBrightness } from '@/lib/utils';
-import { useCardStore } from '@/store';
-
-export const domainColors: { [key: string]: string } = {
-  arcana: '#664295',
-  blade: '#b93035',
-  bone: '#c1c7cc',
-  codex: '#3370ab',
-  grace: '#cb3b90',
-  midnight: '#2c2c2c',
-  sage: '#0e854d',
-  splendor: '#d1b447',
-  valor: '#dc7a27',
-  dread: '#654294',
-};
+import { useCardComputed, useCardStore } from '@/store';
 
 const getDomainIcon = (domain?: string) => {
   switch (domain) {
@@ -51,6 +38,21 @@ const getDomainIcon = (domain?: string) => {
   }
 };
 
+const renderDomainIcon = (
+  domain: string,
+  color: string,
+  check?: boolean,
+  icon?: string,
+) => {
+  console.log('renderDomainIcon', { domain, color, check, icon });
+  if (!check && icon) {
+    return <img src={icon} style={{ height: '32px', width: '32px' }} />;
+  }
+
+  const Icon = getDomainIcon(domain);
+  return <Icon style={{ height: '32px', width: '32px', color }} />;
+};
+
 export const Banner = () => {
   const {
     card: {
@@ -60,12 +62,25 @@ export const Banner = () => {
       domainSecondary,
       domainPrimaryColor,
       domainSecondaryColor,
+      domainPrimaryIcon,
+      domainSecondaryIcon,
     },
   } = useCardStore();
-  const PrimaryIcon = getDomainIcon(domainPrimary);
-  const SecondaryIcon = getDomainIcon(domainSecondary);
+  const { domainIncludes } = useCardComputed();
   const foregroundColor =
     getBrightness(domainPrimaryColor) < 128 ? 'white' : 'black';
+  const PrimaryIcon = renderDomainIcon(
+    domainPrimary,
+    foregroundColor,
+    domainIncludes(domainPrimary),
+    domainPrimaryIcon,
+  );
+  const SecondaryIcon = renderDomainIcon(
+    domainSecondary,
+    foregroundColor,
+    domainIncludes(domainSecondary),
+    domainSecondaryIcon,
+  );
   return (
     <>
       <div
@@ -95,10 +110,9 @@ export const Banner = () => {
           >
             {level}
           </p>
-        ) : domainPrimary !== domainSecondary ? (
-          <PrimaryIcon
-            style={{ height: '32px', width: '32px', color: foregroundColor }}
-          />
+        ) : (domainPrimary !== 'custom' && domainPrimary !== domainSecondary) ||
+          domainPrimary === 'custom' ? (
+          PrimaryIcon
         ) : null}
       </div>
 
@@ -106,15 +120,7 @@ export const Banner = () => {
         className='absolute z-50'
         style={{ transform: 'translateX(-50%)', left: '56px', top: '54px' }}
       >
-        {['class', 'subclass'].includes(type) ? (
-          <SecondaryIcon
-            style={{ height: '32px', width: '32px', color: foregroundColor }}
-          />
-        ) : (
-          <PrimaryIcon
-            style={{ height: '32px', width: '32px', color: foregroundColor }}
-          />
-        )}
+        {['class', 'subclass'].includes(type) ? SecondaryIcon : PrimaryIcon}
       </div>
 
       <div

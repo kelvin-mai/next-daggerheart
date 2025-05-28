@@ -1,9 +1,9 @@
 'use client';
 
+import * as React from 'react';
 import { HexColorPicker } from 'react-colorful';
-import { Paintbrush, UploadIcon, X } from 'lucide-react';
+import { Check, Paintbrush, UploadIcon, X } from 'lucide-react';
 
-import { CustomSelect } from '@/components/common/custom-select';
 import { Label } from '@/components/ui/label';
 import { useCardComputed, useCardStore } from '@/store';
 import { cn } from '@/lib/utils';
@@ -16,6 +16,14 @@ import {
 } from '@/components/ui/popover';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
 
 type DomainSelectProps = {
   id: string;
@@ -25,6 +33,7 @@ type DomainSelectProps = {
   onChange?: (value: string) => void;
   color: string;
   onColorChange: (value: string) => void;
+  onIconChange: (value?: string) => void;
 };
 
 export const DomainSelect: React.FC<DomainSelectProps> = ({
@@ -35,7 +44,9 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
   onChange,
   color,
   onColorChange,
+  onIconChange,
 }) => {
+  const [open, setOpen] = React.useState(false);
   const { domains } = useCardStore();
   const { domainColor } = useCardComputed();
   const domainOptions = domains!
@@ -49,31 +60,105 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
       category: source,
       options: domains!.filter((d) => d.source === source).map((d) => d.name),
     }));
-  const isCustom = value && !domains?.map((d) => d.name).includes(value);
+  const handleSelect = (v: string) => {
+    setOpen(false);
+    if (onChange) {
+      onChange(v);
+    }
+  };
   return (
     <div className={cn('space-y-2', className)}>
       <Label htmlFor={id}>{label}</Label>
-      <CustomSelect
-        id={id}
-        placeholder='Select Domain'
-        options={domainOptions}
-        value={value}
-        onChange={onChange}
-        renderValue={(v) => (
-          <div className='flex items-center gap-2'>
-            <div
-              className='size-3 rounded-full'
-              style={{
-                background: domainColor(v),
-              }}
-            />
-            <span>{v}</span>
-          </div>
-        )}
-      />
-      {isCustom && (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            id={id}
+            variant='outline'
+            role='combobox'
+            aria-expanded={open}
+            className='w-full justify-between font-normal'
+          >
+            {value ? (
+              <div className='flex items-center gap-2'>
+                <div
+                  className='size-3 rounded-full'
+                  style={{
+                    background: value === 'custom' ? color : domainColor(value),
+                  }}
+                />
+                <span className='capitalize'>{value}</span>
+              </div>
+            ) : (
+              <span className='text-muted-foreground'>Select Domain</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className='min-w-[var(--radix-popover-trigger-width)] p-0'
+          align='start'
+        >
+          <Command>
+            <CommandInput placeholder={`Search domains...`} />
+            <CommandEmpty>
+              <div className='text-center'>
+                <p className='text-muted-foreground text-sm'>None found.</p>
+              </div>
+            </CommandEmpty>
+            <CommandList>
+              <CommandGroup heading='Custom'>
+                <CommandItem
+                  value='custom'
+                  className='capitalize'
+                  onSelect={handleSelect}
+                >
+                  <div className='flex items-center gap-2'>
+                    <div
+                      className='size-3 rounded-full'
+                      style={{ background: color }}
+                    />
+                    <span>custom</span>
+                  </div>
+                  <Check
+                    className={cn(
+                      'ml-auto size-4',
+                      value === 'custom' ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
+                </CommandItem>
+              </CommandGroup>
+              {domainOptions.map((option) => (
+                <CommandGroup key={option.category} heading={option.category}>
+                  {option.options.map((option) => (
+                    <CommandItem
+                      key={option}
+                      value={option}
+                      className='capitalize'
+                      onSelect={handleSelect}
+                    >
+                      <div className='flex items-center gap-2'>
+                        <div
+                          className='size-3 rounded-full'
+                          style={{ background: domainColor(option) }}
+                        />
+                        <span>{option}</span>
+                      </div>
+                      <Check
+                        className={cn(
+                          'ml-auto size-4',
+                          value === option ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+      {value === 'custom' && (
         <div className='flex gap-2'>
-          <CustomDomainLogo />
+          <CustomDomainLogo onChange={onIconChange} />
           <CustomDomainColor color={color} setColor={onColorChange} />
         </div>
       )}
@@ -81,10 +166,17 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
   );
 };
 
-const CustomDomainLogo = () => {
+const CustomDomainLogo: React.FC<{ onChange: (v?: string) => void }> = ({
+  onChange,
+}) => {
   const [{ files }, { removeFile, openFileDialog, getInputProps }] =
     useFileUpload({ accept: 'image/*' });
   const [file] = files;
+  React.useEffect(() => {
+    if (onChange) {
+      onChange(file?.preview || undefined);
+    }
+  }, [file]);
   return (
     <>
       {file ? (
