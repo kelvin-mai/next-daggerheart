@@ -1,8 +1,20 @@
 'use client';
 
 import * as React from 'react';
+import { useEditor, EditorContent, type Editor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
+  Strikethrough,
+} from 'lucide-react';
 
-import { RichTextEditor } from '@/components/common';
 import { FormContainer } from '@/components/common/form';
 import { Button } from '@/components/ui/button';
 import { useCardActions, useCardStore } from '@/store';
@@ -15,13 +27,91 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Toggle } from '@/components/ui/toggle';
+import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
+import { CollapsibleContent } from '@radix-ui/react-collapsible';
+import { Label } from '@/components/ui/label';
 
-export const AssistedRulesText = () => {
+const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
+  return (
+    <div className='flex flex-row items-center gap-1 border-t border-slate-200 p-1'>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive('bold')}
+        onPressedChange={() => editor.chain().focus().toggleBold().run()}
+      >
+        <Bold className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive('italic')}
+        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+      >
+        <Italic className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive('strike')}
+        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+      >
+        <Strikethrough className='h-4 w-4' />
+      </Toggle>
+      <Separator orientation='vertical' className='h-8 w-[1px]' />
+      <Toggle
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'left' })}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('left').run()
+        }
+      >
+        <AlignLeft className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'center' })}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('center').run()
+        }
+      >
+        <AlignCenter className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive({ textAlign: 'right' })}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign('right').run()
+        }
+      >
+        <AlignRight className='h-4 w-4' />
+      </Toggle>
+      <Separator orientation='vertical' className='h-8 w-[1px]' />
+      <Toggle
+        size='sm'
+        pressed={editor.isActive('bulletList')}
+        onPressedChange={() => editor.chain().focus().toggleBulletList().run()}
+      >
+        <List className='h-4 w-4' />
+      </Toggle>
+      <Toggle
+        size='sm'
+        pressed={editor.isActive('orderedList')}
+        onPressedChange={() => editor.chain().focus().toggleOrderedList().run()}
+      >
+        <ListOrdered className='h-4 w-4' />
+      </Toggle>
+    </div>
+  );
+};
+
+type AssistedRulesTextProps = {
+  editor: Editor;
+};
+
+export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
+  editor,
+}) => {
   const [sectionType, setSectionType] = React.useState('');
-  const {
-    card: { text },
-  } = useCardStore();
-  const { setCardDetails } = useCardActions();
 
   const getSection = () => {
     switch (sectionType) {
@@ -31,14 +121,24 @@ export const AssistedRulesText = () => {
         return '<strong><em>feature:</em></strong> description';
       case 'spellcast':
         return `<p style='text-align: center'><strong>SPELLCAST:</strong> trait</p>`;
+      default:
         return '';
     }
   };
 
   const handleClick = () => {
-    const section = getSection();
-    setCardDetails({ text: text + '\n' + section });
+    console.log('handleclick', editor);
+    if (editor) {
+      const section = getSection();
+      editor
+        .chain()
+        .focus()
+        .insertContent('<p></p>')
+        .insertContent(section)
+        .run();
+    }
   };
+
   return (
     <div className='flex gap-2'>
       <Select value={sectionType} onValueChange={(v) => setSectionType(v)}>
@@ -48,9 +148,9 @@ export const AssistedRulesText = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Rules Text Section</SelectLabel>
-            <SelectItem value='flavor'>Flavor</SelectItem>
-            <SelectItem value='feature'>Feature</SelectItem>
-            <SelectItem value='spellcast'>Spellcast</SelectItem>
+            <SelectItem value='spellcast'>Spellcast Trait</SelectItem>
+            <SelectItem value='flavor'>Flavor Text</SelectItem>
+            <SelectItem value='feature'>Feature Text</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -62,13 +162,54 @@ export const AssistedRulesText = () => {
 export const RulesForm = () => {
   const { card } = useCardStore();
   const { setCardDetails } = useCardActions();
+
+  const editor = useEditor({
+    editorProps: {
+      attributes: {
+        class:
+          'min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
+      },
+    },
+    extensions: [
+      StarterKit.configure({
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-outside list-decimal pl-4',
+          },
+        },
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-outside list-disc pl-4',
+          },
+        },
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+    ],
+    content: card.text,
+    onUpdate: ({ editor }) => {
+      setCardDetails({ text: editor.getHTML() });
+    },
+  });
   return (
-    <FormContainer title='Rules Text'>
-      {/* <AssistedRulesText /> */}
-      <RichTextEditor
-        defaultValue={card.text}
-        onChange={(e) => setCardDetails({ text: e })}
-      />
+    <FormContainer title='Rules Text' collapsible defaultOpen>
+      <div
+        className={cn(
+          'focus-within:ring-dh-purple-light overflow-hidden rounded-md border border-slate-200 bg-white ring-offset-white focus-within:ring-offset-2',
+        )}
+      >
+        <EditorContent editor={editor} />
+        {editor && <RichTextEditorToolbar editor={editor} />}
+      </div>
+      <CollapsibleContent>
+        {editor && (
+          <div className='space-y-2 pt-2'>
+            <Label>Add Rules Text Section</Label>
+            <AssistedRulesText editor={editor} />
+          </div>
+        )}
+      </CollapsibleContent>
     </FormContainer>
   );
 };
