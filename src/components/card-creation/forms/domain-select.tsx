@@ -76,7 +76,7 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
             variant='outline'
             role='combobox'
             aria-expanded={open}
-            className='w-full justify-between font-normal'
+            className='w-full justify-between bg-white font-normal'
           >
             {value ? (
               <div className='flex items-center gap-2'>
@@ -180,7 +180,7 @@ const CustomDomainLogo: React.FC<{ onChange: (v?: string) => void }> = ({
   return (
     <>
       {file ? (
-        <div className='bg-background flex grow items-center justify-between gap-2 rounded-md border p-2'>
+        <div className='flex grow items-center justify-between gap-2 rounded-md border bg-white p-2'>
           <div className='flex items-center gap-4 overflow-hidden'>
             <div className='bg-accent aspect-square shrink-0 rounded'>
               <img
@@ -208,7 +208,7 @@ const CustomDomainLogo: React.FC<{ onChange: (v?: string) => void }> = ({
       ) : (
         <Button
           variant='outline'
-          className='h-14 grow'
+          className='h-14 grow bg-white'
           onClick={openFileDialog}
         >
           <UploadIcon className='size-3' />
@@ -247,7 +247,7 @@ export const CustomDomainColor: React.FC<CustomDomainColorProps> = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant='outline' className='h-14 grow'>
+        <Button variant='outline' className='h-14 grow bg-white'>
           {color ? (
             <div className='size-4 rounded' style={{ background: color }} />
           ) : (

@@ -74,7 +74,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-full justify-between font-normal'
+          className='w-full justify-between bg-white font-normal'
         >
           <div className='flex items-center gap-2 capitalize'>
             {value ? (

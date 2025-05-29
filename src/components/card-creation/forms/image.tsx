@@ -95,7 +95,11 @@ export const ImageForm = () => {
     <FormContainer title='Card Image' collapsible defaultOpen>
       <div className='space-y-2'>
         <div className='flex flex-col gap-2'>
-          <Button variant='outline' className='h-10' onClick={openFileDialog}>
+          <Button
+            variant='outline'
+            className='h-10 bg-white'
+            onClick={openFileDialog}
+          >
             <UploadIcon className='size-3' />
             Add Image
           </Button>
@@ -106,7 +110,7 @@ export const ImageForm = () => {
             tabIndex={-1}
           />
           {file ? (
-            <div className='bg-background flex items-center justify-between gap-2 rounded-md border p-2'>
+            <div className='flex items-center justify-between gap-2 rounded-md border bg-white p-2'>
               <div className='flex items-center gap-4 overflow-hidden'>
                 <div className='bg-accent aspect-square shrink-0 rounded'>
                   <img
