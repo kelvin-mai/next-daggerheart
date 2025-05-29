@@ -30,11 +30,12 @@ import {
 } from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
-import { CollapsibleContent } from '@radix-ui/react-collapsible';
+import { CollapsibleContent } from '@/components/ui/collapsible';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { traitTypes } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
@@ -131,6 +132,12 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
     }
   };
 
+  const handleSelectType = (v: string) => {
+    setSectionType(v);
+    setText('');
+    setDescription('');
+  };
+
   const handleClick = () => {
     if (editor) {
       const section = getSection();
@@ -148,7 +155,7 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
   return (
     <>
       <div className='flex gap-2'>
-        <Select value={sectionType} onValueChange={(v) => setSectionType(v)}>
+        <Select value={sectionType} onValueChange={handleSelectType}>
           <SelectTrigger className='w-full'>
             <SelectValue placeholder='Rules Text Section Type' />
           </SelectTrigger>
@@ -161,7 +168,9 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Button onClick={handleClick}>Add Section</Button>
+        <Button variant='ghost' onClick={handleClick}>
+          Add Section
+        </Button>
       </div>
       {sectionType === 'spellcast' && (
         <div className='space-y-2'>
@@ -173,7 +182,7 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Trait</SelectLabel>
-                {['instinct'].map((t) => (
+                {traitTypes.map((t) => (
                   <SelectItem key={t} value={t} className='capitalize'>
                     {t}
                   </SelectItem>
@@ -184,13 +193,15 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
         </div>
       )}
       {sectionType === 'flavor' && (
-        <FormInput
-          id='flavor-text'
-          label='Flavor Text'
-          placeholder='Flavor text'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
+        <div className='space-y-2'>
+          <Label htmlFor='flavor-text'>Flavor Text</Label>
+          <Textarea
+            id='flavor-text'
+            placeholder='Flavor text'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        </div>
       )}
       {sectionType === 'feature' && (
         <>

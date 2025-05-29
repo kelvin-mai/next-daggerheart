@@ -4,7 +4,14 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 import { useCardStore } from '@/store/card';
-import { Banner, Divider, Evasion, Stress, Thresholds } from './template/core';
+import {
+  Banner,
+  Divider,
+  Equipment,
+  Evasion,
+  Stress,
+  Thresholds,
+} from './template/core';
 
 type CardPreviewProps = React.ComponentProps<'div'>;
 
@@ -36,6 +43,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
         )}
         {store.card.type === 'domain' && <Stress />}
         {store.card.type === 'class' && <Evasion />}
+        {store.card.type === 'equipment' && <Equipment />}
         <div className='overflow-hidden'>
           {store.card.image && (
             <img

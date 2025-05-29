@@ -8,6 +8,9 @@ import { Label } from '@/components/ui/label';
 import { useCardStore, useCardActions, useCardComputed } from '@/store';
 import { CustomSelect } from '@/components/common';
 import { DomainSelect } from './domain-select';
+import { Toggle } from '@/components/ui/toggle';
+import { Check } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 export const DomainPropertiesForm = () => {
   const {
@@ -25,17 +28,19 @@ export const DomainPropertiesForm = () => {
           value={domainPrimary}
           color={domainPrimaryColor}
           onChange={(v) => {
-            domainIncludes(v)
-              ? setCardDetails({
-                  domainPrimary: v,
-                  domainSecondary: v,
-                  domainPrimaryColor: domainColor(v),
-                  domainSecondaryColor: domainColor(v),
-                })
-              : setCardDetails({
-                  domainPrimary: 'custom',
-                  domainSecondary: 'custom',
-                });
+            if (domainIncludes(v)) {
+              setCardDetails({
+                domainPrimary: v,
+                domainSecondary: v,
+                domainPrimaryColor: domainColor(v),
+                domainSecondaryColor: domainColor(v),
+              });
+            } else {
+              setCardDetails({
+                domainPrimary: 'custom',
+                domainSecondary: 'custom',
+              });
+            }
           }}
           onColorChange={(v) =>
             setCardDetails({ domainPrimaryColor: v, domainSecondaryColor: v })
@@ -279,6 +284,94 @@ export const SubClassPropertiesForm = () => {
           />
         </div>
       ) : null}
+    </FormContainer>
+  );
+};
+
+export const EquipmentPropertiesForm = () => {
+  const {
+    card: { armor, armorEnabled, hands, handsEnabled, tier, tierEnabled },
+  } = useCardStore();
+  const { setCardDetails } = useCardActions();
+  return (
+    <FormContainer title='Equipment Properties' collapsible defaultOpen>
+      <CollapsibleContent className='space-y-2'>
+        <div className='space-y-2'>
+          <Label htmlFor='tier'>Tier</Label>
+          <div className='flex gap-2'>
+            <Input
+              id='tier'
+              placeholder='Tier'
+              type='number'
+              min={1}
+              max={4}
+              value={tier}
+              onChange={(e) => setCardDetails({ tier: Number(e.target.value) })}
+            />
+            <div>
+              <Toggle
+                pressed={tierEnabled}
+                onPressedChange={() =>
+                  setCardDetails({ tierEnabled: !tierEnabled })
+                }
+              >
+                <Check />
+              </Toggle>
+            </div>
+          </div>
+        </div>
+        <div className='space-y-2'>
+          <Label htmlFor='armor'>Armor</Label>
+          <div className='flex gap-2'>
+            <Input
+              id='armor'
+              placeholder='Armor'
+              type='number'
+              min={1}
+              value={armor}
+              onChange={(e) =>
+                setCardDetails({ armor: Number(e.target.value) })
+              }
+            />
+            <div>
+              <Toggle
+                pressed={armorEnabled}
+                onPressedChange={() =>
+                  setCardDetails({ armorEnabled: !armorEnabled })
+                }
+              >
+                <Check />
+              </Toggle>
+            </div>
+          </div>
+        </div>
+        <div className='space-y-2'>
+          <Label htmlFor='hands'>Hands</Label>
+          <div className='flex gap-2'>
+            <Input
+              id='hands'
+              placeholder='Hands'
+              type='number'
+              min={1}
+              max={2}
+              value={hands}
+              onChange={(e) =>
+                setCardDetails({ hands: Number(e.target.value) })
+              }
+            />
+            <div>
+              <Toggle
+                pressed={handsEnabled}
+                onPressedChange={() =>
+                  setCardDetails({ handsEnabled: !handsEnabled })
+                }
+              >
+                <Check />
+              </Toggle>
+            </div>
+          </div>
+        </div>
+      </CollapsibleContent>
     </FormContainer>
   );
 };

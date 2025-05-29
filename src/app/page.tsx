@@ -50,7 +50,7 @@ export default async function Home() {
             />
           </div>
 
-          <div className='bg-card space-y-4 rounded-lg border p-4'>
+          <div className='space-y-4 rounded-lg border bg-white p-4'>
             <div className='flex items-center justify-center'>
               <Image
                 src='/assets/images/dh-cgl-full.png'
@@ -59,11 +59,12 @@ export default async function Home() {
                 alt='Daggerheart CGL Logo'
               />
             </div>
-            <p>
+            <p className='text-black'>
               The materials and references within this application are limited
               to those included in the <em>Daggerheart</em> System Reference
-              Document (SRD). Users are responsible for ensuring that any
-              content they create complies with the terms of the{' '}
+              Document (SRD) and all creations are intended to be comptible with
+              the Daggerheart TTRPG system. Users are responsible for ensuring
+              that any content they create complies with the terms of the{' '}
               <a
                 href='https://darringtonpress.com/license/'
                 target='_blank'

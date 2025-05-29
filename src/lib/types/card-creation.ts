@@ -9,6 +9,15 @@ export const cardTypes = [
 
 export const domainAbilityTypes = ['ability', 'spell', 'grimoire'] as const;
 
+export const traitTypes = [
+  'agility',
+  'strength',
+  'finesse',
+  'instinct',
+  'presence',
+  'knowledge',
+] as const;
+
 export type CardType = (typeof cardTypes)[number];
 
 export type CardClassOption = {
@@ -40,6 +49,12 @@ export type CardDetails = {
   evasion?: number;
   thresholds?: [number, number];
   thresholdsEnabled?: boolean;
+  tier?: number;
+  tierEnabled?: boolean;
+  hands?: number;
+  handsEnabled?: boolean;
+  armor?: number;
+  armorEnabled?: boolean;
   domainPrimary: string;
   domainPrimaryColor: string;
   domainPrimaryIcon?: string;

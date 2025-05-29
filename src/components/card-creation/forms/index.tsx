@@ -9,6 +9,7 @@ import { ImageForm } from './image';
 import {
   ClassPropertiesForm,
   DomainPropertiesForm,
+  EquipmentPropertiesForm,
   SubClassPropertiesForm,
 } from './properties';
 import { RulesForm } from './rules';
@@ -31,6 +32,7 @@ export const CardCreationForms = () => {
     <div className='grow space-y-2'>
       <BaseForm />
       <ImageForm />
+      {type === 'equipment' && <EquipmentPropertiesForm />}
       {type === 'domain' && <DomainPropertiesForm />}
       {type === 'class' && <ClassPropertiesForm />}
       {type === 'subclass' && <SubClassPropertiesForm />}
