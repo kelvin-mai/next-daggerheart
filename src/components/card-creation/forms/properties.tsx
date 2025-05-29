@@ -290,33 +290,66 @@ export const SubClassPropertiesForm = () => {
 
 export const EquipmentPropertiesForm = () => {
   const {
-    card: { armor, armorEnabled, hands, handsEnabled, tier, tierEnabled },
+    card: {
+      subtitle,
+      armor,
+      armorEnabled,
+      hands,
+      handsEnabled,
+      tier,
+      tierEnabled,
+    },
   } = useCardStore();
   const { setCardDetails } = useCardActions();
   return (
     <FormContainer title='Equipment Properties' collapsible defaultOpen>
       <CollapsibleContent className='space-y-2'>
-        <div className='space-y-2'>
-          <Label htmlFor='tier'>Tier</Label>
-          <div className='flex gap-2'>
-            <Input
-              id='tier'
-              placeholder='Tier'
-              type='number'
-              min={1}
-              max={4}
-              value={tier}
-              onChange={(e) => setCardDetails({ tier: Number(e.target.value) })}
+        <div className='flex gap-2'>
+          <div className='grow space-y-2'>
+            <Label htmlFor='subtype'>Equipment Type</Label>
+            <CustomSelect
+              id='subtype'
+              placeholder='Equipment Type'
+              options={[
+                {
+                  category: 'Types',
+                  options: [
+                    'armor',
+                    'consumable',
+                    'item',
+                    'primary weapon',
+                    'secondary weapon',
+                  ],
+                },
+              ]}
+              value={subtitle}
+              onChange={(v) => setCardDetails({ subtitle: v })}
             />
-            <div>
-              <Toggle
-                pressed={tierEnabled}
-                onPressedChange={() =>
-                  setCardDetails({ tierEnabled: !tierEnabled })
+          </div>
+          <div className='grow space-y-2'>
+            <Label htmlFor='tier'>Tier</Label>
+            <div className='flex gap-2'>
+              <Input
+                id='tier'
+                placeholder='Tier'
+                type='number'
+                min={1}
+                max={4}
+                value={tier}
+                onChange={(e) =>
+                  setCardDetails({ tier: Number(e.target.value) })
                 }
-              >
-                <Check />
-              </Toggle>
+              />
+              <div>
+                <Toggle
+                  pressed={tierEnabled}
+                  onPressedChange={() =>
+                    setCardDetails({ tierEnabled: !tierEnabled })
+                  }
+                >
+                  <Check />
+                </Toggle>
+              </div>
             </div>
           </div>
         </div>

@@ -37,7 +37,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
       ref={ref}
       {...props}
     >
-      <div className='relative flex h-full flex-col bg-white'>
+      <div className='relative flex h-full flex-col bg-white text-black'>
         {['domain', 'class', 'subclass'].includes(store.card.type) && (
           <Banner />
         )}
