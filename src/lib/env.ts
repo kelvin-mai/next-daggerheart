@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const schema = z.object({
-  PORT: z.coerce.number().min(1000),
+  PORT: z.number().min(1000).optional(),
   ENV: z
     .union([
       z.literal('development'),

@@ -1,5 +1,8 @@
-import { BuyMeCofffeeBanner } from '@/components/common';
-import { ThemeToggle } from '@/components/common/theme-toggle';
+import {
+  BuyMeCofffeeBanner,
+  ThemeToggle,
+  WeMovedBanner,
+} from '@/components/common';
 import { AppSidebar, Footer } from '@/components/layout';
 import {
   SidebarInset,
@@ -18,7 +21,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <ThemeToggle />
           </div>
         </header>
-        <main className='container'>{children}</main>
+        <main className='container'>
+          <WeMovedBanner />
+          {children}
+        </main>
         <section className='container mb-4'>
           <BuyMeCofffeeBanner />
         </section>
