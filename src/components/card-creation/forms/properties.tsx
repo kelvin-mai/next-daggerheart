@@ -240,7 +240,7 @@ export const SubClassPropertiesForm = () => {
         </div>
       </div>
       {!classes!.map((c) => c.name).includes(subtype!) ? (
-        <>
+        <div className='mt-2 space-y-2'>
           <DomainSelect
             id='domain'
             label='Primary Domain'
@@ -277,7 +277,7 @@ export const SubClassPropertiesForm = () => {
             onColorChange={(v) => setCardDetails({ domainPrimaryColor: v })}
             onIconChange={(v) => setCardDetails({ domainSecondaryIcon: v })}
           />
-        </>
+        </div>
       ) : null}
     </FormContainer>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/next';
 
 import { Toaster } from '@/components/ui/toast';
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body className={cn(fontVariables, 'antialiased')}>
-        {children}
-        <Analytics />
-        <Toaster />
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+          {children}
+          <Analytics />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

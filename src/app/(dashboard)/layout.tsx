@@ -1,4 +1,6 @@
-import { AppSidebar } from '@/components/layout/sidebar';
+import { BuyMeCofffeeBanner } from '@/components/common';
+import { ThemeToggle } from '@/components/common/theme-toggle';
+import { AppSidebar, Footer } from '@/components/layout';
 import {
   SidebarInset,
   SidebarProvider,
@@ -11,11 +13,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <AppSidebar />
       <SidebarInset>
         <header className='flex h-16 shrink-0 items-center gap-2'>
-          <div className='flex items-center gap-2 px-4'>
+          <div className='flex w-full items-center justify-between px-4'>
             <SidebarTrigger />
+            <ThemeToggle />
           </div>
         </header>
         <main className='container'>{children}</main>
+        <section className='container mb-4'>
+          <BuyMeCofffeeBanner />
+        </section>
+        <Footer />
       </SidebarInset>
     </SidebarProvider>
   );

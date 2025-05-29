@@ -1,4 +1,4 @@
-import { Barlow, Geist, Geist_Mono } from 'next/font/google';
+import { Barlow, Geist, Geist_Mono, Space_Grotesk } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import { cn } from './utils';
@@ -31,9 +31,16 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+export const spaceGrotesk = Space_Grotesk({
+  weight: ['400', '600'],
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+});
+
 export const fontVariables = cn(
   barlow.variable,
   evelethClean.variable,
   geist.variable,
   geistMono.variable,
+  spaceGrotesk.variable,
 );

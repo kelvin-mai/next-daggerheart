@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import {
   Sidebar,
@@ -27,7 +28,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useSession, logout } from '@/lib/auth/client';
 import { ChevronRight, LogOut, MoreVertical } from 'lucide-react';
 import { toast } from 'sonner';
-import { DaggerheartBrewsIcon } from '../icons';
 import { Collapsible } from '@radix-ui/react-collapsible';
 import { CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
 import { usePathname } from 'next/navigation';
@@ -111,8 +111,8 @@ const AppSidebarContent = () => {
           <Collapsible defaultOpen className='group/collapsible'>
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton isActive={true}>
-                  Card
+                <SidebarMenuButton isActive={pathname === '/card/create'}>
+                  Create
                   <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
@@ -125,7 +125,7 @@ const AppSidebarContent = () => {
                     isActive={pathname === '/card/create'}
                   >
                     <Link href='/card/create'>
-                      Create
+                      Card
                       <Badge>Redesigned</Badge>
                     </Link>
                   </SidebarMenuSubButton>
@@ -148,12 +148,11 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ ...props }) => {
         <SidebarMenu>
           <SidebarMenuButton size='lg' asChild>
             <Link href='/'>
-              <DaggerheartBrewsIcon
-                className='text-primary'
-                style={{
-                  height: '30px',
-                  width: '30px',
-                }}
+              <Image
+                src='/assets/images/dh-cgl-logo.png'
+                alt='Brand'
+                height={30}
+                width={30}
               />
               <div className='flex flex-col gap-1 leading-none'>
                 <span className='font-eveleth-clean'>Daggerheart Brews</span>
@@ -163,7 +162,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ ...props }) => {
         </SidebarMenu>
       </SidebarHeader>
       <AppSidebarContent />
-      <AppSidebarFooter />
+      {/* <AppSidebarFooter /> */}
     </Sidebar>
   );
 };

@@ -46,9 +46,16 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
         </div>
         <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white'>
           <Divider />
-          <div className={cn('font-eveleth-clean z-20 pt-4 text-2xl')}>
+          <p
+            className={cn(
+              'font-eveleth-clean z-20 w-full px-6 pt-4',
+              ['ancestry', 'community'].includes(store.card.type)
+                ? 'text-2xl'
+                : 'text-center text-base',
+            )}
+          >
             {store.card.name}
-          </div>
+          </p>
           {['class', 'subclass', 'equipment'].includes(store.card.type) ? (
             <p
               className='font-semibold capitalize italic'
@@ -60,7 +67,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
             </p>
           ) : null}
           <div
-            className='z-20 w-full px-6 text-sm'
+            className='z-20 w-full space-y-2 px-6 text-sm leading-none text-pretty'
             dangerouslySetInnerHTML={{ __html: store.card.text }}
           />
           <Thresholds />
