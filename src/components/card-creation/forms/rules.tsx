@@ -39,7 +39,7 @@ import { cn } from '@/lib/utils';
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
-    <div className='flex flex-row items-center gap-1 border-t border-slate-200 p-1'>
+    <div className='border-input flex flex-row items-center gap-1 border-t p-1'>
       <Toggle
         size='sm'
         pressed={editor.isActive('bold')}
@@ -237,7 +237,7 @@ export const RulesForm = () => {
     editorProps: {
       attributes: {
         class:
-          'min-h-[80px] max-h-[180px] w-full bg-white px-3 py-2 border-b-0 text-sm placeholder:text-slate-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
+          'min-h-[80px] max-h-[180px] w-full bg-white dark:bg-input/30 px-3 py-2 border-input border-b-0 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto',
       },
     },
     extensions: [
@@ -266,7 +266,7 @@ export const RulesForm = () => {
     <FormContainer title='Rules Text' collapsible defaultOpen>
       <div
         className={cn(
-          'focus-within:ring-dh-purple-light overflow-hidden rounded-md border border-slate-200 bg-white ring-offset-white focus-within:ring-offset-2',
+          'border-input dark:bg-input/30 focus-within:border-ring overflow-hidden rounded-md border bg-white',
         )}
       >
         <EditorContent editor={editor} />

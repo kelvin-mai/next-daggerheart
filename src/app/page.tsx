@@ -37,9 +37,9 @@ export default async function Home() {
             <Button size='lg' asChild>
               <Link href='/card/create'>Start Building</Link>
             </Button>
-            <Button size='lg' variant='ghost' asChild>
+            {/* <Button size='lg' variant='ghost' asChild>
               <Link href='/login'>Something Else</Link>
-            </Button>
+            </Button> */}
           </div>
           <div className='overflow-hidden rounded-lg border'>
             <Image
