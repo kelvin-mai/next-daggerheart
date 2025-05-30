@@ -7,6 +7,11 @@ import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { REDIRECT_LINK } from '@/lib/constants';
 
+export const metadata = {
+  title: 'Login',
+  description: 'Login to DaggerheartBrews',
+};
+
 export default async function Page() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (session?.session) {

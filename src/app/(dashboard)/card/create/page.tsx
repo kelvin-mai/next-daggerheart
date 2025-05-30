@@ -5,6 +5,11 @@ import {
 import { CardPreview } from '@/components/card-creation/preview';
 import { DownloadImageButton } from '@/components/card-creation/preview/download-image-button';
 
+export const metadata = {
+  title: 'Create Card',
+  description: 'Create your very own Daggerheart Card!',
+};
+
 export default function Page() {
   return (
     <div>

@@ -8,8 +8,13 @@ import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Daggerheart Homebrew',
-  description: 'Create homebrew cards for the Daggerheart TTRPG',
+  title: {
+    template: '%s | DaggerheartBrews',
+    default: 'DaggerheartBrews',
+  },
+  description: 'A fan application for generating homebrew Daggerheart content',
+  creator: 'kelvin-mai',
+  authors: [{ name: 'kelvin-mai', url: 'https://kelvinmai.io' }],
 };
 
 export default function RootLayout({
