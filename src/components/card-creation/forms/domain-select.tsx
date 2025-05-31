@@ -6,7 +6,7 @@ import { Check, Paintbrush, UploadIcon, X } from 'lucide-react';
 
 import { Label } from '@/components/ui/label';
 import { useCardComputed, useCardStore } from '@/store';
-import { cn } from '@/lib/utils';
+import { cn, fileToBase64 } from '@/lib/utils';
 import { formatBytes, useFileUpload } from '@/hooks/use-file-upload';
 import { Button } from '@/components/ui/button';
 import {
@@ -174,13 +174,17 @@ const CustomDomainLogo: React.FC<{ onChange: (v?: string) => void }> = ({
   const [file] = files;
   React.useEffect(() => {
     if (onChange) {
-      onChange(file?.preview || undefined);
+      if (file?.preview) {
+        fileToBase64(file.file as File).then((data) => onChange(data));
+      } else {
+        onChange(undefined);
+      }
     }
   }, [file]);
   return (
     <>
       {file ? (
-        <div className='flex grow items-center justify-between gap-2 rounded-md border bg-white p-2'>
+        <div className='dark:bg-input/30 flex grow items-center justify-between gap-2 rounded-md border bg-white p-2'>
           <div className='flex items-center gap-4 overflow-hidden'>
             <div className='bg-accent aspect-square shrink-0 rounded'>
               <img

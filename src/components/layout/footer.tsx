@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className='container'>
       <div className='mb-4 rounded-lg bg-neutral-900 p-4 text-neutral-200'>
-        <div className='grid grid-cols-3'>
+        <div className='grid grid-cols-3 gap-2'>
           <div>
             <div className='mb-4 flex items-center gap-2'>
               <DaggerheartBrewsIcon
@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
                 height={30}
                 width={30}
               />
-              <h4 className='font-eveleth-clean text-xl tracking-tight'>
+              <h4 className='font-eveleth-clean hidden text-xl tracking-tight md:block'>
                 Daggerheart Brews
               </h4>
             </div>
@@ -44,7 +44,10 @@ export const Footer: React.FC = () => {
                 <Link href='/'>Home</Link>
               </li>
               <li>
-                <Link href='/card/create'>Create Card</Link>
+                <Link href='/card/create'>Create</Link>
+              </li>
+              <li>
+                <Link href='/game-master/screen'>GM Screen</Link>
               </li>
             </ul>
           </div>

@@ -12,6 +12,16 @@ export const nav: NavCategory[] = [
     ],
   },
   {
+    name: 'Game Tools',
+    children: [
+      {
+        name: 'GM Screen',
+        badge: 'new',
+        url: '/game-master/screen',
+      },
+    ],
+  },
+  {
     name: 'Reference',
     badge: 'new',
     children: [
@@ -22,16 +32,6 @@ export const nav: NavCategory[] = [
       {
         name: 'Communities',
         url: '/reference/communities',
-      },
-    ],
-  },
-  {
-    name: 'Game Master',
-    children: [
-      {
-        name: 'GM Screen',
-        badge: 'new',
-        url: '/game-master/screen',
       },
     ],
   },
