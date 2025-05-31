@@ -57,7 +57,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
           ) : null}
         </div>
         <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white'>
-          <Divider />
+          <Divider card={card} />
           <p
             className={cn(
               'font-eveleth-clean z-20 w-full px-6 pt-4',

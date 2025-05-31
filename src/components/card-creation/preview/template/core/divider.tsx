@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 
-import { useCardStore } from '@/store';
-import type { CardType } from '@/lib/types';
+import type { CardDetails, CardType } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
 
 const imgStyle = (type: CardType): React.CSSProperties => {
@@ -58,10 +57,12 @@ const titleStyle = (type: CardType): React.CSSProperties => {
   }
 };
 
-export const Divider = () => {
-  const {
-    card: { type, subtype, domainPrimaryColor, domainSecondaryColor },
-  } = useCardStore();
+type DivederProps = {
+  card: CardDetails;
+};
+
+export const Divider: React.FC<DivederProps> = ({ card }) => {
+  const { type, subtype, domainPrimaryColor, domainSecondaryColor } = card;
   const subtypeText = ['ancestry', 'community', 'equipment', 'class'].includes(
     type,
   )
