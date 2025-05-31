@@ -2,6 +2,7 @@ import type {
   CardClassOption,
   CardDetails,
   CardDomainOption,
+  CardType,
 } from '@/lib/types/card-creation';
 
 type CardSettings = {
@@ -9,6 +10,7 @@ type CardSettings = {
   boldRulesText: boolean;
   artist: boolean;
   credits: boolean;
+  placeholderImage: boolean;
 };
 
 export type CardState = {
@@ -36,6 +38,7 @@ export type CardComputed = {
 export type CardActions = {
   setLoading(loading: boolean): void;
   setPreviewRef(ref: React.RefObject<HTMLDivElement | null>): void;
+  setCardTypeDefaults(type: CardType): void;
   setCardDetails(details: Partial<CardDetails>): void;
   setSettings(settings: Partial<CardSettings>): void;
   setOptions(allOptions: {

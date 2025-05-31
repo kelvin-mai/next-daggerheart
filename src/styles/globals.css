@@ -57,6 +57,9 @@
   .aspect-card {
     @apply aspect-[63/88];
   }
+  .aspect-card-horizontal {
+    @apply aspect-[88/63];
+  }
   .font-barlow {
     font-family: var(--font-barlow);
   }

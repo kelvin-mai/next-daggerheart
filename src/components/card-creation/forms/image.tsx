@@ -74,9 +74,7 @@ export const ImageForm = () => {
   const [file] = files;
 
   React.useEffect(() => {
-    if (file?.preview) {
-      setCardDetails({ image: file.preview });
-    }
+    setCardDetails({ image: file?.preview || undefined });
   }, [file]);
 
   const handleCropChange = async (area: Area | null) => {
@@ -110,7 +108,7 @@ export const ImageForm = () => {
             tabIndex={-1}
           />
           {file ? (
-            <div className='flex items-center justify-between gap-2 rounded-md border bg-white p-2'>
+            <div className='dark:bg-input/30 flex items-center justify-between gap-2 rounded-md border bg-white p-2'>
               <div className='flex items-center gap-4 overflow-hidden'>
                 <div className='bg-accent aspect-square shrink-0 rounded'>
                   <img

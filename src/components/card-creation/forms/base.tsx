@@ -17,7 +17,7 @@ import { useCardStore, useCardActions } from '@/store';
 
 export const BaseForm = () => {
   const { card } = useCardStore();
-  const { setCardDetails } = useCardActions();
+  const { setCardDetails, setCardTypeDefaults } = useCardActions();
   return (
     <FormContainer title='Basic Details' collapsible defaultOpen>
       <div className='flex gap-2'>
@@ -25,7 +25,7 @@ export const BaseForm = () => {
           <Label htmlFor='type'>Type</Label>
           <Select
             value={card.type}
-            onValueChange={(v: CardType) => setCardDetails({ type: v })}
+            onValueChange={(v: CardType) => setCardTypeDefaults(v)}
           >
             <SelectTrigger id='type' className='w-full capitalize'>
               <SelectValue placeholder='Type' />
@@ -47,6 +47,7 @@ export const BaseForm = () => {
           id='name'
           type='text'
           placeholder='Card Name'
+          disabled={card.type === 'class'}
           value={card.name}
           onChange={(e) => setCardDetails({ name: e.target.value })}
         />

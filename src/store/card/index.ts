@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { CardState, CardStore } from './types';
+import type { CardState, CardStore } from './types';
 import { createActions } from './actions';
 import { createEffects } from './effects';
 import { createComputed } from './computed';
@@ -12,6 +12,7 @@ const initialState: CardState = {
     boldRulesText: true,
     artist: true,
     credits: true,
+    placeholderImage: true,
   },
   card: {
     name: '',
@@ -36,7 +37,7 @@ const initialState: CardState = {
 export const useCardStore = create<CardStore>((set, get) => ({
   ...initialState,
   computed: createComputed(get),
-  actions: createActions(set),
+  actions: createActions(set, get),
   effects: createEffects(set, get),
 }));
 

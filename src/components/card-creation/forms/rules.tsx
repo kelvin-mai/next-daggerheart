@@ -36,6 +36,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { traitTypes } from '@/lib/types';
 import { cn } from '@/lib/utils';
+import { CustomSelect } from '@/components/common';
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
@@ -112,14 +113,20 @@ type AssistedRulesTextProps = {
   editor: Editor;
 };
 
-export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
-  editor,
-}) => {
+const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({ editor }) => {
+  const initialWeaponText = {
+    trait: 'strength',
+    distance: 'melee',
+    amount: 'd12',
+    type: 'physical',
+  };
   const [sectionType, setSectionType] = React.useState('');
   const [text, setText] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const [weaponText, setWeaponText] = React.useState(initialWeaponText);
 
   const getSection = () => {
+    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
     switch (sectionType) {
       case 'flavor':
         return `<em>${text}</em>`;
@@ -127,6 +134,8 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
         return `<strong><em>${text}:</em></strong> ${description}`;
       case 'spellcast':
         return `<p style='text-align: center'><strong>SPELLCAST:</strong> ${text.toUpperCase()}</p>`;
+      case 'weapon':
+        return `<p style='text-align: center'><strong>${capitalize(weaponText.trait)} ${capitalize(weaponText.distance)}</strong> - ${weaponText.amount} (${capitalize(weaponText.type)})</p>`;
       default:
         return '';
     }
@@ -136,6 +145,7 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
     setSectionType(v);
     setText('');
     setDescription('');
+    setWeaponText(initialWeaponText);
   };
 
   const handleClick = () => {
@@ -149,6 +159,7 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
         .run();
       setText('');
       setDescription('');
+      setWeaponText(initialWeaponText);
     }
   };
 
@@ -165,6 +176,7 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
               <SelectItem value='spellcast'>Spellcast Trait</SelectItem>
               <SelectItem value='flavor'>Flavor Text</SelectItem>
               <SelectItem value='feature'>Feature Text</SelectItem>
+              <SelectItem value='weapon'>Weapon Text</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -222,6 +234,80 @@ export const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({
             />
           </div>
         </>
+      )}
+      {sectionType === 'weapon' && (
+        <div className='space-y-2'>
+          <div className='grid grid-cols-2 gap-2'>
+            <div className='space-y-2'>
+              <Label htmlFor='weapon-trait'>Weapon Trait</Label>
+              <Select
+                value={weaponText.trait}
+                onValueChange={(v) =>
+                  setWeaponText({ ...weaponText, trait: v })
+                }
+              >
+                <SelectTrigger className='w-full capitalize'>
+                  <SelectValue id='weapon-trait' placeholder='Weapon Trait' />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Trait</SelectLabel>
+                    {traitTypes.map((t) => (
+                      <SelectItem key={t} value={t} className='capitalize'>
+                        {t}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className='space-y-2'>
+              <Label htmlFor='weapon-distance'>Distance</Label>
+              <CustomSelect
+                id='weapon-distance'
+                placeholder='Distance'
+                options={[
+                  {
+                    category: 'Distance',
+                    options: [
+                      'melee',
+                      'very close',
+                      'close',
+                      'far',
+                      'very far',
+                      'out of range',
+                    ],
+                  },
+                ]}
+                value={weaponText.distance}
+                onChange={(v) => setWeaponText({ ...weaponText, distance: v })}
+              />
+            </div>
+            <FormInput
+              id='damage-amount'
+              label='Damage Amount'
+              value={weaponText.amount}
+              onChange={(e) =>
+                setWeaponText({ ...weaponText, amount: e.target.value })
+              }
+            />
+            <div className='space-y-2'>
+              <Label htmlFor='damage-type'>Damage Type</Label>
+              <CustomSelect
+                id='damage-type'
+                placeholder='Damage Type'
+                options={[
+                  {
+                    category: 'Damage Type',
+                    options: ['physical', 'magical'],
+                  },
+                ]}
+                value={weaponText.type}
+                onChange={(v) => setWeaponText({ ...weaponText, type: v })}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

@@ -1,8 +1,8 @@
 import { toPng } from 'html-to-image';
 
-import { ZustandGet, ZustandSet } from '../types';
-import { CardEffects, CardState, CardStore } from './types';
-import { CardClassOption, CardDomainOption } from '@/lib/types';
+import type { CardClassOption, CardDomainOption } from '@/lib/types';
+import type { ZustandGet, ZustandSet } from '../types';
+import type { CardEffects, CardState, CardStore } from './types';
 
 const downloadImage =
   (get: ZustandGet<CardStore>): CardEffects['downloadImage'] =>

@@ -42,6 +42,16 @@ export const SettingsForm = () => {
               }
             }}
           />
+          <FormCheckbox
+            id='show-placeholder'
+            label='Placeholder image?'
+            checked={settings.placeholderImage}
+            onCheckedChange={(e) => {
+              if (e !== 'indeterminate') {
+                setSettings({ placeholderImage: e });
+              }
+            }}
+          />
         </div>
       </CollapsibleContent>
     </FormContainer>

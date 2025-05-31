@@ -12,6 +12,7 @@ import {
   Stress,
   Thresholds,
 } from './template/core';
+import { DaggerheartBrewsIcon } from '@/components/icons';
 
 type CardPreviewProps = React.ComponentProps<'div'>;
 
@@ -45,12 +46,18 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
         {store.card.type === 'class' && <Evasion />}
         {store.card.type === 'equipment' && <Equipment />}
         <div className='overflow-hidden'>
-          {store.card.image && (
+          {store.card.image ? (
             <img
               className='object-center-top -z-10 w-full object-cover'
               src={store.card.image}
             />
-          )}
+          ) : store.settings.placeholderImage ? (
+            <div className='flex h-[250px] w-full items-center justify-center'>
+              <DaggerheartBrewsIcon
+                style={{ height: '64px', width: '64px', color: '#737373' }}
+              />
+            </div>
+          ) : null}
         </div>
         <div className='flex-start absolute bottom-9 flex min-h-[200px] w-full flex-col items-center gap-1.5 bg-white'>
           <Divider />
@@ -69,13 +76,12 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
               className='font-semibold capitalize italic'
               style={{ fontSize: '12px' }}
             >
-              {store.card.type === 'class'
-                ? 'Class Features'
-                : store.card.subtitle}
+              {store.card.subtitle}
             </p>
           ) : null}
           <div
-            className='z-20 w-full space-y-2 px-6 text-sm leading-none text-pretty'
+            className='z-20 w-full space-y-2 px-6 leading-none text-pretty'
+            style={{ fontSize: 12 }}
             dangerouslySetInnerHTML={{ __html: store.card.text }}
           />
           <Thresholds />
