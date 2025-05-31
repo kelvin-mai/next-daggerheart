@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div>
+    <>
       <h1 className='font-eveleth-clean dark:text-primary-foreground text-2xl font-bold'>
         Create a card
       </h1>
@@ -27,6 +27,6 @@ export default function Page() {
           <SettingsForm />
         </div>
       </div>
-    </div>
+    </>
   );
 }

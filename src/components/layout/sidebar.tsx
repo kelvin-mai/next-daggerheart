@@ -135,6 +135,37 @@ const AppSidebarContent = () => {
           </Collapsible>
         </SidebarMenu>
       </SidebarGroup>
+      <SidebarGroup>
+        <SidebarMenu>
+          <Collapsible defaultOpen className='group/collapsible'>
+            <SidebarMenuItem>
+              <CollapsibleTrigger asChild>
+                <SidebarMenuButton
+                  isActive={pathname === '/game-master/screen'}
+                >
+                  Game Master
+                  <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
+                </SidebarMenuButton>
+              </CollapsibleTrigger>
+            </SidebarMenuItem>
+            <CollapsibleContent>
+              <SidebarMenuSub>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton
+                    asChild
+                    isActive={pathname === '/game-master/screen'}
+                  >
+                    <Link href='/game-master/screen'>
+                      GM Screen
+                      <Badge>New</Badge>
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              </SidebarMenuSub>
+            </CollapsibleContent>
+          </Collapsible>
+        </SidebarMenu>
+      </SidebarGroup>
     </SidebarContent>
   );
 };
