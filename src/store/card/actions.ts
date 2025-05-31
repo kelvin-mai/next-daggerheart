@@ -57,7 +57,6 @@ const setCardTypeDefaults =
           return {};
       }
     };
-    console.log('setCardTypeDefaults', defaults());
     return set((state) => ({
       ...state,
       card: { ...state.card, type, ...defaults() },

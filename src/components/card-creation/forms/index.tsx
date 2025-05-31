@@ -21,7 +21,6 @@ export const CardCreationForms = () => {
     card: { type },
   } = store;
   const { loadOptions } = useCardEffects();
-  console.log(store);
   React.useEffect(() => {
     loadOptions();
   }, []);

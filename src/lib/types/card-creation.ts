@@ -35,13 +35,21 @@ export type CardDomainOption = {
   source: string;
 };
 
+export type CardSettings = {
+  border: boolean;
+  boldRulesText: boolean;
+  artist: boolean;
+  credits: boolean;
+  placeholderImage: boolean;
+};
+
 export type CardDetails = {
   name: string;
   type: CardType;
   image?: string;
-  text: string;
-  artist: string;
-  credits: string;
+  text?: string;
+  artist?: string;
+  credits?: string;
   subtype?: string;
   subtitle?: string;
   level?: number;
@@ -55,10 +63,10 @@ export type CardDetails = {
   handsEnabled?: boolean;
   armor?: number;
   armorEnabled?: boolean;
-  domainPrimary: string;
-  domainPrimaryColor: string;
+  domainPrimary?: string;
+  domainPrimaryColor?: string;
   domainPrimaryIcon?: string;
-  domainSecondary: string;
-  domainSecondaryColor: string;
+  domainSecondary?: string;
+  domainSecondaryColor?: string;
   domainSecondaryIcon?: string;
 };

@@ -31,7 +31,7 @@ type DomainSelectProps = {
   className?: string;
   value?: string;
   onChange?: (value: string) => void;
-  color: string;
+  color?: string;
   onColorChange: (value: string) => void;
   onIconChange: (value?: string) => void;
 };

@@ -1,9 +1,5 @@
-import {
-  CardCreationForms,
-  SettingsForm,
-} from '@/components/card-creation/forms';
-import { CardPreview } from '@/components/card-creation/preview';
-import { DownloadImageButton } from '@/components/card-creation/preview/download-image-button';
+import { CardCreationForms } from '@/components/card-creation/forms';
+import { CardCreationPreview } from '@/components/card-creation/preview';
 
 export const metadata = {
   title: 'Create Card',
@@ -21,11 +17,7 @@ export default function Page() {
       </p>
       <div className='flex flex-col-reverse gap-2 py-4 md:flex-row'>
         <CardCreationForms />
-        <div className='flex flex-col items-center space-y-2'>
-          <CardPreview />
-          <DownloadImageButton className='w-full' />
-          <SettingsForm />
-        </div>
+        <CardCreationPreview />
       </div>
     </>
   );

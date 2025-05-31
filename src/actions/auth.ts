@@ -69,7 +69,6 @@ export const register = async (
     password: formData.get('password'),
     confirmPassword: formData.get('confirm-password'),
   });
-  console.log('register', validation);
   if (!validation.success) {
     return {
       errors: { validation: validation.error.flatten().fieldErrors },

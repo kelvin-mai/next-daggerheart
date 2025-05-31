@@ -3,7 +3,13 @@
 import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ChevronRight, LogOut, MoreVertical } from 'lucide-react';
 
+import { usePathname } from 'next/navigation';
+import { toast } from 'sonner';
+
+import { useSession, logout } from '@/lib/auth/client';
+import { nav } from '@/lib/constants';
 import {
   Sidebar,
   SidebarContent,
@@ -25,12 +31,11 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { useSession, logout } from '@/lib/auth/client';
-import { ChevronRight, LogOut, MoreVertical } from 'lucide-react';
-import { toast } from 'sonner';
-import { Collapsible } from '@radix-ui/react-collapsible';
-import { CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
-import { usePathname } from 'next/navigation';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '../ui/collapsible';
 import { Badge } from '../ui/badge';
 
 const AppSidebarFooter = () => {
@@ -106,66 +111,48 @@ const AppSidebarContent = () => {
   const pathname = usePathname();
   return (
     <SidebarContent>
-      <SidebarGroup>
-        <SidebarMenu>
-          <Collapsible defaultOpen className='group/collapsible'>
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton isActive={pathname === '/card/create'}>
-                  Create
-                  <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-            </SidebarMenuItem>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton
-                    asChild
-                    isActive={pathname === '/card/create'}
+      {nav.map((category) => (
+        <SidebarGroup key={category.name}>
+          <SidebarMenu>
+            <Collapsible defaultOpen className='group/collapsible'>
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton
+                    isActive={category.children
+                      ?.map((item) => item.url)
+                      .includes(pathname)}
                   >
-                    <Link href='/card/create'>
-                      Card
-                      <Badge>Redesigned</Badge>
-                    </Link>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarMenu>
-      </SidebarGroup>
-      <SidebarGroup>
-        <SidebarMenu>
-          <Collapsible defaultOpen className='group/collapsible'>
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton
-                  isActive={pathname === '/game-master/screen'}
-                >
-                  Game Master
-                  <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-            </SidebarMenuItem>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton
-                    asChild
-                    isActive={pathname === '/game-master/screen'}
-                  >
-                    <Link href='/game-master/screen'>
-                      GM Screen
-                      <Badge>New</Badge>
-                    </Link>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </Collapsible>
-        </SidebarMenu>
-      </SidebarGroup>
+                    {category.name}
+                    {category.badge && (
+                      <Badge className='capitalize'>{category.badge}</Badge>
+                    )}
+                    <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+              </SidebarMenuItem>
+              <CollapsibleContent>
+                <SidebarMenuSub>
+                  {category.children?.map((item) => (
+                    <SidebarMenuSubItem key={item.name}>
+                      <SidebarMenuSubButton
+                        asChild
+                        isActive={pathname === item.url}
+                      >
+                        <Link href={item.url}>
+                          {item.name}
+                          {item.badge && (
+                            <Badge className='capitalize'>{item.badge}</Badge>
+                          )}
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  ))}
+                </SidebarMenuSub>
+              </CollapsibleContent>
+            </Collapsible>
+          </SidebarMenu>
+        </SidebarGroup>
+      ))}
     </SidebarContent>
   );
 };

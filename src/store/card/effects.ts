@@ -14,7 +14,6 @@ const downloadImage =
         await toPng(preview.current, { cacheBust: true }).then((data) => {
           const link = document.createElement('a');
           link.download = `daggerheart-${type}-${name}.png`;
-          console.log(link.download);
           link.href = data;
           link.click();
         });

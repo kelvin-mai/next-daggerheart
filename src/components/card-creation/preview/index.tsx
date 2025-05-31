@@ -2,8 +2,10 @@
 
 import * as React from 'react';
 
+import type { CardDetails, CardSettings } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { useCardStore } from '@/store/card';
+import { useCardActions, useCardStore } from '@/store/card';
+import { DaggerheartBrewsIcon } from '@/components/icons';
 import {
   Banner,
   Divider,
@@ -12,46 +14,41 @@ import {
   Stress,
   Thresholds,
 } from './template/core';
-import { DaggerheartBrewsIcon } from '@/components/icons';
+import { DownloadImageButton } from './download-image-button';
+import { SettingsForm } from '../forms';
 
-type CardPreviewProps = React.ComponentProps<'div'>;
+type CardPreviewProps = React.ComponentProps<'div'> & {
+  card: CardDetails;
+  settings: CardSettings;
+};
 
 export const CardPreview: React.FC<CardPreviewProps> = ({
   className,
+  card,
+  settings,
   ...props
 }) => {
-  const store = useCardStore();
-
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    store.actions.setPreviewRef(ref);
-  }, [ref]);
-
   return (
     <div
       className={cn(
         'aspect-card w-[340px] overflow-hidden',
-        store.settings.border && 'rounded-lg border-2 border-amber-300 shadow',
+        settings.border && 'rounded-lg border-2 border-amber-300 shadow',
         className,
       )}
-      ref={ref}
       {...props}
     >
       <div className='relative flex h-full flex-col bg-white text-black'>
-        {['domain', 'class', 'subclass'].includes(store.card.type) && (
-          <Banner />
-        )}
-        {store.card.type === 'domain' && <Stress />}
-        {store.card.type === 'class' && <Evasion />}
-        {store.card.type === 'equipment' && <Equipment />}
+        {['domain', 'class', 'subclass'].includes(card.type) && <Banner />}
+        {card.type === 'domain' && <Stress />}
+        {card.type === 'class' && <Evasion />}
+        {card.type === 'equipment' && <Equipment />}
         <div className='overflow-hidden'>
-          {store.card.image ? (
+          {card.image ? (
             <img
               className='object-center-top -z-10 w-full object-cover'
-              src={store.card.image}
+              src={card.image}
             />
-          ) : store.settings.placeholderImage ? (
+          ) : settings.placeholderImage ? (
             <div className='flex h-[250px] w-full items-center justify-center'>
               <DaggerheartBrewsIcon
                 style={{ height: '64px', width: '64px', color: '#737373' }}
@@ -64,25 +61,25 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
           <p
             className={cn(
               'font-eveleth-clean z-20 w-full px-6 pt-4',
-              ['ancestry', 'community'].includes(store.card.type)
+              ['ancestry', 'community'].includes(card.type)
                 ? 'text-2xl'
                 : 'text-center text-base',
             )}
           >
-            {store.card.name}
+            {card.name}
           </p>
-          {['class', 'subclass', 'equipment'].includes(store.card.type) ? (
+          {['class', 'subclass', 'equipment'].includes(card.type) ? (
             <p
               className='font-semibold capitalize italic'
               style={{ fontSize: '12px' }}
             >
-              {store.card.subtitle}
+              {card.subtitle}
             </p>
           ) : null}
           <div
             className='z-20 w-full space-y-2 px-6 leading-none text-pretty'
             style={{ fontSize: 12 }}
-            dangerouslySetInnerHTML={{ __html: store.card.text }}
+            dangerouslySetInnerHTML={{ __html: card.text || '' }}
           />
           <Thresholds />
         </div>
@@ -94,7 +91,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
             fontSize: '10px',
           }}
         >
-          {store.settings.artist && store.card.artist}
+          {settings.artist && card.artist}
         </div>
         <div
           className='absolute italic'
@@ -104,9 +101,28 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
             fontSize: '10px',
           }}
         >
-          {store.settings.credits && store.card.credits}
+          {settings.credits && card.credits}
         </div>
       </div>
+    </div>
+  );
+};
+
+export const CardCreationPreview = () => {
+  const { card, settings } = useCardStore();
+  const { setPreviewRef } = useCardActions();
+
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    setPreviewRef(ref);
+  }, [ref]);
+
+  return (
+    <div className='flex flex-col items-center space-y-2'>
+      <CardPreview ref={ref} card={card} settings={settings} />
+      <DownloadImageButton className='w-full' />
+      <SettingsForm />
     </div>
   );
 };

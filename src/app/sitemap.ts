@@ -1,5 +1,7 @@
-import { getBaseUrl } from '@/lib/utils';
 import { MetadataRoute } from 'next';
+
+import { nav } from '@/lib/constants';
+import { getBaseUrl } from '@/lib/utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string) => new URL(path, getBaseUrl()).toString();
@@ -8,9 +10,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: url('/'),
       lastModified: new Date(),
     },
-    {
-      url: url('/card/create'),
-      lastModified: new Date(),
-    },
+    ...nav
+      .flatMap((category) => category.children)
+      .filter((i) => i !== undefined)
+      .map((item) => ({
+        url: url(item.url),
+        lastModified: new Date(),
+      })),
   ];
 }

@@ -39,12 +39,11 @@ const getDomainIcon = (domain?: string) => {
 };
 
 const renderDomainIcon = (
-  domain: string,
-  color: string,
+  domain?: string,
+  color?: string,
   check?: boolean,
   icon?: string,
 ) => {
-  console.log('renderDomainIcon', { domain, color, check, icon });
   if (!check && icon) {
     return <img src={icon} style={{ height: '32px', width: '32px' }} />;
   }
@@ -72,13 +71,13 @@ export const Banner = () => {
   const PrimaryIcon = renderDomainIcon(
     domainPrimary,
     foregroundColor,
-    domainIncludes(domainPrimary),
+    domainIncludes(domainPrimary || ''),
     domainPrimaryIcon,
   );
   const SecondaryIcon = renderDomainIcon(
     domainSecondary,
     foregroundColor,
-    domainIncludes(domainSecondary),
+    domainIncludes(domainSecondary || ''),
     domainSecondaryIcon,
   );
   return (

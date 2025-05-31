@@ -7,7 +7,6 @@ export default async function Page() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  console.log(session);
   return (
     <div>
       <h1 className='font-eveleth-clean text-2xl font-bold'>Profile</h1>

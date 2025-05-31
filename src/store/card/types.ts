@@ -2,16 +2,9 @@ import type {
   CardClassOption,
   CardDetails,
   CardDomainOption,
+  CardSettings,
   CardType,
 } from '@/lib/types/card-creation';
-
-type CardSettings = {
-  border: boolean;
-  boldRulesText: boolean;
-  artist: boolean;
-  credits: boolean;
-  placeholderImage: boolean;
-};
 
 export type CardState = {
   loading: boolean;
