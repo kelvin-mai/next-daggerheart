@@ -180,7 +180,11 @@ export const GameMasterRolls = () => {
     },
   ];
   return (
-    <GameMasterCollapsible label='Dice Rolls' className='break-inside-avoid'>
+    <GameMasterCollapsible
+      label='Dice Rolls'
+      className='break-inside-avoid'
+      defaultOpen
+    >
       <div className='space-y-2 px-2'>
         <h3 className='font-bold'>Action Rolls</h3>
         <p>Call for a roll where the outcome is interesting to the story.</p>

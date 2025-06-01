@@ -299,7 +299,7 @@ const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({ editor }) => {
                 options={[
                   {
                     category: 'Damage Type',
-                    options: ['physical', 'magical'],
+                    options: ['physical', 'magical', 'tech'],
                   },
                 ]}
                 value={weaponText.type}

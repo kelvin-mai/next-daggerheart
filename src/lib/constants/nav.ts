@@ -9,6 +9,11 @@ export const nav: NavCategory[] = [
         badge: 'redesigned',
         url: '/card/create',
       },
+      {
+        name: 'Adversary',
+        badge: 'new',
+        url: '/adversary/create',
+      },
     ],
   },
   {

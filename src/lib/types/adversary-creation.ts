@@ -1,0 +1,23 @@
+export type AdversaryDetails = {
+  name: string;
+  type: string;
+  subtype?: string;
+  image?: string;
+  artist?: string;
+  credits?: string;
+  tier?: number;
+  description?: string;
+  subDescription?: string;
+  experience?: string;
+  text?: string;
+  difficulty?: string;
+  hp?: number;
+  stress?: number;
+  thresholds?: [number, number];
+  attack?: string;
+  weapon?: string;
+  distance?: string;
+  damageType?: string;
+  damageAmount?: string;
+  potential?: string;
+};
