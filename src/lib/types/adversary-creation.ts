@@ -1,3 +1,10 @@
+export type AdversaryFeature = {
+  name: string;
+  description: string;
+  flavor?: string;
+  type: string;
+};
+
 export type AdversaryDetails = {
   name: string;
   type: string;

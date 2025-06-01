@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { HexColorPicker } from 'react-colorful';
-import { Check, Paintbrush, UploadIcon, X } from 'lucide-react';
+import { Check, ChevronDown, Paintbrush, UploadIcon, X } from 'lucide-react';
 
 import { Label } from '@/components/ui/label';
 import { useCardComputed, useCardStore } from '@/store';
@@ -91,6 +91,7 @@ export const DomainSelect: React.FC<DomainSelectProps> = ({
             ) : (
               <span className='text-muted-foreground'>Select Domain</span>
             )}
+            <ChevronDown className='text-muted-foreground size-4' />
           </Button>
         </PopoverTrigger>
         <PopoverContent

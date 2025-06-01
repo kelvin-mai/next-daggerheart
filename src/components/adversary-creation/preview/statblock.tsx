@@ -103,10 +103,7 @@ export const AdversaryPreviewStatblock: React.FC<
         )}
       </div>
       <h3 className='font-eveleth-clean text-xl'>Features</h3>
-      <div
-        className='space-y-2'
-        dangerouslySetInnerHTML={{ __html: text || '' }}
-      />
+      <div dangerouslySetInnerHTML={{ __html: text || '' }} />
     </div>
   );
 };
