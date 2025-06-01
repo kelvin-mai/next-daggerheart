@@ -3,5 +3,6 @@ export * from './custom-select';
 export * from './form-field';
 export * from './image-cropper';
 export * from './password-input';
+export * from './rich-text-editor';
 export * from './theme-toggle';
 export * from './we-moved-banner';

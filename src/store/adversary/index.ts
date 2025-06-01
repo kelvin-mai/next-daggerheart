@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import type { AdversaryState, AdversaryStore } from './types';
+import { toPng } from 'html-to-image';
 
 const initialState: AdversaryState = {
   loading: true,
@@ -25,8 +26,33 @@ export const useAdversaryStore = create<AdversaryStore>((set, get) => ({
           ...details,
         },
       })),
+    setPreviewStatblockRef: (ref: React.RefObject<HTMLDivElement | null>) =>
+      set({ previewStatblock: ref }),
+  },
+  effects: {
+    downloadStatblock: async () => {
+      const { previewStatblock, adversary } = get();
+      const { name, type } = adversary;
+      try {
+        if (previewStatblock?.current) {
+          await toPng(previewStatblock.current, { cacheBust: true }).then(
+            (data) => {
+              const link = document.createElement('a');
+              link.download = `daggerheart-${type}-${name}.png`;
+              link.href = data;
+              link.click();
+            },
+          );
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
 }));
 
 export const useAdversaryActions = () =>
   useAdversaryStore((store) => store.actions);
+
+export const useAdversaryEffects = () =>
+  useAdversaryStore((store) => store.effects);

@@ -1,35 +1,47 @@
-'use client';
+import * as React from 'react';
 
-import { useAdversaryStore } from '@/store';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
+import type { AdversaryDetails } from '@/lib/types';
 
-export const AdversaryPreviewStatblock = () => {
+type AdversaryPreviewStatblockProps = React.ComponentProps<'div'> & {
+  adversary: AdversaryDetails;
+};
+
+export const AdversaryPreviewStatblock: React.FC<
+  AdversaryPreviewStatblockProps
+> = ({ className, adversary, ...props }) => {
   const {
-    adversary: {
-      name,
-      type,
-      subtype,
-      tier,
-      description,
-      subDescription,
-      experience,
-      difficulty,
-      thresholds,
-      hp,
-      stress,
-      weapon,
-      attack,
-      distance,
-      damageAmount,
-      damageType,
-      potential,
-      text,
-    },
-  } = useAdversaryStore();
+    name,
+    type,
+    subtype,
+    tier,
+    description,
+    subDescription,
+    experience,
+    difficulty,
+    thresholds,
+    hp,
+    stress,
+    weapon,
+    attack,
+    distance,
+    damageAmount,
+    damageType,
+    potential,
+    text,
+  } = adversary;
   const formatThresholds = (n: number) => (n === 0 ? 'None' : n);
   return (
-    <div className='rounded-md border p-4 text-black'>
+    <div
+      className={cn(
+        'space-y-2 rounded-md border p-4 text-black',
+        type === 'adversary' && 'border-[#bcab84] bg-[#f4f0e5]',
+        type === 'environment' && 'border-[#aaa8a9] bg-[#ededed]',
+        className,
+      )}
+      {...props}
+    >
       <h3 className='font-eveleth-clean text-2xl'>{name}</h3>
       <p className='text-base font-bold capitalize'>
         <em>
@@ -45,7 +57,13 @@ export const AdversaryPreviewStatblock = () => {
         </strong>
         {subDescription}
       </p>
-      <div className='border-t border-b bg-white p-4'>
+      <div
+        className={cn(
+          'border-t border-b bg-white p-4',
+          type === 'adversary' && 'border-[#bcab84]',
+          type === 'environment' && 'border-[#aaa8a9]',
+        )}
+      >
         {type === 'adversary' ? (
           <>
             <p>

@@ -1,5 +1,5 @@
 import { AdversaryCreationForms } from '@/components/adversary-creation/forms';
-import { AdversaryPreviewStatblock } from '@/components/adversary-creation/preview';
+import { AdversaryCreationPreview } from '@/components/adversary-creation/preview';
 
 export const metadata = {
   title: 'Create Adversary',
@@ -15,9 +15,9 @@ export default function Page() {
       <p className='text-muted-foreground'>
         Create your very own Daggerheart Adversary or Environment!
       </p>
-      <div className='grid grid-cols-2 gap-2 py-4 md:flex-row'>
+      <div className='flex flex-col-reverse gap-2 py-4 md:flex-row'>
         <AdversaryCreationForms />
-        <AdversaryPreviewStatblock />
+        <AdversaryCreationPreview />
       </div>
     </>
   );

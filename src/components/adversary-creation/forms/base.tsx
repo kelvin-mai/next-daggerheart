@@ -66,7 +66,7 @@ export const BaseForm = () => {
           <div className='grow space-y-2'>
             <Label htmlFor='tier'>Tier</Label>
             <Select
-              value={String(tier)}
+              value={tier ? String(tier) : ''}
               onValueChange={(v) => setAdversaryDetails({ tier: Number(v) })}
             >
               <SelectTrigger id='tier' className='w-full capitalize'>

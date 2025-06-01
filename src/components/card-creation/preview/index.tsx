@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import type { CardDetails, CardSettings } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { useCardActions, useCardStore } from '@/store/card';
+import { useCardActions, useCardEffects, useCardStore } from '@/store/card';
 import { DaggerheartBrewsIcon } from '@/components/icons';
 import {
   Banner,
@@ -14,8 +14,8 @@ import {
   Stress,
   Thresholds,
 } from './template/core';
-import { DownloadImageButton } from './download-image-button';
 import { SettingsForm } from '../forms';
+import { Button } from '@/components/ui/button';
 
 type CardPreviewProps = React.ComponentProps<'div'> & {
   card: CardDetails;
@@ -111,6 +111,7 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
 export const CardCreationPreview = () => {
   const { card, settings } = useCardStore();
   const { setPreviewRef } = useCardActions();
+  const { downloadImage } = useCardEffects();
 
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -121,7 +122,9 @@ export const CardCreationPreview = () => {
   return (
     <div className='flex flex-col items-center space-y-2'>
       <CardPreview ref={ref} card={card} settings={settings} />
-      <DownloadImageButton className='w-full' />
+      <Button className='w-full' onClick={downloadImage}>
+        Export as PNG
+      </Button>
       <SettingsForm />
     </div>
   );
