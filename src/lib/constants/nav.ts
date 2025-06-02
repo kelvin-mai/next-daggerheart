@@ -48,6 +48,10 @@ export const nav: NavCategory[] = [
         name: 'Communities',
         url: '/reference/communities',
       },
+      {
+        name: 'Environments',
+        url: '/reference/environments',
+      },
     ],
   },
   {
