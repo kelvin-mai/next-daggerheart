@@ -29,7 +29,7 @@ import {
 } from '@/components/ui/command';
 import type { AdversaryFeature } from '@/lib/types';
 import { exampleFeatures } from '@/lib/constants/srd';
-import { cn } from '@/lib/utils';
+import { capitalize, cn } from '@/lib/utils';
 
 export const AssistedFeatureText = ({
   feature,
@@ -118,7 +118,6 @@ export const RulesForm = () => {
       feature === 'custom'
         ? custom
         : exampleFeatures.find((f) => f.name === feature);
-    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
     if (editor && feat) {
       const section = `<p><strong><em>${capitalize(feat.name)} - ${capitalize(feat.type)}: </em></strong> ${feat.description}</p>${
         feat.flavor ? `<p><em>${feat.flavor}</em></p>` : ''

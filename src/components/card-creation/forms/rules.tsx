@@ -27,6 +27,7 @@ import {
   RichTextEditor,
   useRichTextEditor,
 } from '@/components/common/rich-text-editor';
+import { capitalize } from '@/lib/utils';
 
 type AssistedRulesTextProps = {
   editor: Editor;
@@ -45,7 +46,6 @@ const AssistedRulesText: React.FC<AssistedRulesTextProps> = ({ editor }) => {
   const [weaponText, setWeaponText] = React.useState(initialWeaponText);
 
   const getSection = () => {
-    const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
     switch (sectionType) {
       case 'flavor':
         return `<em>${text}</em>`;

@@ -1,4 +1,4 @@
-import { AdversaryFeature } from '@/lib/types';
+import type { AdversaryFeature } from '@/lib/types';
 
 export const exampleFeatures: AdversaryFeature[] = [
   {

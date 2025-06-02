@@ -35,7 +35,7 @@ export const AdversaryPreviewStatblock: React.FC<
   return (
     <div
       className={cn(
-        'space-y-2 rounded-md border p-4 text-black',
+        'space-y-1 rounded-md border p-4 text-black',
         type === 'adversary' && 'border-[#bcab84] bg-[#f4f0e5]',
         type === 'environment' && 'border-[#aaa8a9] bg-[#ededed]',
         className,
@@ -104,7 +104,7 @@ export const AdversaryPreviewStatblock: React.FC<
       </div>
       <h3 className='font-eveleth-clean text-xl'>Features</h3>
       <div
-        className='[&_p]:pl-4 [&_p]:-indent-4'
+        className='space-y-1 text-sm [&_ol]:ml-4 [&_p]:pl-4 [&_p:has(strong)]:-indent-4 [&_ul]:ml-4'
         dangerouslySetInnerHTML={{ __html: text || '' }}
       />
     </div>
