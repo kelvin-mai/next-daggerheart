@@ -14,8 +14,8 @@ export const createComputed = (get: ZustandGet<CardStore>): CardComputed => ({
     const { classes } = get();
     const selected = classes?.find((c) => c.name === className);
     return {
-      primary: selected?.domain_primary!,
-      secondary: selected?.domain_secondary!,
+      primary: selected?.domainPrimary!,
+      secondary: selected?.domainSecondary!,
     };
   },
   classColors: (className: string) => {
@@ -25,8 +25,8 @@ export const createComputed = (get: ZustandGet<CardStore>): CardComputed => ({
     } = get();
     const selected = classes?.find((c) => c.name === className);
     return {
-      primary: domainColor(selected?.domain_primary!),
-      secondary: domainColor(selected?.domain_secondary!),
+      primary: domainColor(selected?.domainPrimary!),
+      secondary: domainColor(selected?.domainSecondary!),
     };
   },
 });

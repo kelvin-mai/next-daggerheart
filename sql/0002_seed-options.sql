@@ -1,17 +1,4 @@
-create table if not exists domain_options (
-  id uuid not null primary key default gen_random_uuid(),
-  name text not null unique,
-  color text not null,
-  source text not null
-);
-
-create table if not exists class_options (
-  id uuid not null primary key default gen_random_uuid(),
-  name text not null unique,
-  domain_primary text not null,
-  domain_secondary text not null,
-  source text not null
-);
+-- Custom SQL migration file, put your code below! --
 
 insert into domain_options (name, color, source) values
 ('arcana', '#664295', 'SRD'),
@@ -22,7 +9,8 @@ insert into domain_options (name, color, source) values
 ('midnight', '#2c2c2c', 'SRD'),
 ('sage', '#0e854d', 'SRD'),
 ('splendor', '#d1b447', 'SRD'),
-('valor', '#dc7a27', 'SRD');
+('valor', '#dc7a27', 'SRD'),
+('dread', '#362b6c', 'SRD');
 
 insert into class_options (name, domain_primary, domain_secondary, source) values
 ('bard', 'grace', 'codex', 'SRD'),
@@ -33,4 +21,6 @@ insert into class_options (name, domain_primary, domain_secondary, source) value
 ('seraph', 'splendor', 'valor', 'SRD'),
 ('sorcerer', 'arcana', 'midnight', 'SRD'),
 ('warrior', 'blade', 'bone', 'SRD'),
-('wizard', 'codex', 'splendor', 'SRD');
+('wizard', 'codex', 'splendor', 'SRD'),
+('warlock', 'dread', 'grace', 'The Void'),
+('fighter', 'bone', 'valor', 'The Void');

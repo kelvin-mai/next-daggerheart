@@ -1,14 +1,13 @@
 import { betterAuth } from 'better-auth';
-import { Pool } from 'pg';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 import { env } from '@/lib/env';
 import { nextCookies } from 'better-auth/next-js';
+import { createClient } from '../database';
 
 export const auth = betterAuth({
-  database: new Pool({
-    connectionString: env.DATABASE_URL,
-    port: 5432,
-    // ssl: true,
+  database: drizzleAdapter(createClient(), {
+    provider: 'pg',
   }),
   user: {
     modelName: 'users',

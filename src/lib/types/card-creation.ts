@@ -23,8 +23,8 @@ export type CardType = (typeof cardTypes)[number];
 export type CardClassOption = {
   id: string;
   name: string;
-  domain_primary: string;
-  domain_secondary: string;
+  domainPrimary: string;
+  domainSecondary: string;
   source: string;
 };
 

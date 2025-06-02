@@ -1,12 +1,13 @@
 import { createClient } from '@/lib/database';
+import { classOptions, domainOptions } from '@/lib/database/schema';
 
 export async function GET() {
-  const sql = createClient();
-  const domainOptions = await sql`select * from domain_options;`;
-  const classOptions = await sql`select * from class_options;`;
+  const db = createClient();
+  const domains = await db.select().from(domainOptions);
+  const classes = await db.select().from(classOptions);
 
   return Response.json({
-    domains: domainOptions,
-    classes: classOptions,
+    domains,
+    classes,
   });
 }

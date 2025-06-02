@@ -33,10 +33,10 @@ const setCardTypeDefaults =
             state.domains?.length && state.classes?.length
               ? {
                   primary: state.domains.find(
-                    (d) => d.name === state.classes![0].domain_primary,
+                    (d) => d.name === state.classes![0].domainPrimary,
                   ),
                   secondary: state.domains.find(
-                    (d) => d.name === state.classes![0].domain_secondary,
+                    (d) => d.name === state.classes![0].domainSecondary,
                   ),
                 }
               : {
