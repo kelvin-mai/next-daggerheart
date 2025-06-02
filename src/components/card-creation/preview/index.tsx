@@ -1,11 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import { useRouter } from 'next/navigation';
 
 import type { CardDetails, CardSettings } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useCardActions, useCardEffects, useCardStore } from '@/store/card';
 import { DaggerheartBrewsIcon } from '@/components/icons';
+import { Button } from '@/components/ui/button';
 import {
   Banner,
   Divider,
@@ -15,7 +17,6 @@ import {
   Thresholds,
 } from './template/core';
 import { SettingsForm } from '../forms';
-import { Button } from '@/components/ui/button';
 
 type CardPreviewProps = React.ComponentProps<'div'> & {
   card: CardDetails;
@@ -126,6 +127,27 @@ export const CardCreationPreview = () => {
         Export as PNG
       </Button>
       <SettingsForm />
+    </div>
+  );
+};
+
+export const CardDisplayPreview: React.FC<CardPreviewProps> = ({
+  card,
+  settings,
+}) => {
+  const { setCardDetails } = useCardActions();
+  const router = useRouter();
+  const handleClick = () => {
+    console.log(card);
+    setCardDetails(card);
+    router.push('/card/create');
+  };
+  return (
+    <div className='flex flex-col items-center space-y-2'>
+      <CardPreview card={card} settings={settings} />
+      <Button className='w-full' onClick={handleClick}>
+        Edit
+      </Button>
     </div>
   );
 };

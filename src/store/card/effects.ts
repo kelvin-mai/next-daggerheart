@@ -27,17 +27,23 @@ const loadOptions =
   (get: ZustandGet<CardStore>): CardEffects['loadOptions'] =>
   async () => {
     const {
+      domains,
+      classes,
       actions: { setOptions, setLoading },
     } = get();
-    try {
-      setLoading(true);
-      const res = await fetch('/api/card-options');
-      const data: { classes: CardClassOption[]; domains: CardDomainOption[] } =
-        await res.json();
-      setOptions(data);
-      setLoading(false);
-    } catch (e) {
-      console.error(e);
+    if (!domains || !classes) {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/card-options');
+        const data: {
+          classes: CardClassOption[];
+          domains: CardDomainOption[];
+        } = await res.json();
+        setOptions(data);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
