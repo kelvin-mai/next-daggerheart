@@ -10,7 +10,7 @@ insert into domain_options (name, color, source) values
 ('sage', '#0e854d', 'SRD'),
 ('splendor', '#d1b447', 'SRD'),
 ('valor', '#dc7a27', 'SRD'),
-('dread', '#362b6c', 'SRD');
+('dread', '#362b6c', 'The Void');
 
 insert into class_options (name, domain_primary, domain_secondary, source) values
 ('bard', 'grace', 'codex', 'SRD'),

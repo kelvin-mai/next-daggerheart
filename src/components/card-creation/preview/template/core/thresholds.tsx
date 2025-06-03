@@ -1,13 +1,11 @@
-'use client';
 import * as React from 'react';
 
-import { useCardStore } from '@/store';
 import { cn } from '@/lib/utils';
 
-export const Thresholds: React.FC = () => {
-  const {
-    card: { thresholds, thresholdsEnabled },
-  } = useCardStore();
+export const Thresholds: React.FC<{
+  thresholds?: [number, number];
+  thresholdsEnabled?: boolean;
+}> = ({ thresholds, thresholdsEnabled }) => {
   const labels = ['minor', 'major', 'severe'];
   if (!thresholdsEnabled) {
     return null;

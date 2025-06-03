@@ -3,13 +3,15 @@ import {
   BladeDomainIcon,
   BoneDomainIcon,
   CodexDomainIcon,
-  DaggerheartIcon,
+  DaggerheartBrewsIcon,
+  DreadDomainIcon,
   GraceDomainIcon,
   MidnightDomainIcon,
   SageDomainIcon,
   SplendorDomainIcon,
   ValorDomainIcon,
 } from '@/components/icons';
+import { CardDetails } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
 import { useCardComputed, useCardStore } from '@/store';
 
@@ -33,8 +35,10 @@ const getDomainIcon = (domain?: string) => {
       return SplendorDomainIcon;
     case 'valor':
       return ValorDomainIcon;
+    case 'dread':
+      return DreadDomainIcon;
     default:
-      return DaggerheartIcon;
+      return DaggerheartBrewsIcon;
   }
 };
 
@@ -52,19 +56,16 @@ const renderDomainIcon = (
   return <Icon style={{ height: '32px', width: '32px', color }} />;
 };
 
-export const Banner = () => {
-  const {
-    card: {
-      type,
-      level,
-      domainPrimary,
-      domainSecondary,
-      domainPrimaryColor,
-      domainSecondaryColor,
-      domainPrimaryIcon,
-      domainSecondaryIcon,
-    },
-  } = useCardStore();
+export const Banner = ({
+  type,
+  level,
+  domainPrimary,
+  domainSecondary,
+  domainPrimaryColor,
+  domainSecondaryColor,
+  domainPrimaryIcon,
+  domainSecondaryIcon,
+}: CardDetails) => {
   const { domainIncludes } = useCardComputed();
   const foregroundColor =
     getBrightness(domainPrimaryColor) < 128 ? 'white' : 'black';

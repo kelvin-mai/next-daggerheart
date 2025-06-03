@@ -1,9 +1,4 @@
-import { useCardStore } from '@/store';
-
-export const Stress = () => {
-  const {
-    card: { stress },
-  } = useCardStore();
+export const Stress = ({ stress }: { stress?: number }) => {
   return (
     <>
       <div

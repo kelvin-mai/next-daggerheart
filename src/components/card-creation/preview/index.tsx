@@ -39,9 +39,11 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
       {...props}
     >
       <div className='relative flex h-full flex-col bg-white text-black'>
-        {['domain', 'class', 'subclass'].includes(card.type) && <Banner />}
-        {card.type === 'domain' && <Stress />}
-        {card.type === 'class' && <Evasion />}
+        {['domain', 'class', 'subclass'].includes(card.type) && (
+          <Banner {...card} />
+        )}
+        {card.type === 'domain' && <Stress stress={card.stress} />}
+        {card.type === 'class' && <Evasion evasion={card.evasion} />}
         {card.type === 'equipment' && <Equipment />}
         <div className='overflow-hidden'>
           {card.image ? (
@@ -82,7 +84,10 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
             style={{ fontSize: 12 }}
             dangerouslySetInnerHTML={{ __html: card.text || '' }}
           />
-          <Thresholds />
+          <Thresholds
+            thresholds={card.thresholds}
+            thresholdsEnabled={card.thresholdsEnabled}
+          />
         </div>
         <div
           className='absolute italic'

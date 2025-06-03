@@ -1,11 +1,4 @@
-'use client';
-
-import { useCardStore } from '@/store';
-
-export const Evasion = () => {
-  const {
-    card: { evasion },
-  } = useCardStore();
+export const Evasion = ({ evasion }: { evasion?: number }) => {
   return (
     <>
       <div className='absolute' style={{ right: '24px', top: '24px' }}>
