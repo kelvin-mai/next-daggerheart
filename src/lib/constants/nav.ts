@@ -52,6 +52,10 @@ export const nav: NavCategory[] = [
         name: 'Environments',
         url: '/reference/environments',
       },
+      {
+        name: 'Beastforms',
+        url: '/reference/beastforms',
+      },
     ],
   },
   {
