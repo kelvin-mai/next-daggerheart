@@ -1,5 +1,6 @@
 import {
   BuyMeCofffeeBanner,
+  DCGLCompatibilityBanner,
   ThemeToggle,
   WeMovedBanner,
 } from '@/components/common';
@@ -25,7 +26,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <WeMovedBanner />
           {children}
         </main>
-        <section className='container mb-4'>
+        <section className='container mb-4 space-y-2'>
+          <DCGLCompatibilityBanner className='text-muted-foreground grid-cols-1 text-sm lg:grid-cols-2' />
           <BuyMeCofffeeBanner />
         </section>
         <Footer />
