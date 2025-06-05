@@ -597,6 +597,369 @@ appropriate for extreme cold gains advantage on these rolls.`,
       },
     ],
   },
+  {
+    name: 'Burning Heart of the Woods',
+    tier: 3,
+    subtype: 'exploration',
+    description:
+      'Thick indigo ash fills the air around a owering moss-covered tree that burns eternally with flames a sickly shade of blue.',
+    subDescription:
+      'Beat out an uncanny rhythm for all to follow, corrupt the woods',
+    difficulty: '16',
+    potential:
+      'Beasts (Bear, Glass Snake), Elementals (Elemental Spark), Verdant Defenders (Dryad, Oak Treant, Stag Knight',
+    features: [
+      {
+        name: 'Chaos Magic Locus',
+        type: 'passive',
+        description:
+          'When a PC makes a Spellcast Roll, they must roll two Fear Dice and take the higher result.',
+        flavor:
+          'What does it feel like to work magic in this chaos-touched place? What do you fear will happen if you lose control of the spell?',
+      },
+      {
+        name: 'The Indigo Flame',
+        type: 'passive',
+        description:
+          'PCs who approach the central tree can make a Knowledge Roll to try to identify themagic that consumed this environment.',
+        extra: `<ul class="list-outside list-disc pl-4">
+        <li>On a success: They loarn three of the below details. On a success with Fear, they learn two.</li>
+        <li>On a failure: They can mark a Stress to learn one and gain advantage on the next action roll to investigate this environment.</li>
+        <li>Details: This is a result of Fallen magic. The corruption is spread through the ashen moss. It can be cleansed only by a ritual of nature magic with a Progress Contdown (8).</li>
+        </ul>`,
+        flavor:
+          'What Fallen cult corrupted these woods? What have they already done with the cursed wood andsap from this tree?',
+      },
+      {
+        name: 'Grasping Vines',
+        type: 'action',
+        description:
+          'Animate vines bristling with thorns whip out from the underbrush to ensnare the PCs. A target must succeed on an Agility Reaction Roll or become Restrained and Vulnerable until they break free, clearing both conditions, with a successful Finesse or Strength Roll or by dealing 10 damage to the vines. When the target makes a roll to escape, they take 1d8+4 physical damage and lose a Hope.',
+        flavor:
+          'What painful memories do the vines bring to the surface as they pierce flesh?',
+      },
+      {
+        name: 'Charcoal Constructs',
+        type: 'action',
+        description:
+          'Warped animals wreathed in indigo flame trample through a point of your choice. All targets within Close range of that point must make an Agility Reaction Roll. Targets who fail take 3d12+3 physical damage. Targets who succeed take half damage instead.',
+        flavor:
+          'Are these real animals consumed by the flames or merely constructs of the corrupting magic?',
+      },
+      {
+        name: 'Choking Ash',
+        type: 'reaction',
+        description:
+          'Countdown (Loop ). When the PCs enter the Burning Heart of the Woods, activate the countdown. When it triggers, all characters must make a Strength or Instinct Reaction Roll. Targets who fail take 4d6+5 direct physical damage. Targets who succeed take half damage. Protective masks or clothes give advantage on the reaction roll.',
+        flavor:
+          'What hallucinations does the ash induce? What incongruous taste does it possess?',
+      },
+    ],
+  },
+  {
+    name: 'Castle Siege',
+    tier: 3,
+    subtype: 'event',
+    description:
+      'An active siege with an attacking force fighting to gain entry to a fortified castle',
+    subDescription:
+      'Bleed out the will to fight, breach the walls, build tension',
+    difficulty: '17',
+    potential:
+      'Mercenaries (Harrier, Sellsword, Spellblade, Weaponmaster), Noble Forces (Archer Squadron, Conscript, Elite Soldier, Knight of the Realm)',
+    features: [
+      {
+        name: 'Secret Entrance',
+        type: 'passive',
+        description:
+          'A PC can find or recall a secret way into the castle with a successful Instinct or Knowledge Roll.',
+        flavor:
+          'How do they get in without revealing the pathway to the attackers? Are any of the defenders monitoring this path?',
+      },
+      {
+        name: 'Siege Weapons (Environment Change)',
+        type: 'action',
+        description:
+          "Consequence Countdown (6). The attacking force deploys siege weapons to try to raze the defenders' fortifi cations. Activate the countdown when the siege begins (for a protracted siege, make this long-term countdown instead). When it triggers, the defenders' fortifications have been breached and the attackers flood inside. You gain 2 Fear, then shift to the Pitched Battle environment and spotlight it.",
+        flavor:
+          'What siege weapons are being deployd? Are they magical, mundane, or a mixture of both? What defenses must the characters overcome to storm the castle?',
+      },
+      {
+        name: 'Reinforcements!',
+        type: 'action',
+        description:
+          'Summon a Knight of the Realm, a number of Tier 3 Minions equal to the number of PCs, and two adversaries of your choice within Far range of a chosen PC as reinforcements. The Knight of the Realm immediately takes the spotlight.',
+        flavor: 'Who are they targeting first? What formation do they take?',
+      },
+      {
+        name: 'Collateral Damage',
+        type: 'reaction',
+        description:
+          'When an adversary is defeated, you can spend a Fear to have a stray attack from a siege weapon hit a point on the battlefi eld. All targets within Very Close range of that point must make an Agility Reaction Roll.',
+        extra: `<ul class="list-outside list-disc pl-4">
+        <li>Targets who fail take 3d8+3 physical or magic damage and must mark a Stress.</li>
+        <li>Targets who succeed must mark a Stress.</li>
+        </ul>`,
+        flavor:
+          "What debris is scattered by the attack? What is broken by the strike that can't be that easily mended?",
+      },
+    ],
+  },
+  {
+    name: 'Pitched Battle',
+    tier: 3,
+    subtype: 'event',
+    description:
+      'A massive combat between two large groups of armed combatants.',
+    subDescription:
+      'Seize people, land, and wealth, spill blood for greed and glory',
+    difficulty: '17',
+    potential:
+      'Mercenaries (Harrier, Sellsword, Spellblade, Weaponmaster), Noble Forces (Archer Squadron, Conscript, Elite Soldier, Knight of the Realm)',
+    features: [
+      {
+        name: 'Adrift on a Sea of Steel',
+        type: 'passive',
+        description:
+          'Traversing a battlefi eld during an active combat is extremely dangerous. A PC must succeed on an Agility Roll to move at all, and can only go up to Close range on a success. If an adversary is within Melee range of them, they must mark a Stress to make an Agility Roll to move.',
+        flavor:
+          'Do the combatants mistake you for the enemy or consider you interlopers? Can you tell the difference between friend and foe in the fray?',
+      },
+      {
+        name: 'Raze and Pillage',
+        type: 'action',
+        description:
+          'The attacking force raises the stakes by lighting a fire, stealing a vulnerable asset, kidnapping an important person, or killing the populace.',
+        flavor: 'What is valuable here? Who is most vulnerable?',
+      },
+      {
+        name: 'War Magic',
+        type: 'action',
+        description:
+          'Spend a Fear as a mage from one side uses large-scale destructive magic. Pick a point on the battlefield within Very Far range of the mage. All targets within Close range of that point must make an Agility Reaction Roll. Targets who fail take 3d12+8 magic damage and must mark a Stress.',
+        flavor:
+          'What form does the attack take - fireball, raining acid, a storm of blades? What tactical objective is this attack meant to accomplish, and what comes next?',
+      },
+      {
+        name: 'Reinforcements',
+        type: 'action',
+        description:
+          'Summon a Knight of the Realm, a number of Tier 3 Minions equal to the number of PCs, and two adversaries of your choice within Far range of a chosen PC as reinforcements. The Knight of the Realm immediately takes the spotlight.',
+        flavor: 'Who are they targeting fist? What formation do they take?',
+      },
+    ],
+  },
+  {
+    name: 'Chaos Realm',
+    tier: 4,
+    subtype: 'traversal',
+    description:
+      'An otherworldly space where the laws of reality are unstable and dangerous.',
+    subDescription: 'Annihilate certainity, consume power, defy logic',
+    difficulty: '20',
+    potential: 'Outer Realms Monstrosities (Abomination, Corruptor, Thrall)',
+    features: [
+      {
+        name: 'Impossible Architecture',
+        type: 'passive',
+        description:
+          "Up is down, down is right, right is starward. Gravity and directionality themselves are in flux, and any attempt to move through this realm is an odyssey unto itself, requiring a Progress Countdown (8). On a failure, a PC must mark a Stress in addition to the roll's other consequences.",
+        flavor:
+          'What does it feel like to move in a space so alien to the Mortal Realm? What landmark or point do you fixate on to maintain your balance? What bizarre landmarks do you traverse on your journey?',
+      },
+      {
+        name: 'Everything You Are This Place Will Take from You',
+        type: 'action',
+        description:
+          'Countdown (Loop 1d4). Activate the countdown. When it triggers, all PCs must succeed on a Presence Reaction Roll or their highest trait is temporarily reduced by 1d4 unless they mark a number of Stress equal to its value. Any lost trait points are regained if the PC critically succeeds or escapes the Chaos Realm.',
+        flavor:
+          'How does this place try to steal from you that which makes you legendary? What does it feel to have this power taken from you?',
+      },
+      {
+        name: 'Unmaking',
+        type: 'action',
+        description:
+          'Spend a Fear to force a PC to make a Strength Reaction Roll. On a failure, they take 4d10 direct magic damage. On a success, they must mark a Stress.',
+        flavor:
+          'What glimpse of other worlds do you catch while this place tries to unmake you? What core facet of your personality does the unmaking try to erase?',
+      },
+      {
+        name: 'Outer Realms Predators',
+        type: 'action',
+        description:
+          "Spend a Fear to summon an Outer Realms Abomination, an Outer Realms Corruptor and 2d6 Outer Realms Thralls, who appear at Close range of a chosen PC in defiance of logic and causality. Immediately spotlight one of these adversaries, and you can spend an additional Fear to automatically succeed on that adversary's standard attack.",
+        flavor:
+          'What half-consumed remnants of the shattered world do these monstrosities cast aside in pursuit of living flesh? What jagged reflections of former personhood do you catch between moments of unquestioning malice?',
+      },
+      {
+        name: 'Disorienting Reality',
+        type: 'reaction',
+        description:
+          'On a result with Fear, you can ask the PC to describe which of their fiers the Chaos Realm evokes as a vision of reality unmakes and reconstitutes itself to the PC. The PC loses a Hope. If it is their last Hope, you gain a Fear.',
+        flavor:
+          "What moment do they see? If it's a memory, how is it warped by this place? How hard will it be to hold on to the real memory?",
+      },
+    ],
+  },
+  {
+    name: 'Divine Usurpation',
+    tier: 4,
+    subtype: 'event',
+    description:
+      'A massive ritual designed to breach the gates of the Hollows Above and unseat the New Gods themselves.',
+    subDescription: 'Collect power, overawe, silence dissent',
+    difficulty: '20',
+    potential:
+      'Arch-Necromancer, Fallen Shock Troops, Mortal Hunter, Oracle of Doom, Perfected Zombie',
+    features: [
+      {
+        name: 'Final Preparations',
+        type: 'passive',
+        description:
+          'When the environment first takes the spotlight, designate one adversary as the Usurper seeking to overthrow the gods. Activate a Long-Term Countdown (8) as the Usurper assembles what they need to conduct the ritual. When it triggers, spotlight this environment to use the "Beginning of the End" feature. While this environment remains in play, you can hold up to 15 Fear.',
+        flavor:
+          'What does the Usurper still require: The heart of a High Seraph? The lodestone of an ancient waygate? The loyalty of two archnemesis? The heartbroken tears of a pure soul?',
+      },
+      {
+        name: 'Divine Blessing',
+        type: 'passive',
+        description:
+          'When a PC critically succeeds, they can spend 2 Hope to refresh an ability normally limited by uses (such as once per rest, once per session).',
+        flavor:
+          'What god favors you as you fight against this usurpation? How does your renewed power reflect their influence?',
+      },
+      {
+        name: 'Defiliers Abound',
+        type: 'action',
+        description:
+          'Spend 2 fear to summon 1d4+2 Fallen Shock Troops that appear within Close range of the Usurper to assist their divine siege. Immediately spotlight the Shock Troops to use a "Group Attack" action.',
+        flavor:
+          "Which High Fallen do these troops serve? Which god's flesh do they wish to feast upon?",
+      },
+      {
+        name: 'Godslayer',
+        type: 'action',
+        description:
+          'If the Divine Siege Contdown (see "Beginning of the End") has triggered, you can spend 3 Fear to describe the Usurper slaying one of th egods of the Hallows Above, feasting upon their power and growing stronger. The Usurper clears 2 HP. Increase their Difficulty, damage, attack modifier, or give them a new feature from the slain god.',
+        flavor:
+          "Which god meets their end? What are their last words? How does the Usurper's new stolen power manifest?",
+      },
+      {
+        name: 'Beginning of the End',
+        type: 'reaction',
+        description:
+          ' When the "Final Preparations" long-term countdown triggers, the Usurper begins hammering on the gates of the Hallows themselves. Activate a Divine Siege Countdown (10). Spotlight the Usurper to describe the Usurper\'s assault and tick down this countdown by 1. If the Usurper takes Major or greater damage, tick up the countdown by 1. When it triggers, the Usurper shatters the barrier between the Mortal Realm and the Hallows Above to slay the gods and take their place. You gain a Fear for each unmarked HP the Usurper has. You can immediately use the "Godslayer" feature without spending Fear to make an additional GM move.',
+        flavor:
+          'How does the Mortal Realm writhe as the natural order is violated? What mortals witness this blasphemy from afar?',
+      },
+    ],
+  },
+  {
+    name: 'Imperial Court',
+    tier: 4,
+    subtype: 'social',
+    description:
+      'The majestic domain of a powerful empire, lavishly appointed with stolen treasures.',
+    subDescription:
+      'Justify and perpetuate imperial rule, seduce rivals with promises of power and comfort',
+    difficulty: '20',
+    potential: 'Bladed Guard, Courtesan, Knight of the Realm, Monarch, Spy',
+    features: [
+      {
+        name: 'All Roads Lead Here',
+        type: 'passive',
+        description:
+          "While in the Imperial Court, a PC has disadvantage on Presence Rolls made to take actions that don't fit the imperial way of life or support the empire's dominance.",
+        flavor:
+          'How does the way language is used make even discussing alternative ways of living difficult? What obvious benefits for loyalty create friction when you try to discuss alternatives?',
+      },
+      {
+        name: 'Rival Vassals',
+        type: 'passive',
+        description:
+          "The PCs can find imperial subjects, vassals, and supplicants in the court, each vying for favor, seeking proximity to power, exchanging favors for loyalty, and elevating their status above others'. Some might be desperate to undermine their rivals, while other smight even be open to discussion that verge on sedition.",
+        flavor:
+          'How do they benefit from vassalage, andwhat has it cost them? What exploration drives them to consider opposing the unstoppable?',
+      },
+      {
+        name: 'The Gravity of Empire',
+        type: 'action',
+        description:
+          "Spend a Fear to present a PC with a golden opportunity or offer to satisify a major goal in exchange for obeying or supporting the empire. The target mustmake a Presence Reaction Roll. On a failure, they must mark all their Stress or accept the offer. If they have already marked all their Stress, they must accept the offer or exile themselves from the emipre. On a success they must mark 1d4 Stress as they're taxed by temptation.",
+        flavor:
+          "What do the PCs want so desperately they might consider throwing in with this ruthless power? How did imperial agents learn the PC's greatest desires?",
+      },
+      {
+        name: 'Imperial Decree',
+        type: 'action',
+        description:
+          "Spend a Fear to tick down a long-term countdown related to the empire's agenda by 1d4. If this triggers the countdown, a proclamation related to the agenda is announced at court as the plan is executed.",
+        flavor:
+          'What display of power or transfer of wealth was needed to expedite this plan? Whose lives were disrupted or upended to make this happen?',
+      },
+      {
+        name: 'Eyes Everywhere',
+        type: 'reaction',
+        description:
+          'On a result with Fear, you can spend a Fear to have someone loyal to the empire overhear seditious talk within the court. A PC must succeed on an Instinct Reaction Roll to notice that the group has been overheard so they can try to intercept the witness before the PCs are exposed.',
+        flavor:
+          "How has the empire compromised the witness? Why is their first impulse to protect the empire, even if it doesn't treat them well?",
+      },
+    ],
+  },
+  {
+    name: "Necromancer's Ossuary",
+    tier: 4,
+    subtype: 'exploration',
+    description:
+      'A dusty crypt with a library, twisting corridors, and abunant sarcophagi, spattered with the blood of ill-fated invaders.',
+    subDescription:
+      'Confound intruders, delve into secrets best left buried, manifest unlife, unleash a tide of undead',
+    difficulty: '19',
+    potential: "Arch-Necromancer's Host (Perfected Zombie, Zombie Legion)",
+    features: [
+      {
+        name: 'No Place for the Living',
+        type: 'passive',
+        description:
+          'A feature or action that clears HP requires spenidng a Hope to use. If it already costs Hope, a PC must spend an additional Hope.',
+        flavor:
+          'What does it feel like to try to heal in a place so antithetical to life?',
+      },
+      {
+        name: 'Centuries of Knowledge',
+        type: 'passive',
+        description:
+          "A PC can investigate the library and laboratory and make a Knowledege Roll to learn information related to arcana, local history, and the Necromancer's plans.",
+        flavor:
+          'What are the names of the tomes? What project is the necromancer working on and what does it communicate about their plans?',
+      },
+      {
+        name: 'Skeletal Burst',
+        type: 'action',
+        description:
+          'All targets within Close range of a point you choose in the environment must succeed on an Agility Reaction Roll or take 4d8+8 physical damage from skeletal shrapnel as part of the ossuary detonates around them.',
+        flavor:
+          'What ancient skeletal architecture is destroyed? What bones stick in your armor?',
+      },
+      {
+        name: 'Aura of Death',
+        type: 'action',
+        description:
+          'Once per scene, roll a d4. Each undead within Far range of the Necromancer can clear HP and Stress equal to the result rolled. The undead can choose how that number is divided between HP and Stress.',
+        flavor:
+          'How does their renewed vigor manifest? Do they look more lifelike or, paradoxically, are they more decayed but vigorous?',
+      },
+      {
+        name: 'They Just Keep Coming!',
+        type: 'action',
+        description:
+          'Spend a Fear to summon 1d6 Rotted Zombies, two Perfected Zombies, or a Zombie Legion, who appear at Close range of a chosen PC.',
+        flavor:
+          "Who were these people before they became the neccromancer's pawns? What vestiges of those lives remain for the heroes to see?",
+      },
+    ],
+  },
 ];
 
 export const environments: AdversaryDetails[] = preEnvironments.map(
