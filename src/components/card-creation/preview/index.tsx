@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
@@ -93,24 +94,47 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
           />
         </div>
         <div
-          className='absolute italic'
+          className='absolute flex items-end gap-0.5 italic'
           style={{
             bottom: '8px',
             left: '10px',
             fontSize: '10px',
           }}
         >
-          {settings.artist && card.artist}
+          {settings.artist && (
+            <>
+              <Image
+                className='size-3.5'
+                src='/assets/images/quill-icon.png'
+                alt='Artist Quill'
+                width={14}
+                height={14}
+              />
+              {card.artist}
+            </>
+          )}
         </div>
         <div
-          className='absolute italic'
+          className='absolute flex items-end gap-0.5 italic'
           style={{
             bottom: '8px',
             right: '10px',
-            fontSize: '10px',
+            fontSize: '8px',
+            color: '#110f1c80',
           }}
         >
-          {settings.credits && card.credits}
+          {settings.credits && (
+            <>
+              {card.credits}
+              <Image
+                className='size-5'
+                src='/assets/images/dh-cgl-logo.png'
+                alt='Daggerheart Compatible Logo'
+                width={20}
+                height={20}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

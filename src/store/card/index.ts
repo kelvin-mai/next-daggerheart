@@ -20,7 +20,7 @@ const initialState: CardState = {
     image: undefined,
     text: '',
     artist: '',
-    credits: 'Daggerheart © Darrington Press 2025',
+    credits: 'Daggerheart™ Compatible. Terms at Daggerheart.com',
     subtype: '',
     subtitle: '',
     level: 1,

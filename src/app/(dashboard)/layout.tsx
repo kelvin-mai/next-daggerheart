@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
         <section className='container mb-4 space-y-2'>
-          <DCGLCompatibilityBanner className='text-muted-foreground grid-cols-1 text-sm lg:grid-cols-2' />
+          <DCGLCompatibilityBanner className='text-muted-foreground grid-cols-1 text-sm lg:grid-cols-2 dark:text-black' />
           <BuyMeCofffeeBanner />
         </section>
         <Footer />
