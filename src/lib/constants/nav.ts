@@ -2,16 +2,28 @@ import type { NavCategory } from '@/lib/types';
 
 export const nav: NavCategory[] = [
   {
+    name: 'Community',
+    badge: 'new',
+    children: [
+      {
+        name: 'Cards',
+        url: '/community/cards',
+      },
+      {
+        name: 'Adversaries',
+        url: '/community/adversaries',
+      },
+    ],
+  },
+  {
     name: 'Create',
     children: [
       {
         name: 'Card',
-        badge: 'redesigned',
         url: '/card/create',
       },
       {
         name: 'Adversary',
-        badge: 'new',
         url: '/adversary/create',
       },
     ],
@@ -21,14 +33,12 @@ export const nav: NavCategory[] = [
     children: [
       {
         name: 'GM Screen',
-        badge: 'new',
         url: '/game-master/screen',
       },
     ],
   },
   {
     name: 'Reference',
-    badge: 'new',
     children: [
       {
         name: 'Ancestries',
@@ -37,6 +47,21 @@ export const nav: NavCategory[] = [
       {
         name: 'Communities',
         url: '/reference/communities',
+      },
+    ],
+  },
+  {
+    name: 'Profile',
+    badge: 'new',
+    requireAuth: true,
+    children: [
+      {
+        name: 'Settings',
+        url: '/profile',
+      },
+      {
+        name: 'Homebrew',
+        url: '/profile/homebrew',
       },
     ],
   },

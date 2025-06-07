@@ -7,5 +7,6 @@ export type NavItem = {
 export type NavCategory = {
   name: string;
   badge?: string;
+  requireAuth?: boolean;
   children?: NavItem[];
 };

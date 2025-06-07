@@ -4,11 +4,13 @@ import type {
   CardDomainOption,
   CardSettings,
   CardType,
-} from '@/lib/types/card-creation';
+  UserCard,
+} from '@/lib/types';
 
 export type CardState = {
   loading: boolean;
   settings: CardSettings;
+  userCard?: UserCard;
   card: CardDetails;
   preview?: React.RefObject<HTMLElement | null>;
   classes?: CardClassOption[];
@@ -33,6 +35,7 @@ export type CardActions = {
   setPreviewRef(ref: React.RefObject<HTMLDivElement | null>): void;
   setCardTypeDefaults(type: CardType): void;
   setCardDetails(details: Partial<CardDetails>): void;
+  setUserCard(userCard?: UserCard): void;
   setSettings(settings: Partial<CardSettings>): void;
   setOptions(allOptions: {
     domains: CardDomainOption[];
@@ -43,6 +46,7 @@ export type CardActions = {
 export type CardEffects = {
   downloadImage(): void;
   loadOptions(): void;
+  saveCardPreview(): Promise<void>;
 };
 
 export type CardStore = CardState & {

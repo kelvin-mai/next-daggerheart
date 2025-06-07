@@ -6,6 +6,7 @@ export type AdversaryFeature = {
 };
 
 export type AdversaryDetails = {
+  id?: string;
   name: string;
   type: string;
   subtype?: string;

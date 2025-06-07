@@ -1,57 +1,37 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-
-import { env } from '@/lib/env';
 import { nextCookies } from 'better-auth/next-js';
-import { createClient } from '../database';
+
+import { sendResetPasswordEmail, sendVerificationEmail } from '@/lib/email';
+import { env } from '@/lib/env';
+import { db } from '@/lib/database';
+import * as schemas from '@/lib/database/schema';
 
 export const auth = betterAuth({
-  database: drizzleAdapter(createClient(), {
+  database: drizzleAdapter(db, {
     provider: 'pg',
+    schema: {
+      user: schemas.users,
+      session: schemas.sessions,
+      account: schemas.accounts,
+      verification: schemas.verification,
+    },
   }),
-  user: {
-    modelName: 'users',
-    fields: {
-      emailVerified: 'email_verified',
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-    },
-  },
-  session: {
-    modelName: 'sessions',
-    fields: {
-      expiresAt: 'expires_at',
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-      ipAddress: 'ip_address',
-      userAgent: 'user_agent',
-      userId: 'user_id',
-    },
-  },
-  account: {
-    modelName: 'accounts',
-    fields: {
-      accountId: 'account_id',
-      providerId: 'provider_id',
-      userId: 'user_id',
-      idToken: 'id_token',
-      accessToken: 'access_token',
-      accessTokenExpiresAt: 'access_token_expires_at',
-      refreshToken: 'refresh_token',
-      refreshTokenExpiresAt: 'refresh_token_expires_at',
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-    },
-  },
-  verification: {
-    fields: {
-      expiresAt: 'expires_at',
-      createdAt: 'created_at',
-      updatedAt: 'updated_at',
-    },
-  },
   emailAndPassword: {
     enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      await sendResetPasswordEmail({ user, url: url.toString() });
+    },
+  },
+  emailVerification: {
+    autoSignInAfterVerification: true,
+    sendOnSignUp: true,
+    expiresIn: 60 * 60,
+    sendVerificationEmail: async ({ user, url }) => {
+      const link = new URL(url);
+      link.searchParams.set('callbackURL', '/profile');
+      await sendVerificationEmail({ user, url: link.toString() });
+    },
   },
   socialProviders: {
     google: {

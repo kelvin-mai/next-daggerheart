@@ -9,3 +9,5 @@ export const createClient = () => {
   }
   return drizzleNode(env.DATABASE_URL);
 };
+
+export const db = createClient();

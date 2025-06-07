@@ -26,6 +26,7 @@ export const useAdversaryStore = create<AdversaryStore>((set, get) => ({
           ...details,
         },
       })),
+    setUserAdversary: (userAdversary) => set({ userAdversary }),
     setPreviewStatblockRef: (ref: React.RefObject<HTMLDivElement | null>) =>
       set({ previewStatblock: ref }),
   },
@@ -46,6 +47,25 @@ export const useAdversaryStore = create<AdversaryStore>((set, get) => ({
         }
       } catch (e) {
         console.error(e);
+      }
+    },
+    saveAdversaryPreview: async () => {
+      try {
+        const { adversary, userAdversary } = get();
+        console.log({ adversary, userAdversary });
+        const res = await fetch(
+          `/api/adversary-preview/${userAdversary?.adversaryPreviewId && adversary.id && userAdversary?.adversaryPreviewId === adversary.id ? adversary.id : ''}`,
+          {
+            method: 'POST',
+            body: JSON.stringify({ adversary, userAdversary }),
+          },
+        );
+        const data = await res.json();
+        if (!data.success) {
+          throw Error(data.error.message);
+        }
+      } catch (e) {
+        throw e;
       }
     },
   },

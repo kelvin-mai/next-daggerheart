@@ -15,7 +15,7 @@ export const AuthFormContainer: React.FC<AuthFormContainerProps> = ({
   children,
 }) => {
   return (
-    <div className='space-y-4'>
+    <div className='min-w-96 space-y-4'>
       <div className='flex flex-col items-center gap-2 text-center'>
         <h1 className='text-2xl font-bold'>{title}</h1>
         <p className='text-muted-foreground text-sm text-balance'>

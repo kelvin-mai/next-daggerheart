@@ -9,34 +9,15 @@ import {
   AlignLeft,
   AlignRight,
   Bold,
-  Check,
   Italic,
   List,
   ListOrdered,
   Strikethrough,
 } from 'lucide-react';
 
-import { FormContainer, FormInput } from '@/components/common/form';
-import { Button } from '@/components/ui/button';
-import { useCardActions, useCardStore } from '@/store';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Toggle } from '@/components/ui/toggle';
 import { Separator } from '@/components/ui/separator';
-import { CollapsibleContent } from '@/components/ui/collapsible';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { traitTypes } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { CustomSelect } from '@/components/common';
 
 const RichTextEditorToolbar = ({ editor }: { editor: Editor }) => {
   return (
