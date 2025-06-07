@@ -1,6 +1,7 @@
 'use server';
 
 import { and, count, eq } from 'drizzle-orm';
+import sanitizeHtml from 'sanitize-html';
 
 import { db } from '@/lib/database';
 import {
@@ -36,7 +37,10 @@ export const insertCard = async ({
 }) => {
   return await db.transaction(async (tx) => {
     const { id: _id, ...insertCard } = body.card;
-    const [card] = await tx.insert(cardPreviews).values(insertCard).returning();
+    const [card] = await tx
+      .insert(cardPreviews)
+      .values({ ...insertCard, text: sanitizeHtml(insertCard.text || '') })
+      .returning();
     const [userCard] = await tx
       .insert(userCards)
       .values({ userId: session.user.id, cardPreviewId: card.id })
@@ -57,7 +61,7 @@ export const updateCard = async ({
   return await db.transaction(async (tx) => {
     const [card] = await tx
       .update(cardPreviews)
-      .set(body.card)
+      .set({ ...body.card, text: sanitizeHtml(body.card.text || '') })
       .where(eq(cardPreviews.id, id))
       .returning();
     const [userCard] = await tx
@@ -101,7 +105,10 @@ export const insertAdversary = async ({
     const { id: _id, ...insertAdversary } = body.adversary;
     const [adversary] = await tx
       .insert(adversaryPreviews)
-      .values(insertAdversary)
+      .values({
+        ...insertAdversary,
+        text: sanitizeHtml(insertAdversary.text || ''),
+      })
       .returning();
     const [userAdversary] = await tx
       .insert(userAdversaries)
@@ -123,7 +130,7 @@ export const updateAdversary = async ({
   return await db.transaction(async (tx) => {
     const [adversary] = await tx
       .update(adversaryPreviews)
-      .set(body.adversary)
+      .set({ ...body.adversary, text: sanitizeHtml(body.adversary.text || '') })
       .where(eq(adversaryPreviews.id, id))
       .returning();
     const [userAdversary] = await tx
