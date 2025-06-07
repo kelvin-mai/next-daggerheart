@@ -7,6 +7,7 @@ import {
 } from '@/components/common';
 import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/layout';
+import { LogIn } from 'lucide-react';
 
 export default async function Home() {
   return (
@@ -40,9 +41,12 @@ export default async function Home() {
             <Button size='lg' asChild>
               <Link href='/card/create'>Start Building</Link>
             </Button>
-            {/* <Button size='lg' variant='ghost' asChild>
-              <Link href='/login'>Something Else</Link>
-            </Button> */}
+            <Button size='lg' variant='ghost' asChild>
+              <Link href='/login'>
+                Login
+                <LogIn />
+              </Link>
+            </Button>
           </div>
           <div className='overflow-hidden rounded-lg border'>
             <Image

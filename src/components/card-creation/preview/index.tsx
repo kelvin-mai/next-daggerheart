@@ -2,12 +2,14 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
-import type { CardDetails, CardSettings } from '@/lib/types';
+import type { CardDetails, CardSettings, UserCard } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { useCardActions, useCardEffects, useCardStore } from '@/store/card';
 import { DaggerheartBrewsIcon } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import { SavePreviewButton } from '@/components/common';
 import {
   Banner,
   Divider,
@@ -17,6 +19,7 @@ import {
   Thresholds,
 } from './template/core';
 import { SettingsForm } from '../forms';
+import { toast } from 'sonner';
 
 type CardPreviewProps = React.ComponentProps<'div'> & {
   card: CardDetails;
@@ -115,9 +118,11 @@ export const CardPreview: React.FC<CardPreviewProps> = ({
 };
 
 export const CardCreationPreview = () => {
+  const router = useRouter();
   const { card, settings } = useCardStore();
   const { setPreviewRef } = useCardActions();
-  const { downloadImage } = useCardEffects();
+  const { downloadImage, saveCardPreview } = useCardEffects();
+  const [pending, setPending] = React.useState(false);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -125,25 +130,50 @@ export const CardCreationPreview = () => {
     setPreviewRef(ref);
   }, [ref]);
 
+  const handleClick = async () => {
+    setPending(true);
+    try {
+      await saveCardPreview();
+      router.refresh();
+      router.push('/profile/homebrew');
+    } catch (e) {
+      toast.error(
+        (e as unknown as Error)?.message || 'Something went wrong. Try again.',
+      );
+    } finally {
+      setPending(false);
+    }
+  };
+
   return (
     <div className='flex flex-col items-center space-y-2'>
       <CardPreview ref={ref} card={card} settings={settings} />
-      <Button className='w-full' onClick={downloadImage}>
-        Export as PNG
-      </Button>
+      <div className='flex w-full gap-2'>
+        <Button className='grow' onClick={downloadImage}>
+          Export as PNG
+        </Button>
+        <SavePreviewButton
+          variant='secondary'
+          className='grow'
+          onClick={handleClick}
+          disabled={pending}
+        >
+          {pending && <Loader2 className='animate-spin' />}
+          Save
+        </SavePreviewButton>
+      </div>
       <SettingsForm />
     </div>
   );
 };
 
-export const CardDisplayPreview: React.FC<CardPreviewProps> = ({
-  card,
-  settings,
-}) => {
-  const { setCardDetails } = useCardActions();
+export const CardDisplayPreview: React.FC<
+  CardPreviewProps & { userCard?: UserCard }
+> = ({ card, userCard, settings }) => {
+  const { setCardDetails, setUserCard } = useCardActions();
   const router = useRouter();
   const handleClick = () => {
-    console.log(card);
+    setUserCard(userCard);
     setCardDetails(card);
     router.push('/card/create');
   };

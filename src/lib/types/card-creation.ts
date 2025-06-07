@@ -44,6 +44,7 @@ export type CardSettings = {
 };
 
 export type CardDetails = {
+  id?: string;
   name: string;
   type: CardType;
   image?: string;

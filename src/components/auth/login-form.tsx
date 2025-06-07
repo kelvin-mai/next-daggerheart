@@ -24,7 +24,7 @@ export const LoginForm = () => {
   return (
     <form action={action} className='flex flex-col space-y-4'>
       {state.errors?.action ? (
-        <div className='border-destructive text-destructive bg-destructive/10 rounded-lg border p-4'>
+        <div className='border-destructive text-destructive bg-destructive/10 rounded-lg border px-4 py-2'>
           <p>{state.errors.action}</p>
         </div>
       ) : null}
@@ -42,7 +42,7 @@ export const LoginForm = () => {
         <div className='flex justify-between'>
           <Label htmlFor='password'>Password</Label>
           <Link
-            href='/auth/'
+            href='/forgot-password'
             className='text-sm underline-offset-4 hover:underline'
           >
             Forgot your password?

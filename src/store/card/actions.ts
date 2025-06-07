@@ -68,6 +68,11 @@ const setCardDetails =
   (details) =>
     set((state) => ({ ...state, card: { ...state.card, ...details } }));
 
+const setUserCard =
+  (set: ZustandSet<CardState>): CardActions['setUserCard'] =>
+  (userCard) =>
+    set({ userCard });
+
 const setSettings =
   (set: ZustandSet<CardState>): CardActions['setSettings'] =>
   (settings) =>
@@ -90,6 +95,7 @@ export const createActions = (
     set({ preview: ref }),
   setCardTypeDefaults: setCardTypeDefaults(set, get),
   setCardDetails: setCardDetails(set),
+  setUserCard: setUserCard(set),
   setSettings: setSettings(set),
   setOptions: setOptions(set),
 });

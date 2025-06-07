@@ -47,10 +47,28 @@ const loadOptions =
     }
   };
 
+const saveCardPreview =
+  (get: ZustandGet<CardStore>): CardEffects['saveCardPreview'] =>
+  async () => {
+    const { card, userCard } = get();
+    const res = await fetch(
+      `/api/card-preview/${userCard?.cardPreviewId && card.id && userCard?.cardPreviewId === card.id ? card.id : ''}`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ card, userCard }),
+      },
+    );
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.error.message);
+    }
+  };
+
 export const createEffects = (
   _: ZustandSet<CardState>,
   get: ZustandGet<CardStore>,
 ) => ({
   downloadImage: downloadImage(get),
   loadOptions: loadOptions(get),
+  saveCardPreview: saveCardPreview(get),
 });

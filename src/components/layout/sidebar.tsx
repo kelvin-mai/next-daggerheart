@@ -3,9 +3,14 @@
 import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronRight, LogOut, MoreVertical } from 'lucide-react';
-
 import { usePathname } from 'next/navigation';
+import {
+  ChevronRight,
+  CircleUser,
+  LogIn,
+  LogOut,
+  MoreVertical,
+} from 'lucide-react';
 import { toast } from 'sonner';
 
 import { useSession, logout } from '@/lib/auth/client';
@@ -28,14 +33,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '../ui/collapsible';
+import { Collapsible } from '@radix-ui/react-collapsible';
+import { CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible';
 import { Badge } from '../ui/badge';
 
 const AppSidebarFooter = () => {
@@ -89,6 +93,35 @@ const AppSidebarFooter = () => {
                 align='end'
                 sideOffset={4}
               >
+                <DropdownMenuLabel>
+                  <div className='flex items-center gap-2'>
+                    <Avatar className='size-8 rounded-lg'>
+                      <AvatarImage
+                        src={data.user.image ?? undefined}
+                        alt={data.user.name}
+                      />
+                      <AvatarFallback className='uppercase'>
+                        {data.user.name.charAt(0) ?? '?'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className='grid flex-1 text-left text-sm leading-tight'>
+                      <span className='truncate font-medium'>
+                        {data.user.name}
+                      </span>
+                      <span className='text-muted-foreground truncate text-xs'>
+                        {data.user.email}
+                      </span>
+                    </div>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href='/profile' className='flex items-center gap-2'>
+                    <CircleUser />
+                    Account
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut /> Logout
                 </DropdownMenuItem>
@@ -97,6 +130,7 @@ const AppSidebarFooter = () => {
           ) : (
             <SidebarMenuButton asChild>
               <Link href='/login' className='font-semibold'>
+                <LogIn />
                 Login
               </Link>
             </SidebarMenuButton>
@@ -109,50 +143,56 @@ const AppSidebarFooter = () => {
 
 const AppSidebarContent = () => {
   const pathname = usePathname();
+  const { data } = useSession();
   return (
     <SidebarContent>
-      {nav.map((category) => (
-        <SidebarGroup key={category.name}>
-          <SidebarMenu>
-            <Collapsible defaultOpen className='group/collapsible'>
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    isActive={category.children
-                      ?.map((item) => item.url)
-                      .includes(pathname)}
-                  >
-                    {category.name}
-                    {category.badge && (
-                      <Badge className='capitalize'>{category.badge}</Badge>
-                    )}
-                    <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-              </SidebarMenuItem>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {category.children?.map((item) => (
-                    <SidebarMenuSubItem key={item.name}>
-                      <SidebarMenuSubButton
-                        asChild
-                        isActive={pathname === item.url}
-                      >
-                        <Link href={item.url}>
-                          {item.name}
-                          {item.badge && (
-                            <Badge className='capitalize'>{item.badge}</Badge>
-                          )}
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </Collapsible>
-          </SidebarMenu>
-        </SidebarGroup>
-      ))}
+      {nav
+        .filter(
+          (category) =>
+            !category.requireAuth || (category.requireAuth && data?.user),
+        )
+        .map((category) => (
+          <SidebarGroup key={category.name}>
+            <SidebarMenu>
+              <Collapsible defaultOpen className='group/collapsible'>
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      isActive={category.children
+                        ?.map((item) => item.url)
+                        .includes(pathname)}
+                    >
+                      {category.name}
+                      {category.badge && (
+                        <Badge className='capitalize'>{category.badge}</Badge>
+                      )}
+                      <ChevronRight className='ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90' />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                </SidebarMenuItem>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {category.children?.map((item) => (
+                      <SidebarMenuSubItem key={item.name}>
+                        <SidebarMenuSubButton
+                          asChild
+                          isActive={pathname === item.url}
+                        >
+                          <Link href={item.url}>
+                            {item.name}
+                            {item.badge && (
+                              <Badge className='capitalize'>{item.badge}</Badge>
+                            )}
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
+            </SidebarMenu>
+          </SidebarGroup>
+        ))}
     </SidebarContent>
   );
 };
@@ -180,7 +220,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ ...props }) => {
         </SidebarMenu>
       </SidebarHeader>
       <AppSidebarContent />
-      {/* <AppSidebarFooter /> */}
+      <AppSidebarFooter />
     </Sidebar>
   );
 };

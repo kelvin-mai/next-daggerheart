@@ -7,11 +7,12 @@ import { redirect } from 'next/navigation';
 import { register } from '@/actions/auth';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { FormField, PasswordInput } from '../common';
+import { FormField, PasswordInput, PasswordStrengthMeter } from '../common';
 import { cn } from '@/lib/utils';
-import { REDIRECT_LINK } from '@/lib/constants';
+import { passwordRequirements, REDIRECT_LINK } from '@/lib/constants';
 
 export const RegisterForm = () => {
+  const [password, setPassword] = React.useState('');
   const [state, action, pending] = React.useActionState(register, {
     success: false,
   });
@@ -50,13 +51,16 @@ export const RegisterForm = () => {
         <PasswordInput
           id='password'
           name='password'
+          value={password}
           className={cn(
             state.errors?.validation?.password && 'border-destructive',
           )}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </FormField>
       <FormField
         id='confirm-password'
+        label='Confirm Password'
         errors={state.errors?.validation?.confirmPassword}
       >
         <PasswordInput
@@ -67,6 +71,10 @@ export const RegisterForm = () => {
           )}
         />
       </FormField>
+      <PasswordStrengthMeter
+        password={password}
+        requirements={passwordRequirements}
+      />
       <Button type='submit' disabled={pending}>
         {pending ? <Loader2 className='animate-spin' /> : null}
         Register

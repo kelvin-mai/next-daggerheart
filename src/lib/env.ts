@@ -18,6 +18,7 @@ const schema = z.object({
   GOOGLE_CLIENT_SECRET: z.string(),
   REDDIT_CLIENT_ID: z.string(),
   REDDIT_CLIENT_SECRET: z.string(),
+  RESEND_API_KEY: z.string(),
 });
 
 export const env = schema.parse(process.env);
