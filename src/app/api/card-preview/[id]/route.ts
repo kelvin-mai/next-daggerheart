@@ -21,7 +21,7 @@ export async function POST(
       throw new Error('Unauthorized');
     }
     if (body.userCard?.userId === session.user.id) {
-      const data = updateCard({ id, body, session });
+      const data = await updateCard({ id, body, session });
       return NextResponse.json({ success: true, data }, { status: 202 });
     } else {
       await limitCardInserts({ session });

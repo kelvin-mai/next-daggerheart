@@ -55,7 +55,7 @@ export const CommunityCard: React.FC<CommunityCardProps> = ({
           <p className='font-bold'>{cardPreview.name || 'Untitled'}</p>
           <p className='text-muted-foreground text-sm'>
             <span className='capitalize'>{cardPreview.type}</span> created by{' '}
-            {user.email}
+            {user.name}
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const CommunityAdversary: React.FC<CommunityAdversaryProps> = ({
           <p className='font-bold'>{adversaryPreview.name || 'Untitled'}</p>
           <p className='text-muted-foreground text-sm'>
             <span className='capitalize'>{adversaryPreview.type}</span> created
-            by {user.email}
+            by {user.name}
           </p>
         </div>
       </div>
