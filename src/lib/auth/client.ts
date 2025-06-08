@@ -2,7 +2,6 @@ import { createAuthClient } from 'better-auth/react';
 import { inferAdditionalFields } from 'better-auth/client/plugins';
 
 import type { auth } from '@/lib/auth';
-import { getBaseUrl } from '../utils';
 
 const {
   signIn,
@@ -12,7 +11,6 @@ const {
   forgetPassword,
   resetPassword,
 } = createAuthClient({
-  baseURL: getBaseUrl(),
   plugins: [inferAdditionalFields<typeof auth>()],
 });
 

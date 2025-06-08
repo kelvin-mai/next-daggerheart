@@ -4,6 +4,7 @@ import { nextCookies } from 'better-auth/next-js';
 
 import { sendResetPasswordEmail, sendVerificationEmail } from '@/lib/email';
 import { env } from '@/lib/env';
+import { getBaseUrl } from '../utils';
 import { db } from '@/lib/database';
 import * as schemas from '@/lib/database/schema';
 
@@ -17,6 +18,7 @@ export const auth = betterAuth({
       verification: schemas.verification,
     },
   }),
+  trustedOrigins: [getBaseUrl()],
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url }) => {
