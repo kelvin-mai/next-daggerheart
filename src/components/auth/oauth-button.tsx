@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { signIn } from '@/lib/auth/client';
 
 type OauthButtonProps = React.ComponentProps<typeof Button> & {
-  provider: 'discord' | 'google' | 'reddit';
+  provider: 'discord' | 'google';
 };
 
 export const OauthButton: React.FC<OauthButtonProps> = ({

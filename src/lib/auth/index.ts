@@ -44,10 +44,6 @@ export const auth = betterAuth({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
     },
-    reddit: {
-      clientId: env.REDDIT_CLIENT_ID,
-      clientSecret: env.REDDIT_CLIENT_SECRET,
-    },
   },
   advanced: {
     database: {

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { OauthButton } from './oauth-button';
 import { Discord } from '../icons/discord';
-import { Reddit } from '../icons/reddit';
 import { Google } from '../icons/google';
 
 type AuthFormContainerProps = React.PropsWithChildren & {
@@ -41,13 +40,6 @@ export const AuthFormContainer: React.FC<AuthFormContainerProps> = ({
           className='bg-[#5865F2] text-white hover:bg-[#5865F2]/80'
         >
           <Discord className='fill-white' /> Discord
-        </OauthButton>
-        <OauthButton
-          provider='reddit'
-          className='bg-[#FF4500] text-white hover:bg-[#FF4500]/80'
-        >
-          <Reddit className='fill-white' />
-          Reddit
         </OauthButton>
       </div>
     </div>
