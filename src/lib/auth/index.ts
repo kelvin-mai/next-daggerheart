@@ -18,7 +18,7 @@ export const auth = betterAuth({
       verification: schemas.verification,
     },
   }),
-  trustedOrigins: [getBaseUrl()],
+  trustedOrigins: ['https://www.daggerheartbrews.com', getBaseUrl()],
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url }) => {
