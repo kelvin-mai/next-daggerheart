@@ -47,8 +47,6 @@ export default async function Page() {
       eq(userAdversaries.adversaryPreviewId, adversaryPreviews.id),
     )
     .where(eq(userAdversaries.userId, session.user.id));
-  console.log(cardData);
-  console.log(adversaryData);
   return (
     <div className='mb-4 space-y-4'>
       <Collapsible className='bg-card group/collapsible rounded-lg border px-4 py-2'>

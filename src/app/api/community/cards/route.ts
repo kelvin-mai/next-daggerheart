@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
       .from(userCards)
       .leftJoin(users, eq(userCards.userId, users.id))
       .leftJoin(cardPreviews, eq(userCards.cardPreviewId, cardPreviews.id))
+      .where(eq(userCards.public, true))
       .orderBy(desc(userCards.createdAt))
       .limit(pageSize)
       .offset((page - 1) * pageSize);

@@ -13,7 +13,7 @@ import {
 } from '@/components/icons';
 import { CardDetails } from '@/lib/types';
 import { cn, getBrightness } from '@/lib/utils';
-import { useCardComputed, useCardStore } from '@/store';
+import { useCardComputed } from '@/store';
 
 const getDomainIcon = (domain?: string) => {
   switch (domain) {

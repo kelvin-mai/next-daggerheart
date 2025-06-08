@@ -66,7 +66,7 @@ export const CommunityAdversaries = () => {
   }
 
   return (
-    <div className='space-y-2'>
+    <div className='mb-2 space-y-2'>
       {adversaries.map((adversary) => (
         <CommunityAdversary
           key={adversary.userAdversary.id}
@@ -75,20 +75,26 @@ export const CommunityAdversaries = () => {
           userAdversary={adversary.userAdversary}
         />
       ))}
-      <Pagination
-        className='justify-end'
-        currentPage={pagination.currentPage}
-        pages={Math.ceil(pagination.total / pagination.pageSize)}
-        onPage={(page) => loadData({ page, pageSize: pagination.pageSize })}
-        buttonProps={{ variant: 'ghost' }}
-      >
-        <PaginationPageSizeDropdown
-          pageSize={pagination.pageSize}
-          total={pagination.total}
-          onPageSize={(pageSize) => loadData({ page: 1, pageSize })}
+      {adversaries.length > 0 ? (
+        <Pagination
+          className='justify-end'
+          currentPage={pagination.currentPage}
+          pages={Math.ceil(pagination.total / pagination.pageSize)}
+          onPage={(page) => loadData({ page, pageSize: pagination.pageSize })}
           buttonProps={{ variant: 'ghost' }}
-        />
-      </Pagination>
+        >
+          <PaginationPageSizeDropdown
+            pageSize={pagination.pageSize}
+            total={pagination.total}
+            onPageSize={(pageSize) => loadData({ page: 1, pageSize })}
+            buttonProps={{ variant: 'ghost' }}
+          />
+        </Pagination>
+      ) : (
+        <div className='bg-card text-muted-foreground rounded-lg border p-4'>
+          <p>There are currently no public cards. Please check back later.</p>
+        </div>
+      )}
     </div>
   );
 };

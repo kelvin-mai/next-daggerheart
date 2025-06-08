@@ -1,11 +1,4 @@
-import {
-  boolean,
-  integer,
-  pgTable,
-  point,
-  text,
-  uuid,
-} from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, point, text } from 'drizzle-orm/pg-core';
 
 import { uuidPrimaryKey } from './columns.helpers';
 

@@ -1,6 +1,5 @@
 import { headers } from 'next/headers';
 import { NextResponse, type NextRequest } from 'next/server';
-import { revalidatePath } from 'next/cache';
 
 import type { CardDetails, UserCard } from '@/lib/types';
 import { auth } from '@/lib/auth';

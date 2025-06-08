@@ -57,7 +57,7 @@ export const CommunityCards = () => {
   }
 
   return (
-    <div className='space-y-2'>
+    <div className='mb-2 space-y-2'>
       {cards.map((card) => (
         <CommunityCard
           key={card.userCard.id}
@@ -66,20 +66,26 @@ export const CommunityCards = () => {
           userCard={card.userCard}
         />
       ))}
-      <Pagination
-        className='justify-end'
-        currentPage={pagination.currentPage}
-        pages={Math.ceil(pagination.total / pagination.pageSize)}
-        onPage={(page) => loadData({ page, pageSize: pagination.pageSize })}
-        buttonProps={{ variant: 'ghost' }}
-      >
-        <PaginationPageSizeDropdown
-          pageSize={pagination.pageSize}
-          total={pagination.total}
-          onPageSize={(pageSize) => loadData({ page: 1, pageSize })}
+      {cards.length > 0 ? (
+        <Pagination
+          className='justify-end'
+          currentPage={pagination.currentPage}
+          pages={Math.ceil(pagination.total / pagination.pageSize)}
+          onPage={(page) => loadData({ page, pageSize: pagination.pageSize })}
           buttonProps={{ variant: 'ghost' }}
-        />
-      </Pagination>
+        >
+          <PaginationPageSizeDropdown
+            pageSize={pagination.pageSize}
+            total={pagination.total}
+            onPageSize={(pageSize) => loadData({ page: 1, pageSize })}
+            buttonProps={{ variant: 'ghost' }}
+          />
+        </Pagination>
+      ) : (
+        <div className='bg-card text-muted-foreground rounded-lg border p-4'>
+          <p>There are currently no public cards. Please check back later.</p>
+        </div>
+      )}
     </div>
   );
 };

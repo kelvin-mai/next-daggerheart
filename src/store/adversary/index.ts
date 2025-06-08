@@ -52,7 +52,6 @@ export const useAdversaryStore = create<AdversaryStore>((set, get) => ({
     saveAdversaryPreview: async () => {
       try {
         const { adversary, userAdversary } = get();
-        console.log({ adversary, userAdversary });
         const res = await fetch(
           `/api/adversary-preview/${userAdversary?.adversaryPreviewId && adversary.id && userAdversary?.adversaryPreviewId === adversary.id ? adversary.id : ''}`,
           {
