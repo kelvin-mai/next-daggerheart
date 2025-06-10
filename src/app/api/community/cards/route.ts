@@ -15,8 +15,10 @@ export async function GET(request: NextRequest) {
       ? Number(searchParams.get('page-size'))
       : 10;
 
-    const [result] = await db.select({ count: count() }).from(userCards);
-
+    const [result] = await db
+      .select({ count: count() })
+      .from(userCards)
+      .where(eq(userCards.public, true));
     const meta = { page, pageSize, total: result.count };
 
     const data = await db
