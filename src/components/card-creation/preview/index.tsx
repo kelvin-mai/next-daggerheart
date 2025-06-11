@@ -4,6 +4,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 import type { CardDetails, CardSettings, UserCard } from '@/lib/types';
 import { cn } from '@/lib/utils';
@@ -20,7 +21,6 @@ import {
   Thresholds,
 } from './template/core';
 import { SettingsForm } from '../forms';
-import { toast } from 'sonner';
 
 type CardPreviewProps = React.ComponentProps<'div'> & {
   card: CardDetails;

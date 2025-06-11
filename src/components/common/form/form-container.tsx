@@ -38,7 +38,7 @@ export const FormContainer: React.FC<FormContainerProps> = ({
             className='flex h-8 w-full items-center justify-between px-2 hover:cursor-pointer'
           >
             <Label>{title}</Label>
-            <ChevronDown className='size-4 group-data-[state=open]/collapsible:rotate-180' />
+            <ChevronDown className='size-4 transition-transform group-data-[state=open]/collapsible:rotate-180' />
             <span className='sr-only'>Toggle</span>
           </Button>
         </CollapsibleTrigger>

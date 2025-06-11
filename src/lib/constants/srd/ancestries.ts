@@ -1,6 +1,6 @@
 import type { CardDetails } from '@/lib/types';
 
-export const ancestries: CardDetails[] = [
+export const ancestries = [
   {
     type: 'ancestry',
     name: 'Clank',
@@ -11,7 +11,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Efficent:</em></strong> When you take a short rest, you can choose a long rest move instead of a short rest move.</p>
 `,
     artist: 'Mat Wilma',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -23,7 +22,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Elemental Breath:</em></strong> Choose an element for your breath (such as electricity, fire, or ice). You can use this breath against a target or group of targets within Very Close range, treating it as an instinct weapon that deals d8 magic damage using your Proficiency.</p>
     `,
     artist: 'Mat Wilma',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -35,7 +33,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Increased Fortitude:</em></strong> Spend 3 Hope to halve incoming physical damage.</p>
 `,
     artist: 'Mat Wilma',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -47,7 +44,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Celestial Trance:</em></strong> During a rest, you can drop into a trance to choose an additional downttime move.</p>
 `,
     artist: 'Mat Wilma',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -59,7 +55,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Wings:</em></strong> You can fly. While flying, you can mark a Stress after an adversary makes an attack against you to gain a +2 bonus to your Evasion against that attack.</p>
     `,
     artist: 'Anthony Jones',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -71,7 +66,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Kick:</em></strong> When you succeed on an attack against a target within Melee range, you can Mark a Stress to kick yourself off them, dealing an extra 2d6 damage and knocking back etiher yourself or the target to Very Close range.</p>
 `,
     artist: 'Jessketchin',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -83,7 +77,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Unshakable:</em></strong> When you would mark a Stress, roll a d6. On a result of 6, don't mark it.</p>
 `,
     artist: 'Anthony Jones',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -95,7 +88,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Death Connection:</em></strong> While touching a corpse that died recently, you can mark a Stress to extract one memory from the corpse related to a specific emotion or sensation of your choice.</p>
     `,
     artist: 'Anthony Jones',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -107,7 +99,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Retract:</em></strong> Mark a Stress to retract into your shell. While in your shell, you have resistance to physical damage, you have disadvantage on action rolls, and you can't move.</p>
 `,
     artist: 'Jessketchin',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -119,7 +110,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Reach:</em></strong> Treat any weapon, ability, spell, or feature that has a Melee range as though it has a Very Close range instead.</p>
 `,
     artist: 'Juan Salvador Almencio',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -131,7 +121,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Danger Sense:</em></strong> Once per rest, mark a Stress to force an adversary to reroll an attack against you or an ally within Very Close range.</p>
 `,
     artist: 'Anthony Jones',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -143,9 +132,7 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Internal Compass:</em></strong> When you roll a 1 on your Hope Die, you can reroll it.</p>
     `,
     artist: 'Anthony Jones',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
-
   {
     type: 'ancestry',
     name: 'Human',
@@ -156,7 +143,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Adaptability:</em></strong> When you fail a roll that utilized one of your Experiences, you can mark a Stress to reroll.</p>
     `,
     artist: 'Fernanda Suarez',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -169,7 +155,6 @@ export const ancestries: CardDetails[] = [
 `,
 
     artist: 'Fernanda Suarez',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -181,7 +166,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Retracting Claws:</em></strong> Make an Agility Roll to scratch a target within Melee range. On a success, they become temporarily Vulnerable.</p>
 `,
     artist: 'Hendry Iwanaga',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -193,7 +177,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Tusks:</em></strong> When you succeed on an attack against a target within Melee range, you can spend a Hope to gore the target with your tusks, dealing an extra 1d6 damage.</p>
     `,
     artist: 'Simon Pape',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -205,7 +188,6 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Long Tongue:</em></strong> You can use yoru long tongue to grab onto things within Close range. Mark a Stress to use your tongue as a Finesse Close weapon that deals d12 physical damage using your Proficiency.</p>
 `,
     artist: 'Leesha Hannigan',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
   {
     type: 'ancestry',
@@ -217,6 +199,8 @@ export const ancestries: CardDetails[] = [
     <p><strong><em>Nimble:</em></strong> Gain a permanent +1 bonus to your Evasion at character creation.</p>
     `,
     artist: 'Jessketchin',
-    credits: 'Daggerheart © Darrington Press 2025',
   },
-];
+].map((c) => ({
+  ...c,
+  credits: 'Daggerheart™ Compatible. Terms at Daggerheart.com',
+})) as CardDetails[];
