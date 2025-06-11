@@ -180,7 +180,12 @@ export const ClassPropertiesForm = () => {
               options={[
                 {
                   category: 'Features',
-                  options: ['class features', 'multiclass features'],
+                  options: [
+                    'flavor',
+                    'hope feature',
+                    'class features',
+                    'multiclass features',
+                  ],
                 },
               ]}
               value={subtitle}

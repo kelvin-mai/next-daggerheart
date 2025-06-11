@@ -538,7 +538,6 @@ export const beastforms: CardDetails[] = preBeastforms.map((beastform) => ({
   subtype: 'druid',
   subtitle: 'Beastform',
   type: 'subclass',
-  credits: 'Daggerheart © Darrington Press 2025',
   domainPrimary: 'sage',
   domainPrimaryColor: '#0e854d',
   domainSecondary: 'arcana',
@@ -555,4 +554,5 @@ ${feat.extra && feat.extra}
   .join('')}
 <p style='text-align: center'>(${beastform.examples})</p>
 `,
+  credits: 'Daggerheart™ Compatible. Terms at Daggerheart.com',
 }));

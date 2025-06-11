@@ -1,5 +1,5 @@
 import { CardDisplayPreview } from '@/components/card-creation/preview';
-import { ancestries } from '@/lib/constants';
+import { ancestries, initialSettings } from '@/lib/constants';
 
 export const metadata = {
   title: 'Ancestries',
@@ -8,13 +8,6 @@ export const metadata = {
 };
 
 export default function Page() {
-  const settings = {
-    border: true,
-    boldRulesText: true,
-    artist: true,
-    credits: true,
-    placeholderImage: true,
-  };
   return (
     <>
       <h1 className='font-eveleth-clean dark:text-primary-foreground text-2xl font-bold'>
@@ -28,7 +21,7 @@ export default function Page() {
           <CardDisplayPreview
             key={ancestry.name}
             card={ancestry}
-            settings={settings}
+            settings={initialSettings}
           />
         ))}
       </div>

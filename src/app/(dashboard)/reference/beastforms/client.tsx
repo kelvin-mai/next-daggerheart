@@ -6,17 +6,9 @@ import { AnimatePresence, motion } from 'motion/react';
 import { FormInput } from '@/components/common/form';
 import { MultipleSelector, Option } from '@/components/common';
 import { Label } from '@/components/ui/label';
-import { capitalize } from '@/lib/utils';
 import { CardDetails } from '@/lib/types';
 import { CardDisplayPreview } from '@/components/card-creation/preview';
-
-const settings = {
-  border: true,
-  boldRulesText: true,
-  artist: true,
-  credits: true,
-  placeholderImage: true,
-};
+import { initialSettings } from '@/lib/constants';
 
 export const FilteredBeastforms = ({
   beastforms,
@@ -82,7 +74,10 @@ export const FilteredBeastforms = ({
                 transition={{ duration: 0.15 }}
                 layout
               >
-                <CardDisplayPreview card={beastform} settings={settings} />
+                <CardDisplayPreview
+                  card={beastform}
+                  settings={initialSettings}
+                />
               </motion.div>
             ))}
         </AnimatePresence>

@@ -8,13 +8,6 @@ export const metadata = {
 };
 
 export default function Page() {
-  const settings = {
-    border: true,
-    boldRulesText: true,
-    artist: true,
-    credits: true,
-    placeholderImage: true,
-  };
   return (
     <>
       <h1 className='font-eveleth-clean dark:text-primary-foreground text-2xl font-bold'>
