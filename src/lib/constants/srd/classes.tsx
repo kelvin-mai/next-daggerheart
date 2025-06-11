@@ -530,8 +530,8 @@ export const classes: ClassReference[] = [
             <p className='text-muted-foreground'>
               When you choose the Beastbound Ranger subclass, take a companion
               sheet. This sheet is for tracking important information about your
-              character's companion and can be tucked beneath the right side of
-              your character sheet for ease of viewing.
+              character&apos;s companion and can be tucked beneath the right
+              side of your character sheet for ease of viewing.
             </p>
             <h5 className='font-bold uppercase'>Step 1: Name your companion</h5>
             <p className='pl-4'>

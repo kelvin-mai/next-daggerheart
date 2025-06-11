@@ -29,7 +29,7 @@ export default function Page() {
               domainPrimaryColor: domainColor(cl.domains[0]),
               domainSecondary: cl.domains[1],
               domainSecondaryColor: domainColor(cl.domains[1]),
-              text: cl.flavor,
+              text: `<p><em>${cl.flavor}</em></p>`,
               credits: 'Daggerheart © Darrington Press 2025',
             }}
           />
