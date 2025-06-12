@@ -1,13 +1,13 @@
 const domainColors = {
-  arcana: '#664295',
-  blade: '#b93035',
-  bone: '#c1c7cc',
-  codex: '#3370ab',
-  grace: '#cb3b90',
-  midnight: '#2c2c2c',
-  sage: '#0e854d',
-  splendor: '#d1b447',
-  valor: '#dc7a27',
+  arcana: '#4e3456',
+  blade: '#af231c',
+  bone: '#a4a9a8',
+  codex: '#24395d',
+  grace: '#8d3965',
+  midnight: '#1e201f',
+  sage: '#244e30',
+  splendor: '#b8a342',
+  valor: '#e2680e',
 };
 
 export const domainColor = (domain?: string) => {
