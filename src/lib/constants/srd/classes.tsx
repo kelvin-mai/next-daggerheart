@@ -21,6 +21,8 @@ type ClassReference = {
   AdditionalSection?: React.FC;
   subclasses: {
     name: string;
+    image: string;
+    artist: string;
     description: string;
     trait?: string;
     foundation: Feature[];
@@ -66,6 +68,8 @@ export const classes: ClassReference[] = [
         name: 'Troubadour',
         description:
           'Play the Troubadour if you want to play music to bolster your allies.',
+        image: 'bard-troubadour.jpg',
+        artist: 'Bear Frymire',
         trait: 'presence',
         foundation: [
           {
@@ -99,6 +103,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Wordsmith if you want to use clever wordplay to captivate crowds.',
         trait: 'presence',
+        image: 'bard-wordsmith.jpg',
+        artist: 'Nikki Dawes',
         foundation: [
           {
             name: 'Rousing Speech',
@@ -175,6 +181,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Warden of the Elements if you want to embody the natural elements of the wild.',
         trait: 'instinct',
+        image: 'druid-warden-of-the-elements.jpg',
+        artist: 'Zoe Badini',
         foundation: [
           {
             name: 'Elemental Incarnation',
@@ -220,6 +228,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Warden of Renewal if you want to use powerful magic to heal your party.',
         trait: 'instinct',
+        image: 'druid-warden-of-renewal.jpg',
+        artist: 'Ilya Royz',
         foundation: [
           {
             name: 'Clarity of Nature',
@@ -373,6 +383,8 @@ export const classes: ClassReference[] = [
         name: 'Stalwart',
         description:
           'Play the Stalwart if you want to take heavy blows and keep fighting.',
+        image: 'guardian-stalwart.jpg',
+        artist: 'Reiko Murakami',
         foundation: [
           {
             name: 'Unwavering',
@@ -411,6 +423,8 @@ export const classes: ClassReference[] = [
         name: 'Vegeance',
         description:
           'Play the Vengeance if you want to strike down enemies who harm you or your allies.',
+        image: 'guardian-vengeance.jpg',
+        artist: 'Linda Lithén',
         foundation: [
           {
             name: 'At Ease',
@@ -491,6 +505,8 @@ export const classes: ClassReference[] = [
         trait: 'agility',
         description:
           'Play the Beastbound if you want to form a deep bond with an animal ally.',
+        image: 'ranger-beastbound.jpg',
+        artist: 'Jenny Tan',
         foundation: [
           {
             name: 'Companion',
@@ -656,6 +672,8 @@ export const classes: ClassReference[] = [
       {
         name: 'Wayfinder',
         trait: 'agility',
+        image: 'ranger-wayfinder.jpg',
+        artist: 'Simon Pape',
         description:
           'Play the wayfinder if you want to hunt your prey and strike with deadly force.',
         foundation: [
@@ -728,6 +746,8 @@ export const classes: ClassReference[] = [
         trait: 'finesse',
         description:
           'Play the Nightwalker if you want to manipulate shadows to maneuver through the environment.',
+        image: 'rogue-nightwalker.jpg',
+        artist: 'Juan Salvador Almencion',
         foundation: [
           {
             name: 'Shadow Stepper',
@@ -765,6 +785,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Syndicate if you want to have a web of contacts everywhere you go.',
         trait: 'finesse',
+        image: 'rogue-syndicate.jpg',
+        artist: 'Jenny Tan',
         foundation: [
           {
             name: 'Well-Connected',
@@ -864,6 +886,8 @@ export const classes: ClassReference[] = [
         trait: 'strength',
         description:
           'Play the Divine Wielder if you want to dominate the battlefield with a legendary weapon',
+        image: 'seraph-divine-wielder.jpg',
+        artist: 'Jenny Tan',
         foundation: [
           {
             name: 'Spirit Weapon',
@@ -896,6 +920,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Winged Sentinel if you want to take flight and strike crushing blows from the sky',
         trait: 'Strength',
+        image: 'seraph-winged-sentinel.jpg',
+        artist: 'Stephanie Cost',
         foundation: [
           {
             name: 'Wings of Light',
@@ -978,6 +1004,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the ELemental Origin if you want to channel raw magic to take the shape of a particular element.',
         trait: 'instinct',
+        image: 'sorcerer-elemental-origin.jpg',
+        artist: 'Bear Frymire',
         foundation: [
           {
             name: 'Elementalist',
@@ -1012,6 +1040,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the Primal Origin if you want to extend the versatility of your spells in powerful ways.',
         trait: 'Instinct',
+        image: 'sorcerer-primal-origin.jpg',
+        artist: 'Laura Galli',
         foundation: [
           {
             name: 'Manipulate Magic',
@@ -1087,6 +1117,8 @@ export const classes: ClassReference[] = [
         name: 'Call of the Brave',
         description:
           'Play the Call of the Brave if you want to use the might of your enemies to fuel your own power.',
+        image: 'warrior-call-of-the-brave.jpg',
+        artist: 'Mat Wilma',
         foundation: [
           {
             name: 'Courage',
@@ -1117,6 +1149,8 @@ export const classes: ClassReference[] = [
         name: 'Call of the Slayer',
         description:
           'Play the Call of the Slayer if you want to strike down adversaries with immense force.',
+        image: 'warrior-call-of-the-slayer.jpg',
+        artist: 'Reiko Murakami',
         foundation: [
           {
             name: 'Slayer',
@@ -1184,6 +1218,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the School of Knowledge if you want a keen understading of the world around you.',
         trait: 'Knowledge',
+        image: 'wizard-school-of-knowledge.jpg',
+        artist: 'Bear Frymire',
         foundation: [
           {
             name: 'Prepared',
@@ -1226,6 +1262,8 @@ export const classes: ClassReference[] = [
         description:
           'Play the School of War if you want to utilize trained magic for violence.',
         trait: 'Knowledge',
+        image: 'wizard-school-of-war.jpg',
+        artist: 'Nikki Dawes',
         foundation: [
           {
             name: 'Battlemage',

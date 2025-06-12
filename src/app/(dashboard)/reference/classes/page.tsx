@@ -25,6 +25,8 @@ export default function Page() {
               type: 'class',
               subtitle: 'Flavor',
               evasion: cl.startEvasion,
+              image: `/assets/images/srd/class/${cl.subclasses[0].image}`,
+              artist: cl.subclasses[0].artist,
               domainPrimary: cl.domains[0],
               domainPrimaryColor: domainColor(cl.domains[0]),
               domainSecondary: cl.domains[1],
